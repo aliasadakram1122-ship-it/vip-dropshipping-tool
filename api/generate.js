@@ -2,16 +2,16 @@ export default async function handler(req, res) {
     if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
     try {
-        const { link } = req.body;
+        const { link, platform } = req.body;
         if (!link) return res.status(400).json({ error: 'Product link is required' });
 
+        const targetPlatform = platform || 'eBay UK';
         const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
-        // نیا ماسٹر پرامپٹ: 3D گلاس اور ڈارک تھیم ٹیمپلیٹ کے ساتھ
-        const prompt = `I am dropshipping this product on eBay UK. Product link/info: ${link}. 
+        const prompt = `I am dropshipping this product on ${targetPlatform}. Product link/info: ${link}. 
         Please provide ONLY a raw JSON response with two keys:
-        1. "title": An optimized, highly searchable eBay SEO title (Maximum 80 characters). STRICT RULE: Do NOT repeat any words. No special symbols.
-        2. "description": Create a highly professional, premium eBay product description using the exact 3D Glassmorphism HTML template below. 
+        1. "title": An optimized, highly searchable SEO title for ${targetPlatform} (Maximum 80 characters). STRICT RULE: Do NOT repeat any words. No special symbols.
+        2. "description": Create a highly professional, premium product description using the exact 3D Glassmorphism HTML template below. Adapt the tone for ${targetPlatform} audience.
         
         TEMPLATE TO USE AND FILL OUT:
         <div style="font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #1a1c29 0%, #050507 100%); color: #ffffff; padding: 40px 20px; text-align: center;">
@@ -35,18 +35,17 @@ export default async function handler(req, res) {
                     </ul>
                 </div>
                 
-                <!-- Policy Section (Gold Glow) -->
+                <!-- Policy Section -->
                 <div style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(217, 119, 6, 0.1)); border: 1px solid rgba(251, 191, 36, 0.2); box-shadow: 0 10px 30px rgba(217, 119, 6, 0.15); padding: 25px; border-radius: 15px; margin-top: 35px; text-align: center;">
-                    <h3 style="color: #fbbf24; margin-top: 0; text-transform: uppercase; letter-spacing: 1px;">📦 Free UK Shipping & 30-Day Returns</h3>
-                    <p style="font-size: 14px; color: #d1d5db; margin-bottom: 0; line-height: 1.6;">Shop with absolute confidence! We provide fast, free shipping across the UK and a hassle-free 30-day return policy for your complete peace of mind.</p>
+                    <h3 style="color: #fbbf24; margin-top: 0; text-transform: uppercase; letter-spacing: 1px;">📦 Fast Shipping & Secure Returns</h3>
+                    <p style="font-size: 14px; color: #d1d5db; margin-bottom: 0; line-height: 1.6;">Shop with absolute confidence! We provide fast shipping and a hassle-free return policy for your complete peace of mind.</p>
                 </div>
                 
             </div>
         </div>
         
-        INSTRUCTIONS FOR AI: Replace the bracketed placeholders with actual product data. Do NOT include your own CSS. Use ONLY the structure provided. Do NOT include any personal names.`;
+        INSTRUCTIONS: Replace bracketed placeholders. Do NOT include any personal names (like Asad) anywhere in the text.`;
 
-        // 2026 کا لیٹسٹ اور 100% ورکنگ ماڈل (gemini-3.5-flash)
         const aiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -54,7 +53,7 @@ export default async function handler(req, res) {
         });
 
         const aiData = await aiRes.json();
-        if (aiData.error) throw new Error("Google API Error: " + aiData.error.message);
+        if (aiData.error) throw new Error(aiData.error.message);
 
         const rawText = aiData.candidates[0].content.parts[0].text;
         const cleanJsonString = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
@@ -63,7 +62,6 @@ export default async function handler(req, res) {
         return res.status(200).json(parsedResult);
 
     } catch (error) {
-        console.error(error);
         return res.status(500).json({ error: error.message });
     }
 }
