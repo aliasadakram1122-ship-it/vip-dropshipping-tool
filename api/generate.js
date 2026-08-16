@@ -7,13 +7,14 @@ export default async function handler(req, res) {
 
         const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
         
+        // ماسٹر پرامپٹ (جس میں آپ کی لسٹنگ کی تمام ریکوائرمنٹس سیٹ کر دی گئی ہیں)
         const prompt = `I am dropshipping this product on eBay UK. Product link/info: ${link}. 
         Please provide ONLY a JSON response with two keys:
         1. "title": An optimized, highly searchable eBay SEO title (Maximum 80 characters). No special symbols.
-        2. "description": A highly professional, plain text product description formatted for eBay. Include Bullet points for features. Do NOT include any HTML tags. Include a standard "Free UK Shipping & 30-Day Returns" policy at the bottom.`;
+        2. "description": A highly professional, plain text product description formatted for eBay. Include Bullet points for features. Do NOT include any HTML tags. Do NOT include any personal names (like Asad) anywhere in the text. Include a standard "Free UK Shipping & 30-Day Returns" policy at the bottom.`;
 
-        // Direct connection to Google's Premium Stable Model (gemini-1.5-pro)
-        const aiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${GEMINI_API_KEY}`, {
+        // 2026 کے سب سے سٹیبل ماڈل (gemini-2.0-flash) سے ڈائریکٹ کنکشن
+        const aiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
