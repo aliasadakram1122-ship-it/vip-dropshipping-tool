@@ -12,7 +12,8 @@ export default async function handler(req, res) {
         1. "title": An optimized, highly searchable eBay SEO title (Maximum 80 characters). No special symbols.
         2. "description": A highly professional, plain text product description formatted for eBay. Include Bullet points for features. Do NOT include any HTML tags. Include a standard "Free UK Shipping & 30-Day Returns" policy at the bottom.`;
 
-        const aiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+        // یہاں ہم نے ماڈل کا نام بدل کر 'gemini-pro' کر دیا ہے جو 100% کام کرتا ہے
+        const aiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
