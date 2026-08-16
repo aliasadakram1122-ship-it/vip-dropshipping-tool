@@ -98,7 +98,7 @@
         }
 
         /* =========================================
-           ✨ VIP CORPORATE SIDE-BORDER INVOICE
+           ✨ VIP PROFESSIONAL INVOICE (FIXED BUG)
            ========================================= */
         #invoiceTemplate { 
             display: none; 
@@ -327,7 +327,7 @@
         </main>
     </div>
 
-    <!-- 📜 SIMPLE, CLASSIC & CORPORATE INVOICE TEMPLATE (NO BLANK BUG) -->
+    <!-- 📜 SIMPLE, CLASSIC & CORPORATE INVOICE TEMPLATE (WITH SIDE BORDER) -->
     <div id="invoiceTemplate">
         <div class="inv-simple-header">
             <div>
@@ -461,7 +461,7 @@
             document.getElementById('rClient').innerText = client.toFixed(2);
         }
 
-        // --- 100% FIXED PDF GENERATOR (No Blank Screen, Perfect Capture) ---
+        // --- 🚀 FOOLPROOF PDF GENERATOR (NO BLANK SCREEN) ---
         function generatePDF() {
             let clientName = document.getElementById('iName').value || 'Valued Client';
             let month = document.getElementById('iMonth').value || 'Current Month';
@@ -487,30 +487,35 @@
             document.getElementById('pdfAgencyProfit').innerText = agencyShare.toFixed(2);
             
             let element = document.getElementById('invoiceTemplate');
+            let btn = document.querySelector('.btn-pdf');
+            let oldText = btn.innerHTML;
             
-            // 🔥 The Definitive Fix for White Screen:
+            // 🔥 The Definitive Fix for White Screen: 
+            // اسے سکرین کے بالکل سامنے لا رہے ہیں تاکہ براؤزر اسے بغیر کسی غلطی کے سکین کر سکے
             element.style.display = 'block'; 
-            element.style.position = 'absolute'; 
+            element.style.position = 'fixed'; 
             element.style.top = '0'; 
             element.style.left = '0';
-            element.style.zIndex = '-9999'; // ڈیش بورڈ کے بالکل پیچھے چھپا رہے گا
+            element.style.zIndex = '999999'; // سب کے اوپر آ جائے گا
+            element.style.boxShadow = '0 0 100px rgba(0,0,0,0.5)';
+            
+            // بیک گراؤنڈ سکرولنگ بند کریں
+            document.body.style.overflow = 'hidden'; 
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Generating VIP PDF...';
             
             let opt = {
-              margin:       0.5,
-              filename:     `Invoice_${clientName.replace(/\s+/g, '_')}_${month}.pdf`,
+              margin:       0.3,
+              filename:     `Statement_${clientName.replace(/\s+/g, '_')}_${month}.pdf`,
               image:        { type: 'jpeg', quality: 1 },
-              html2canvas:  { 
-                  scale: 2, 
-                  scrollY: 0, // 🔴 یہ سکرول کمانڈ وائٹ سکرین کو ہمیشہ کے لیے ختم کر دے گی
-                  windowWidth: 800 
-              },
+              html2canvas:  { scale: 2, windowWidth: 800, useCORS: true },
               jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
             };
             
             html2pdf().set(opt).from(element).save().then(() => {
+                // کام مکمل ہونے کے بعد سب کچھ واپس ویسا ہی کر دیں
                 element.style.display = 'none'; 
-                element.style.position = 'relative';
-                element.style.zIndex = 'auto';
+                document.body.style.overflow = 'auto';
+                btn.innerHTML = oldText;
             });
         }
 
