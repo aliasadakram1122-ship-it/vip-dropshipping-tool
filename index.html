@@ -96,46 +96,6 @@
             from { box-shadow: 0 0 10px rgba(245, 158, 11, 0.2); }
             to { box-shadow: 0 0 30px rgba(245, 158, 11, 0.6); }
         }
-
-        /* =========================================
-           🚀 STRICT WIDTH INVOICE TEMPLATE (NO MOBILE SQUASH)
-           ========================================= */
-        #invoiceTemplate { 
-            display: none; 
-            background: #ffffff; 
-            color: #1e293b; 
-            width: 800px !important;       /* Strict Width */
-            min-width: 800px !important;   /* Force Browser to not compress it */
-            max-width: 800px !important; 
-            padding: 50px 40px; 
-            font-family: 'Inter', Arial, sans-serif; 
-            box-sizing: border-box;
-            border-left: 15px solid #1e293b; 
-            position: relative;
-        }
-        
-        #invoiceTemplate::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 15px;
-            height: 150px;
-            background: #d97706; 
-        }
-
-        .inv-simple-header { display: flex; justify-content: space-between; border-bottom: 2px solid #e2e8f0; padding-bottom: 25px; margin-bottom: 35px; flex-wrap: nowrap !important; }
-        .inv-simple-header h1 { margin: 0; font-size: 32px; color: #1e293b; font-weight: 900; letter-spacing: -1px; white-space: nowrap;}
-        .inv-simple-header h1 span { color: #d97706; }
-        .inv-simple-header p { margin: 8px 0 0 0; color: #64748b; font-size: 14px; font-weight: 600;}
-        
-        .inv-info-row { display: flex; justify-content: space-between; margin-bottom: 40px; background: #f8fafc; padding: 20px; border-radius: 8px; flex-wrap: nowrap !important;}
-        .inv-info-row strong { color: #94a3b8; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;}
-        .inv-info-row span { font-size: 20px; display: block; margin-top: 5px; color: #0f172a; font-weight: 800; white-space: nowrap;}
-        
-        .inv-table-simple { width: 100%; border-collapse: collapse; margin-bottom: 40px; table-layout: fixed;}
-        .inv-table-simple th { padding: 15px; text-align: left; background: #f1f5f9; border-bottom: 2px solid #cbd5e1; color: #475569; font-size: 13px; text-transform: uppercase; letter-spacing: 1px;}
-        .inv-table-simple td { padding: 18px 15px; border-bottom: 1px solid #e2e8f0; font-size: 16px; font-weight: 600; color: #334155;}
     </style>
 </head>
 <body>
@@ -257,7 +217,7 @@
                         <div class="form-group"><label>Total Revenue Generated (£/$)</label><input type="number" id="cRev" oninput="calcClientSplit()"></div>
                         <div class="form-group"><label>Your Agency Share (%)</label><input type="number" id="cPerc" value="50" oninput="calcClientSplit()"></div>
                         
-                        <button class="btn-premium btn-pdf" onclick="generatePDF()"><i class="fa-solid fa-file-pdf"></i> Download PDF Invoice</button>
+                        <button class="btn-premium btn-pdf" onclick="generatePDF()"><i class="fa-solid fa-file-pdf"></i> Download VIP Invoice PDF</button>
                     </div>
                     <div class="details-box">
                         <div style="font-size: 20px; color: #0f172a; margin-bottom: 20px; display: block; text-align: center; font-weight: 900;">Live Statement</div>
@@ -328,69 +288,74 @@
         </main>
     </div>
 
-    <!-- 📜 STRICT & FOOLPROOF INVOICE TEMPLATE (NO SQUASHING) -->
-    <div id="invoiceTemplate">
-        <div class="inv-simple-header">
-            <div>
-                <h1>ECOM <span>WITH ASAD</span></h1>
-                <p>Premium Dropshipping Management</p>
-            </div>
-            <div style="text-align: right;">
-                <h1 style="color: #1e293b;">STATEMENT</h1>
-                <p id="pdfDate" style="color: #64748b; font-weight: 600;">Date: --</p>
-            </div>
-        </div>
+    <!-- 🛑 FOOLPROOF HTML TABLE PDF TEMPLATE (CANNOT SQUASH ON MOBILE) -->
+    <div id="invoiceTemplate" style="display:none; width:800px; background:#ffffff; font-family:Arial, sans-serif; padding:40px; box-sizing:border-box; border-left:15px solid #1e293b;">
         
-        <div class="inv-info-row">
-            <div>
-                <strong>Billed To / Client:</strong>
-                <span id="pdfClient">--</span>
-            </div>
-            <div style="text-align: right;">
-                <strong>Statement Month:</strong>
-                <span id="pdfMonth">--</span>
-            </div>
-        </div>
-
-        <table class="inv-table-simple">
-            <thead>
-                <tr>
-                    <th>Financial Breakdown Description</th>
-                    <th style="text-align: right; width: 200px;">Amount</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Total Revenue Generated</td>
-                    <td style="text-align: right; color: #0284c7; font-weight: bold;" id="pdfRev">0.00</td>
-                </tr>
-                <tr>
-                    <td>Total Capital Invested (Costs)</td>
-                    <td style="text-align: right; color: #dc2626; font-weight: bold;" id="pdfCost">- 0.00</td>
-                </tr>
-                <tr style="background: #f0fdf4; border-bottom: 2px solid #1e293b;">
-                    <td style="font-weight: 900; padding: 20px 15px; font-size: 18px;">Total Net Profit</td>
-                    <td style="text-align: right; font-weight: 900; color: #059669; padding: 20px 15px; font-size: 18px;" id="pdfNet">0.00</td>
-                </tr>
-            </tbody>
+        <!-- Header -->
+        <table width="100%" cellpadding="0" cellspacing="0" style="border-bottom:2px solid #e2e8f0; padding-bottom:20px; margin-bottom:30px;">
+            <tr>
+                <td align="left" valign="middle">
+                    <h1 style="margin:0; font-size:32px; color:#1e293b; font-weight:900;">ECOM <span style="color:#d97706;">WITH ASAD</span></h1>
+                    <p style="margin:5px 0 0 0; color:#64748b; font-size:14px; font-weight:bold;">Premium Dropshipping Management</p>
+                </td>
+                <td align="right" valign="middle">
+                    <h1 style="margin:0; font-size:24px; color:#1e293b;">STATEMENT</h1>
+                    <p id="pdfDate" style="margin:5px 0 0 0; color:#64748b; font-size:14px; font-weight:bold;">Date: --</p>
+                </td>
+            </tr>
         </table>
 
-        <table class="inv-table-simple" style="margin-top: 40px;">
-            <tbody>
-                <tr>
-                    <td>Agency Service Fee / Share (<span id="pdfAgencyPercVal">50</span>%)</td>
-                    <td style="text-align: right; width: 200px; font-weight: bold; color: #d97706;" id="pdfAgencyProfit">0.00</td>
-                </tr>
-                <tr style="background: #f8fafc; border-bottom: 2px solid #1e293b;">
-                    <td style="font-weight: 900; font-size: 18px; padding: 20px 15px;">Client's Net Payout (<span id="pdfClientPercVal">50</span>%)</td>
-                    <td style="text-align: right; width: 200px; font-weight: 900; font-size: 20px; padding: 20px 15px; color: #1e293b;" id="pdfClientProfit">0.00</td>
-                </tr>
-            </tbody>
+        <!-- Client Info Box -->
+        <table width="100%" cellpadding="15" cellspacing="0" style="background:#f8fafc; margin-bottom:30px; border-radius:8px;">
+            <tr>
+                <td align="left" width="50%">
+                    <strong style="color:#94a3b8; font-size:12px; letter-spacing:1px;">BILLED TO / CLIENT:</strong><br>
+                    <span id="pdfClient" style="font-size:20px; font-weight:bold; color:#0f172a; display:block; margin-top:5px;">--</span>
+                </td>
+                <td align="right" width="50%">
+                    <strong style="color:#94a3b8; font-size:12px; letter-spacing:1px;">STATEMENT MONTH:</strong><br>
+                    <span id="pdfMonth" style="font-size:20px; font-weight:bold; color:#0f172a; display:block; margin-top:5px;">--</span>
+                </td>
+            </tr>
+        </table>
+
+        <!-- Financial Breakdown -->
+        <table width="100%" cellpadding="15" cellspacing="0" style="margin-bottom:30px; border-collapse:collapse;">
+            <tr>
+                <th align="left" style="background:#f1f5f9; color:#475569; font-size:13px; border-bottom:2px solid #cbd5e1; text-transform:uppercase;">Financial Breakdown Description</th>
+                <th align="right" style="background:#f1f5f9; color:#475569; font-size:13px; border-bottom:2px solid #cbd5e1; text-transform:uppercase;">Amount</th>
+            </tr>
+            <tr>
+                <td align="left" style="border-bottom:1px solid #e2e8f0; font-size:16px; font-weight:bold; color:#334155;">Total Revenue Generated</td>
+                <td align="right" id="pdfRev" style="border-bottom:1px solid #e2e8f0; font-size:16px; font-weight:bold; color:#0284c7;">0.00</td>
+            </tr>
+            <tr>
+                <td align="left" style="border-bottom:1px solid #e2e8f0; font-size:16px; font-weight:bold; color:#334155;">Total Capital Invested (Costs)</td>
+                <td align="right" id="pdfCost" style="border-bottom:1px solid #e2e8f0; font-size:16px; font-weight:bold; color:#dc2626;">- 0.00</td>
+            </tr>
+            <tr>
+                <td align="left" style="background:#f0fdf4; border-bottom:2px solid #1e293b; font-size:18px; font-weight:900; color:#1e293b; padding:20px 15px;">Total Net Profit</td>
+                <td align="right" id="pdfNet" style="background:#f0fdf4; border-bottom:2px solid #1e293b; font-size:18px; font-weight:900; color:#059669; padding:20px 15px;">0.00</td>
+            </tr>
+        </table>
+
+        <!-- Split Breakdown -->
+        <table width="100%" cellpadding="15" cellspacing="0" style="margin-bottom:40px; border-collapse:collapse;">
+            <tr>
+                <td align="left" style="font-size:16px; font-weight:bold; color:#334155;">Agency Service Fee (<span id="pdfAgencyPercVal">50</span>%)</td>
+                <td align="right" id="pdfAgencyProfit" style="font-size:16px; font-weight:bold; color:#d97706;">0.00</td>
+            </tr>
+            <tr>
+                <td align="left" style="background:#f8fafc; border-bottom:2px solid #1e293b; font-size:18px; font-weight:900; color:#1e293b; padding:20px 15px;">Client's Net Payout (<span id="pdfClientPercVal">50</span>%)</td>
+                <td align="right" id="pdfClientProfit" style="background:#f8fafc; border-bottom:2px solid #1e293b; font-size:20px; font-weight:900; color:#1e293b; padding:20px 15px;">0.00</td>
+            </tr>
         </table>
         
-        <div style="margin-top: 60px; text-align: center; color: #64748b; font-size: 13px; font-weight: 600;">
+        <!-- Footer -->
+        <div style="text-align:center; color:#64748b; font-size:13px; font-weight:bold; margin-top:50px;">
             Thank you for doing business with us!<br>For any questions, please contact WhatsApp: +923028997180
         </div>
+
     </div>
 
     <script>
@@ -401,7 +366,6 @@
             btnElement.classList.add('active');
         }
 
-        // --- MARKET LOGIC (100% Accurate Tiered Formula) ---
         let currentMarket = 'UK';
         let currencySym = '£';
 
@@ -461,7 +425,7 @@
             document.getElementById('rClient').innerText = client.toFixed(2);
         }
 
-        // --- 🚀 THE ULTIMATE FIX FOR MOBILE SQUASHING ---
+        // --- THE UNBREAKABLE PDF GENERATOR ---
         function generatePDF() {
             let clientName = document.getElementById('iName').value || 'Valued Client';
             let month = document.getElementById('iMonth').value || 'Current Month';
@@ -474,7 +438,7 @@
             let agencyShare = profit * (agencyPerc / 100);
             let clientShare = profit - agencyShare;
             
-            // Populate original template
+            // Populate values
             document.getElementById('pdfDate').innerText = "Date: " + new Date().toLocaleDateString();
             document.getElementById('pdfClient').innerText = clientName.toUpperCase();
             document.getElementById('pdfMonth').innerText = month.toUpperCase();
@@ -486,42 +450,38 @@
             document.getElementById('pdfAgencyPercVal').innerText = agencyPerc;
             document.getElementById('pdfAgencyProfit').innerText = agencyShare.toFixed(2);
             
-            // 🛑 CREATE A STRICT OFF-SCREEN WRAPPER TO PREVENT SQUASHING ON MOBILE
-            let cloneWrapper = document.createElement('div');
-            cloneWrapper.style.position = 'absolute';
-            cloneWrapper.style.top = '0';
-            cloneWrapper.style.left = '0';
-            cloneWrapper.style.width = '800px';       // Force 800px width
-            cloneWrapper.style.minWidth = '800px';   // Prevent any mobile squash
-            cloneWrapper.style.zIndex = '-9999';     // Keep hidden from user
-            cloneWrapper.style.background = '#ffffff';
-
+            // Clone the rigidly structured table HTML
             let element = document.getElementById('invoiceTemplate');
             let clone = element.cloneNode(true);
-            clone.style.display = 'block'; // Make clone visible
             
-            cloneWrapper.appendChild(clone);
-            document.body.appendChild(cloneWrapper);
+            clone.style.display = 'block'; 
+            clone.style.position = 'absolute'; 
+            clone.style.top = '0'; 
+            clone.style.left = '-9999px'; // Safely out of view
+            clone.style.width = '800px';  // Force 800px width
+            
+            document.body.appendChild(clone);
             
             let btn = document.querySelector('.btn-pdf');
             let oldText = btn.innerHTML;
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Generating PDF...';
             
+            // html2canvas settings specifically built to prevent mobile squash
             let opt = {
               margin:       0.3,
               filename:     `Statement_${clientName.replace(/\s+/g, '_')}_${month}.pdf`,
               image:        { type: 'jpeg', quality: 1 },
               html2canvas:  { 
                   scale: 2, 
-                  scrollY: 0, 
-                  windowWidth: 800, // Force library to capture exactly 800px wide
+                  windowWidth: 800, // Tell the library the screen is 800px wide
+                  width: 800,       // Force the render box to 800px wide
                   useCORS: true 
               },
               jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
             };
             
-            html2pdf().set(opt).from(cloneWrapper).save().then(() => {
-                document.body.removeChild(cloneWrapper); // Clean up hidden div
+            html2pdf().set(opt).from(clone).save().then(() => {
+                document.body.removeChild(clone); // Destroy the clone
                 btn.innerHTML = oldText;
             });
         }
