@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP Dropshipping Suite | ECOM WITH ASAD</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap');
+        
+        :root {
+            --bg-color: #050507;
+            --gold-primary: #fbbf24;
+            --gold-secondary: #d97706;
+            --panel-bg: rgba(15, 15, 20, 0.6);
+            --glass-border: rgba(251, 191, 36, 0.2);
+            --text-main: #ffffff;
+            --text-muted: #9ca3af;
+        }
+
+        body { 
+            background: radial-gradient(circle at top right, #1a1a24 0%, var(--bg-color) 40%);
+            color: var(--text-main); 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            height: 100vh; 
+            display: flex; 
+            overflow: hidden; 
+        }
+        
+        /* 💎 GLASSMORPHISM SIDEBAR */
+        .sidebar { 
+            width: 280px; 
+            background: rgba(10, 10, 12, 0.8); 
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--glass-border); 
+            display: flex; 
+            flex-direction: column; 
+            box-shadow: 5px 0 30px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+        
+        .brand { 
+            padding: 30px 20px; 
+            text-align: center; 
+            border-bottom: 1px solid rgba(255,255,255,0.05); 
+            position: relative;
+        }
+        .brand h1 { 
+            margin: 0; font-size: 22px; font-weight: 900; 
+            background: linear-gradient(to right, #fff, var(--gold-primary)); 
+            -webkit-background-clip: text; color: transparent; 
+            letter-spacing: 2px;
+        }
+        .brand span { font-size: 11px; color: var(--gold-primary); letter-spacing: 3px; font-weight: 600; text-transform: uppercase;}
+        
+        .nav-menu { padding: 20px 15px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+        .nav-item { 
+            background: transparent; border: 1px solid transparent; color: var(--text-muted); 
+            padding: 16px 20px; border-radius: 12px; cursor: pointer; text-align: left; 
+            font-size: 14px; font-weight: 600; transition: all 0.4s ease; 
+            display: flex; align-items: center; gap: 15px;
+        }
+        .nav-item i { font-size: 18px; transition: 0.3s; }
+        
+        .nav-item:hover { background: rgba(255,255,255,0.03); color: #fff; transform: translateX(5px);}
+        .nav-item.active { 
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(217, 119, 6, 0.1)); 
+            color: var(--gold-primary); 
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3), inset 0 0 15px rgba(251, 191, 36, 0.05);
+        }
+        .nav-item.active i { color: var(--gold-primary); filter: drop-shadow(0 0 5px var(--gold-primary));}
+
+        /* 🚀 MAIN CONTENT AREA */
+        .main-wrapper { flex: 1; display: flex; flex-direction: column; position: relative; }
+        
+        /* TOP HEADER */
+        .top-header {
+            height: 70px; background: rgba(10,10,12,0.5); backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: space-between;
+            padding: 0 40px;
+        }
+        .user-profile { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; color: #fff;}
+        .user-profile img { width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--gold-primary); }
+        .status-badge { background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 5px 10px; border-radius: 20px; font-size: 11px; border: 1px solid #10b981;}
+
+        .content-area { padding: 40px; overflow-y: auto; height: calc(100vh - 70px); box-sizing: border-box; }
+        
+        .tool-section { display: none; animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1); max-width: 900px; margin: 0 auto; }
+        .tool-section.active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .section-header { margin-bottom: 30px; }
+        .section-header h2 { font-size: 28px; margin: 0; color: #fff; font-weight: 800; }
+        .section-header p { color: var(--text-muted); margin-top: 5px; font-size: 14px; }
+
+        /* 🃏 PREMIUM GLASS CARDS */
+        .card { 
+            background: var(--panel-bg); backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.05); border-top: 1px solid var(--glass-border);
+            border-radius: 20px; padding: 30px; margin-bottom: 25px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            position: relative; overflow: hidden;
+        }
+        .card::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.03), transparent); transform: skewX(-25deg); animation: shine 6s infinite; }
+        @keyframes shine { 0% { left: -100%; } 20%, 100% { left: 200%; } }
+
+        /* 🎛️ INPUTS & BUTTONS */
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-size: 12px; font-weight: 800; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        input[type="text"], input[type="number"] { 
+            width: 100%; box-sizing: border-box; background: rgba(0,0,0,0.5); 
+            border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 16px; 
+            border-radius: 12px; font-size: 15px; font-family: 'Inter', sans-serif; outline: none; transition: 0.3s; 
+        }
+        input:focus { border-color: var(--gold-primary); box-shadow: 0 0 20px rgba(251, 191, 36, 0.15); background: rgba(0,0,0,0.8); }
+        
+        .btn-premium { 
+            width: 100%; background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary)); 
+            border: none; color: #000; font-size: 15px; font-weight: 900; padding: 18px; 
+            border-radius: 12px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
+            transition: all 0.4s ease; box-shadow: 0 10px 20px rgba(217, 119, 6, 0.3);
+            display: flex; justify-content: center; align-items: center; gap: 10px;
+        }
+        .btn-premium:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(251, 191, 36, 0.5); color: #fff; }
+
+        /* SPECIFIC ELEMENTS */
+        .profit-val { font-size: 50px; font-weight: 900; text-align: center; color: #10b981; text-shadow: 0 0 30px rgba(16,185,129,0.3); margin: 20px 0;}
+        .details-box { background: rgba(0,0,0,0.4); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
+        .details-box div { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); font-size: 14px; font-weight: 600; color: #d1d5db;}
+        .details-box div:last-child { border: none; padding-bottom: 0; color: var(--gold-primary); font-size: 16px; font-weight: 800;}
+
+        .ai-result-box { background: rgba(0,0,0,0.6); padding: 20px; border-radius: 12px; border: 1px solid #333; margin-bottom: 20px; position: relative;}
+        .copy-btn { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 11px; font-weight: bold; padding: 6px 12px; border-radius: 6px; cursor: pointer; transition: 0.3s;}
+        .copy-btn:hover { background: var(--gold-primary); color: #000;}
+        
+        .ai-text { font-size: 15px; color: #e4e4e7; line-height: 1.6; white-space: pre-wrap; margin-top: 10px;}
+        .loader { display: none; text-align: center; padding: 30px; }
+        .spinner { width: 40px; height: 40px; border: 4px solid rgba(251,191,36,0.2); border-top: 4px solid var(--gold-primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <!-- 💎 SIDEBAR -->
+    <nav class="sidebar">
+        <div class="brand">
+            <h1>ECOM WITH ASAD</h1>
+            <span>VIP Seller Suite</span>
+        </div>
+        <div class="nav-menu">
+            <button class="nav-item active" onclick="switchTool('calcTool', this)"><i class="fa-solid fa-calculator"></i> Profit Calculator</button>
+            <button class="nav-item" onclick="switchTool('aiTool', this)"><i class="fa-solid fa-robot"></i> AI Listing Generator</button>
+            <button class="nav-item" onclick="alert('Module locked for updates.')"><i class="fa-solid fa-truck-fast"></i> Order Autofill</button>
+            <button class="nav-item" onclick="alert('Module locked for updates.')"><i class="fa-solid fa-chart-line"></i> Sales Analytics</button>
+        </div>
+    </nav>
+
+    <!-- 🚀 MAIN CONTENT -->
+    <div class="main-wrapper">
+        <header class="top-header">
+            <div style="font-size: 14px; color: var(--text-muted);"><i class="fa-brands fa-amazon"></i> Amazon to eBay Automation</div>
+            <div class="user-profile">
+                <span class="status-badge"><i class="fa-solid fa-circle-check"></i> System Online</span>
+                <img src="https://ui-avatars.com/api/?name=Asad+VIP&background=fbbf24&color=000&bold=true" alt="Admin">
+                <span>Asad (Admin)</span>
+            </div>
+        </header>
+
+        <main class="content-area">
+            
+            <!-- TOOL 1: PROFIT CALCULATOR -->
+            <div id="calcTool" class="tool-section active">
+                <div class="section-header">
+                    <h2>Advanced Profit Calculator</h2>
+                    <p>Calculate exact dropshipping margins with eBay's latest UK tiered fee structure.</p>
+                </div>
+                
+                <div style="display: grid; gap: 25px; grid-template-columns: 1fr 1fr;">
+                    <div class="card">
+                        <div class="form-group">
+                            <label><i class="fa-brands fa-amazon" style="color:#ff9900;"></i> Supplier Cost Price (£)</label>
+                            <input type="number" id="amazonCost" placeholder="0.00" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa-brands fa-ebay" style="color:#86b817;"></i> eBay Sale Price (£)</label>
+                            <input type="number" id="ebayPrice" placeholder="0.00" step="0.01">
+                        </div>
+                        <button class="btn-premium" onclick="calculateVIPProfit()">Calculate Net Profit <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+
+                    <div class="card">
+                        <label style="text-align: center; color: var(--gold-primary);">Final Net Profit</label>
+                        <div class="profit-val" id="netProfit">£0.00</div>
+                        <div class="details-box">
+                            <div><span>Supplier Cost:</span> <span id="displayAmzCost">£0.00</span></div>
+                            <div><span>eBay Protection Fee:</span> <span id="displayEbayFee">£0.00</span></div>
+                            <div><span>Total Deduction:</span> <span id="totalDeduction">£0.00</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TOOL 2: 100% REAL AI LISTING GENERATOR -->
+            <div id="aiTool" class="tool-section">
+                <div class="section-header">
+                    <h2>Real AI SEO Generator</h2>
+                    <p>Paste any Amazon/Supplier link. AI will write a 100% authentic, eBay-compliant SEO Title & Description.</p>
+                </div>
+
+                <div class="card">
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-link"></i> Paste Product URL</label>
+                        <input type="text" id="productLink" placeholder="https://www.amazon.co.uk/dp/B08N5WRWNW...">
+                    </div>
+                    <button class="btn-premium" onclick="generateRealListing()"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate SEO Listing</button>
+                    
+                    <div id="loading" class="loader">
+                        <div class="spinner"></div>
+                        <div>Fetching product data and generating via AI...</div>
+                    </div>
+                </div>
+
+                <div id="results" class="card" style="display: none; border-color: #10b981;">
+                    <h3 style="color: #10b981; margin-top: 0;"><i class="fa-solid fa-check-circle"></i> AI Generation Complete</h3>
+                    
+                    <label style="color: var(--gold-primary); margin-top: 20px;">eBay SEO Title (Max 80 Chars)</label>
+                    <div class="ai-result-box">
+                        <button class="copy-btn" onclick="copyText('titleOutput')"><i class="fa-regular fa-copy"></i> Copy</button>
+                        <div id="titleOutput" class="ai-text" style="font-size: 18px; font-weight: bold; color: #fff;"></div>
+                    </div>
+
+                    <label style="color: var(--gold-primary);">eBay Compliant Description (No HTML)</label>
+                    <div class="ai-result-box">
+                        <button class="copy-btn" onclick="copyText('descOutput')"><i class="fa-regular fa-copy"></i> Copy</button>
+                        <div id="descOutput" class="ai-text"></div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // --- 1. UI NAVIGATION ---
+        function switchTool(toolId, btnElement) {
+            document.querySelectorAll('.tool-section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.getElementById(toolId).classList.add('active');
+            btnElement.classList.add('active');
+        }
+
+        // --- 2. EXACT EBAY FEE LOGIC ---
+        function calculateEbayFee(ebayPrice) {
+            if (!ebayPrice || ebayPrice <= 0) return 0;
+            let fee = 0.10; 
+            let tier1 = Math.min(ebayPrice, 20); fee += tier1 * 0.07; 
+            if (ebayPrice > 20) { let tier2 = Math.min(ebayPrice - 20, 280); fee += tier2 * 0.04; } 
+            if (ebayPrice > 300) { let tier3 = Math.min(ebayPrice - 300, 3700); fee += tier3 * 0.02; } 
+            return fee;
+        }
+
+        function calculateVIPProfit() {
+            let amazonCost = parseFloat(document.getElementById('amazonCost').value) || 0;
+            let ebayPrice = parseFloat(document.getElementById('ebayPrice').value) || 0;
+            
+            let ebayFee = calculateEbayFee(ebayPrice);
+            let totalDeduction = amazonCost + ebayFee;
+            let profit = ebayPrice > 0 ? (ebayPrice - totalDeduction) : 0;
+            
+            let profitEl = document.getElementById('netProfit');
+            profitEl.innerText = '£' + profit.toFixed(2);
+            
+            if(profit > 0) { profitEl.style.color = '#10b981'; profitEl.style.textShadow = '0 0 30px rgba(16,185,129,0.3)'; }
+            else if(profit < 0) { profitEl.style.color = '#ef4444'; profitEl.style.textShadow = '0 0 30px rgba(239,68,68,0.3)'; profitEl.innerText = '-' + profitEl.innerText.replace('-', ''); }
+            else { profitEl.style.color = '#fff'; profitEl.style.textShadow = 'none'; }
+            
+            document.getElementById('displayAmzCost').innerText = '£' + amazonCost.toFixed(2);
+            document.getElementById('displayEbayFee').innerText = '£' + ebayFee.toFixed(2);
+            document.getElementById('totalDeduction').innerText = '£' + totalDeduction.toFixed(2);
+        }
+
+        // --- 3. 100% REAL AI LOGIC (SECURE SERVERLESS API) ---
+        async function generateRealListing() {
+            let link = document.getElementById('productLink').value.trim();
+            if(!link) { alert("Please enter a product link!"); return; }
+
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('loading').style.display = 'block';
+
+            try {
+                // ہماری ویب سائٹ اب ڈائریکٹ API Key استعمال نہیں کرے گی، بلکہ ہمارے Vercel سرور سے بات کرے گی
+                let response = await fetch('/api/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ link: link })
+                });
+
+                let aiData = await response.json();
+                
+                if(aiData.error) {
+                    alert("System Error: " + aiData.error);
+                    document.getElementById('loading').style.display = 'none';
+                    return;
+                }
+
+                // سکرین پر رزلٹ شو کرنا
+                document.getElementById('titleOutput').innerText = aiData.title;
+                document.getElementById('descOutput').innerText = aiData.description;
+                
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('results').style.display = 'block';
+
+            } catch (error) {
+                console.error(error);
+                alert("Network error! Make sure the server is running.");
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        // --- 4. COPY TEXT HELPER ---
+        function copyText(elementId) {
+            let text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text);
+            alert("Copied to clipboard!");
+        }
+    </script>
+</body>
+</html>
