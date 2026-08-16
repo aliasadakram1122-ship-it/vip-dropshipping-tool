@@ -7,12 +7,12 @@ export default async function handler(req, res) {
 
         const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
+        // نیا ماسٹر پرامپٹ: HTML کی اجازت اور الفاظ ریپیٹ نہ کرنے کی سختی
         const prompt = `I am dropshipping this product on eBay UK. Product link/info: ${link}. 
         Please provide ONLY a raw JSON response with two keys:
-        1. "title": An optimized, highly searchable eBay SEO title (Maximum 80 characters). No special symbols.
-        2. "description": A highly professional, plain text product description formatted for eBay. Include Bullet points for features. Do NOT include any HTML tags. Do NOT include any personal names anywhere in the text. Include a standard "Free UK Shipping & 30-Day Returns" policy at the bottom.`;
+        1. "title": An optimized, highly searchable eBay SEO title (Maximum 80 characters). STRICT RULE: Do NOT repeat any words. No special symbols.
+        2. "description": A highly professional, premium product description formatted for eBay using clean HTML. Use modern styling, <b> tags for headings, and <ul><li> for bullet points. Do NOT include any personal names. Include a standard "Free UK Shipping & 30-Day Returns" policy at the bottom inside a visually distinct HTML section or bold text.`;
 
-        // 2026 کا لیٹسٹ اور 100% ورکنگ ماڈل (gemini-3.5-flash)
         const aiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
