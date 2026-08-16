@@ -5,80 +5,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VIP Dropshipping Suite | ECOM WITH ASAD</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- PDF Generation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap');
         
         :root {
-            --bg-color: #050507;
-            --gold-primary: #fbbf24;
-            --gold-secondary: #d97706;
-            --panel-bg: rgba(15, 15, 20, 0.6);
-            --glass-border: rgba(251, 191, 36, 0.2);
-            --text-main: #ffffff;
-            --text-muted: #9ca3af;
+            --bg-color: #f4f7f6; /* Light, soft background */
+            --gold-primary: #d97706; /* Deeper gold for light theme readability */
+            --gold-secondary: #f59e0b;
+            --panel-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(217, 119, 6, 0.2);
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --accent-glow: rgba(59, 130, 246, 0.15);
         }
 
         body { 
-            background: radial-gradient(circle at top right, #1a1a24 0%, var(--bg-color) 40%);
+            /* Soft, glowing radial background */
+            background: radial-gradient(circle at top right, #e0f2fe 0%, #f8fafc 50%, var(--bg-color) 100%);
             color: var(--text-main); font-family: 'Inter', sans-serif; margin: 0; height: 100vh; display: flex; overflow: hidden; 
         }
         
-        /* SIDEBAR */
-        .sidebar { width: 280px; background: rgba(10, 10, 12, 0.8); backdrop-filter: blur(20px); border-right: 1px solid var(--glass-border); display: flex; flex-direction: column; box-shadow: 5px 0 30px rgba(0,0,0,0.5); z-index: 10;}
-        .brand { padding: 30px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .brand h1 { margin: 0; font-size: 22px; font-weight: 900; background: linear-gradient(to right, #fff, var(--gold-primary)); -webkit-background-clip: text; color: transparent; letter-spacing: 2px;}
-        .brand span { font-size: 11px; color: var(--gold-primary); letter-spacing: 3px; font-weight: 600; text-transform: uppercase;}
+        /* SIDEBAR (Light Glassmorphism) */
+        .sidebar { width: 280px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border-right: 1px solid rgba(0,0,0,0.05); display: flex; flex-direction: column; box-shadow: 10px 0 30px rgba(0,0,0,0.03); z-index: 10;}
+        .brand { padding: 30px 20px; text-align: center; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .brand h1 { margin: 0; font-size: 22px; font-weight: 900; background: linear-gradient(to right, #1e293b, var(--gold-primary)); -webkit-background-clip: text; color: transparent; letter-spacing: 2px;}
+        .brand span { font-size: 11px; color: var(--gold-secondary); letter-spacing: 3px; font-weight: 800; text-transform: uppercase;}
         
         .nav-menu { padding: 20px 15px; flex: 1; display: flex; flex-direction: column; gap: 10px; overflow-y: auto;}
-        .nav-item { background: transparent; border: 1px solid transparent; color: var(--text-muted); padding: 16px 20px; border-radius: 12px; cursor: pointer; text-align: left; font-size: 14px; font-weight: 600; transition: all 0.4s ease; display: flex; align-items: center; gap: 15px;}
+        .nav-item { background: transparent; border: 1px solid transparent; color: var(--text-muted); padding: 16px 20px; border-radius: 12px; cursor: pointer; text-align: left; font-size: 14px; font-weight: 600; transition: all 0.4s ease; display: flex; align-items: center; gap: 15px; position: relative;}
         .nav-item i { font-size: 18px; width: 20px; text-align: center;}
-        .nav-item:hover { background: rgba(255,255,255,0.03); color: #fff; transform: translateX(5px);}
-        .nav-item.active { background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(217, 119, 6, 0.1)); color: var(--gold-primary); border: 1px solid var(--glass-border); box-shadow: 0 10px 20px rgba(0,0,0,0.3), inset 0 0 15px rgba(251, 191, 36, 0.05);}
+        .nav-item:hover { background: #f1f5f9; color: var(--text-main); transform: translateX(5px);}
+        .nav-item.active { background: #fff; color: var(--gold-primary); border: 1px solid var(--glass-border); box-shadow: 0 10px 20px rgba(217, 119, 6, 0.1), inset 0 0 15px rgba(251, 191, 36, 0.05);}
         
+        /* 🔥 Glowing Badge for Extension */
+        .hot-badge { background: #ef4444; color: #fff; font-size: 10px; padding: 3px 8px; border-radius: 20px; position: absolute; right: 10px; animation: pulse-red 1.5s infinite; font-weight: 900;}
+        @keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(239,68,68, 0.7); } 70% { box-shadow: 0 0 0 6px rgba(239,68,68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239,68,68, 0); } }
+
         /* MAIN CONTENT */
         .main-wrapper { flex: 1; display: flex; flex-direction: column; }
-        .top-header { height: 70px; background: rgba(10,10,12,0.5); backdrop-filter: blur(10px); border-bottom: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: space-between; padding: 0 40px;}
-        .user-profile { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; color: #fff;}
+        .top-header { height: 70px; background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; padding: 0 40px;}
+        .user-profile { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; color: var(--text-main);}
         .user-profile img { width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--gold-primary); }
-        .status-badge { background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 5px 10px; border-radius: 20px; font-size: 11px; border: 1px solid #10b981;}
+        .status-badge { background: rgba(16, 185, 129, 0.1); color: #059669; padding: 5px 10px; border-radius: 20px; font-size: 11px; border: 1px solid #10b981; font-weight: bold;}
 
         .content-area { padding: 40px; overflow-y: auto; height: calc(100vh - 70px); box-sizing: border-box; }
         .tool-section { display: none; animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1); max-width: 1000px; margin: 0 auto; }
         .tool-section.active { display: block; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
-        .section-header { margin-bottom: 30px; }
-        .section-header h2 { font-size: 28px; margin: 0; color: #fff; font-weight: 800; }
-        .section-header p { color: var(--text-muted); margin-top: 5px; font-size: 14px; }
+        .section-header { margin-bottom: 30px; text-align: center; }
+        .section-header h2 { font-size: 32px; margin: 0; color: #0f172a; font-weight: 900; letter-spacing: -0.5px;}
+        .section-header p { color: var(--text-muted); margin-top: 8px; font-size: 15px; }
 
-        /* CARDS & FORMS */
-        .card { background: var(--panel-bg); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.05); border-top: 1px solid var(--glass-border); border-radius: 20px; padding: 30px; margin-bottom: 25px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); position: relative; }
+        /* CARDS & FORMS (Light Theme) */
+        .card { background: var(--panel-bg); backdrop-filter: blur(15px); border: 1px solid #ffffff; border-radius: 24px; padding: 35px; margin-bottom: 25px; box-shadow: 0 20px 40px rgba(0,0,0,0.04), inset 0 0 0 1px rgba(255,255,255,0.5); position: relative; }
         .form-group { margin-bottom: 20px; }
         label { display: block; font-size: 12px; font-weight: 800; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
-        input[type="text"], input[type="number"], select { width: 100%; box-sizing: border-box; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 16px; border-radius: 12px; font-size: 15px; font-family: 'Inter', sans-serif; outline: none; transition: 0.3s; }
-        input:focus, select:focus { border-color: var(--gold-primary); box-shadow: 0 0 20px rgba(251, 191, 36, 0.15); background: rgba(0,0,0,0.8); }
+        input[type="text"], input[type="number"], select { width: 100%; box-sizing: border-box; background: #f8fafc; border: 1px solid #e2e8f0; color: #0f172a; padding: 16px; border-radius: 12px; font-size: 15px; font-family: 'Inter', sans-serif; outline: none; transition: 0.3s; font-weight: 600; }
+        input:focus, select:focus { border-color: var(--gold-secondary); box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.15); background: #ffffff; }
         
         /* BUTTONS */
-        .btn-premium { width: 100%; background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary)); border: none; color: #000; font-size: 15px; font-weight: 900; padding: 18px; border-radius: 12px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.4s ease; box-shadow: 0 10px 20px rgba(217, 119, 6, 0.3); display: flex; justify-content: center; align-items: center; gap: 10px;}
-        .btn-premium:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(251, 191, 36, 0.5); color: #fff; }
+        .btn-premium { width: 100%; background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary)); border: none; color: #fff; font-size: 15px; font-weight: 900; padding: 18px; border-radius: 12px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.4s ease; box-shadow: 0 10px 20px rgba(217, 119, 6, 0.2); display: flex; justify-content: center; align-items: center; gap: 10px;}
+        .btn-premium:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(217, 119, 6, 0.4); }
+        
+        /* PDF Button */
+        .btn-pdf { background: linear-gradient(135deg, #ef4444, #dc2626); margin-top: 15px; }
+        .btn-pdf:hover { box-shadow: 0 15px 30px rgba(239, 68, 68, 0.4); }
+
         .btn-whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); color: #fff; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;}
         .btn-chrome { background: #1a73e8; border: 1px solid #1a73e8; color: #fff; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;}
 
         /* UTILITIES */
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
-        .profit-val { font-size: 50px; font-weight: 900; text-align: center; color: #10b981; text-shadow: 0 0 30px rgba(16,185,129,0.3); margin: 20px 0;}
-        .details-box { background: rgba(0,0,0,0.4); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
-        .details-box div { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); font-size: 14px; font-weight: 600; color: #d1d5db;}
+        .profit-val { font-size: 50px; font-weight: 900; text-align: center; color: #059669; text-shadow: 0 5px 15px rgba(16,185,129,0.2); margin: 20px 0;}
         
-        .market-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
-        .market-tab { flex: 1; padding: 15px; text-align: center; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: #fff; font-weight: bold; cursor: pointer; transition: 0.3s;}
-        .market-tab.active { background: rgba(251, 191, 36, 0.2); border-color: var(--gold-primary); color: var(--gold-primary); }
+        /* Light Theme Details Box */
+        .details-box { background: #f1f5f9; padding: 25px; border-radius: 16px; border: 1px solid #e2e8f0; }
+        .details-box div { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px dashed #cbd5e1; font-size: 14px; font-weight: 700; color: #475569;}
+        .details-box div:last-child { border: none; }
+        
+        .market-tabs { display: flex; gap: 10px; margin-bottom: 25px; }
+        .market-tab { flex: 1; padding: 15px; text-align: center; background: #fff; border: 2px solid #e2e8f0; border-radius: 12px; color: var(--text-muted); font-weight: 800; cursor: pointer; transition: 0.3s;}
+        .market-tab.active { background: rgba(217, 119, 6, 0.05); border-color: var(--gold-secondary); color: var(--gold-primary); box-shadow: 0 5px 15px rgba(217,119,6,0.1);}
 
-        .copy-btn { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 12px; font-weight: bold; padding: 8px 15px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 6px;}
-        .msg-card { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; margin-bottom: 15px; position: relative;}
-        .msg-title { color: var(--gold-primary); font-weight: bold; margin-bottom: 10px; font-size: 14px;}
-        .msg-body { color: #d1d5db; font-size: 13px; line-height: 1.6; padding-right: 80px;}
+        .copy-btn { position: absolute; top: 15px; right: 15px; background: #fff; border: 1px solid #e2e8f0; color: #0f172a; font-size: 12px; font-weight: bold; padding: 8px 15px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);}
+        .copy-btn:hover { background: var(--gold-primary); color: #fff; border-color: var(--gold-primary);}
+        
+        .msg-card { background: #fff; border: 1px solid #e2e8f0; padding: 20px; border-radius: 12px; margin-bottom: 15px; position: relative; box-shadow: 0 4px 10px rgba(0,0,0,0.02);}
+        .msg-title { color: var(--gold-primary); font-weight: 900; margin-bottom: 10px; font-size: 14px;}
+        .msg-body { color: #334155; font-size: 14px; line-height: 1.6; padding-right: 80px; font-weight: 500;}
 
+        /* VIP EXTENSION HIGHLIGHT (Magic Glow) */
+        .magic-card {
+            border: 2px solid var(--gold-secondary) !important;
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.3) !important;
+            animation: super-glow 2s infinite alternate;
+            background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%) !important;
+        }
+        @keyframes super-glow {
+            from { box-shadow: 0 0 10px rgba(245, 158, 11, 0.2); }
+            to { box-shadow: 0 0 30px rgba(245, 158, 11, 0.6); }
+        }
+
+        /* INVOICE TEMPLATE (Hidden from UI, used for PDF) */
+        #invoiceTemplate { display: none; padding: 40px; font-family: 'Helvetica', 'Arial', sans-serif; background: #fff; color: #000; width: 800px; }
+        .inv-header { border-bottom: 2px solid #d97706; padding-bottom: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: flex-end;}
+        .inv-table { width: 100%; border-collapse: collapse; margin-top: 30px; }
+        .inv-table th, .inv-table td { border: 1px solid #e5e7eb; padding: 15px; text-align: left; }
+        .inv-table th { background: #f8fafc; font-weight: bold; color: #1e293b; }
+        .inv-total { font-size: 20px; font-weight: bold; color: #059669; }
     </style>
 </head>
 <body>
@@ -91,18 +129,22 @@
         <div class="nav-menu">
             <button class="nav-item active" onclick="switchTool('calcTool', this)"><i class="fa-solid fa-calculator"></i> Global Calculator</button>
             <button class="nav-item" onclick="switchTool('aiTool', this)"><i class="fa-solid fa-robot"></i> Multi-Platform AI</button>
-            <button class="nav-item" onclick="switchTool('clientTool', this)"><i class="fa-solid fa-handshake"></i> Client Profit Share</button>
+            <button class="nav-item" onclick="switchTool('clientTool', this)"><i class="fa-solid fa-handshake"></i> Profit Share Invoice</button>
             <button class="nav-item" onclick="switchTool('msgTool', this)"><i class="fa-solid fa-comment-dots"></i> 1-Click Messages</button>
-            <button class="nav-item" onclick="switchTool('extTool', this)"><i class="fa-solid fa-puzzle-piece"></i> VIP Extensions</button>
+            <!-- Highlighted Menu Item -->
+            <button class="nav-item" onclick="switchTool('extTool', this)" style="border: 1px solid var(--gold-secondary); background: #fffbeb;">
+                <i class="fa-solid fa-bolt" style="color:var(--gold-primary)"></i> Ecom Jaadugar VIP 
+                <span class="hot-badge">HOT</span>
+            </button>
         </div>
     </nav>
 
     <div class="main-wrapper">
         <header class="top-header">
-            <div style="font-size: 14px; color: var(--text-muted);"><i class="fa-solid fa-crown" style="color:var(--gold-primary)"></i> Premium SaaS Edition</div>
+            <div style="font-size: 14px; font-weight: 700; color: var(--gold-primary);"><i class="fa-solid fa-crown"></i> Premium Light Edition</div>
             <div class="user-profile">
                 <span class="status-badge"><i class="fa-solid fa-circle-check"></i> System Online</span>
-                <img src="https://ui-avatars.com/api/?name=Asad+VIP&background=fbbf24&color=000&bold=true" alt="Admin">
+                <img src="https://ui-avatars.com/api/?name=Asad+VIP&background=f59e0b&color=fff&bold=true" alt="Admin">
                 <span>Asad (Admin)</span>
             </div>
         </header>
@@ -134,11 +176,11 @@
                                 <input type="number" id="globalPrice" placeholder="0.00" step="0.01" oninput="calcGlobalProfit()">
                             </div>
                         </div>
-                        <div class="details-box" style="margin-top: 0; background: rgba(0,0,0,0.6);">
+                        <div class="details-box">
                             <label style="text-align: center; color: var(--gold-primary);">Net Profit</label>
                             <div class="profit-val" id="globalProfitRes"><span class="curr-sym">£</span>0.00</div>
                             <div><span>eBay Fee Deducted:</span> <span id="globalFeeRes"><span class="curr-sym">£</span>0.00</span></div>
-                            <div style="font-size: 11px; color: #6b7280; text-align: center; display: block; border: none; margin-top: 10px;" id="feeNote">UK Buyer Protection: 7%-4%-2% + £0.10</div>
+                            <div style="font-size: 12px; color: #94a3b8; text-align: center; display: block; border: none; margin-top: 10px;" id="feeNote">UK Buyer Protection: 7%-4%-2% + £0.10</div>
                         </div>
                     </div>
                 </div>
@@ -169,38 +211,43 @@
                     </div>
                     <button class="btn-premium" onclick="generateRealListing()"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate SEO Listing</button>
                     
-                    <div id="loading" style="display:none; text-align:center; padding: 20px;"><i class="fa-solid fa-spinner fa-spin" style="color:var(--gold-primary); font-size:24px;"></i> Generating VIP Content...</div>
+                    <div id="loading" style="display:none; text-align:center; padding: 20px; font-weight: bold;"><i class="fa-solid fa-spinner fa-spin" style="color:var(--gold-primary); font-size:24px;"></i> Generating VIP Content...</div>
                 </div>
 
-                <div id="results" class="card" style="display: none; border-color: #10b981;">
+                <div id="results" class="card" style="display: none; border: 2px solid #10b981;">
                     <button class="copy-btn" onclick="copyText('titleOutput', this)"><i class="fa-regular fa-copy"></i> Copy Title</button>
                     <label style="color: var(--gold-primary);">Optimized Title</label>
-                    <div id="titleOutput" style="font-size: 18px; font-weight: bold; padding: 15px 0 25px 0;"></div>
+                    <div id="titleOutput" style="font-size: 18px; font-weight: 900; color: #0f172a; padding: 15px 0 25px 0;"></div>
 
-                    <button class="copy-btn" style="top: 120px;" onclick="copyText('descOutput', this)"><i class="fa-regular fa-copy"></i> Copy HTML / Desc</button>
+                    <button class="copy-btn" style="top: 120px;" onclick="copyText('descOutput', this)"><i class="fa-regular fa-copy"></i> Copy HTML</button>
                     <label style="color: var(--gold-primary);">Premium Description Code</label>
-                    <div id="descOutput" style="font-family: monospace; font-size: 13px; color: #a1a1aa; background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; margin-top: 10px; white-space: pre-wrap;"></div>
+                    <div id="descOutput" style="font-family: monospace; font-size: 13px; color: #475569; background: #f8fafc; border: 1px solid #e2e8f0; padding: 15px; border-radius: 8px; margin-top: 10px; white-space: pre-wrap;"></div>
                 </div>
             </div>
 
-            <!-- 3. CLIENT PROFIT SHARE -->
+            <!-- 3. CLIENT PROFIT SHARE + PDF INVOICE -->
             <div id="clientTool" class="tool-section">
                 <div class="section-header">
-                    <h2>Client Profit-Share Tracker</h2>
-                    <p>Calculate end-of-month profit splits for your dropshipping clients.</p>
+                    <h2>Client Profit-Share & Invoice</h2>
+                    <p>Calculate margins and generate professional PDF invoices for clients.</p>
                 </div>
                 <div class="card grid-2">
                     <div>
+                        <div class="form-group"><label>Client Name</label><input type="text" id="iName" placeholder="e.g. John Doe"></div>
+                        <div class="form-group"><label>Statement Month</label><input type="text" id="iMonth" placeholder="e.g. August 2026"></div>
                         <div class="form-group"><label>Total Monthly Revenue (£/$)</label><input type="number" id="cRev" oninput="calcClientSplit()"></div>
                         <div class="form-group"><label>Total Monthly Costs (£/$)</label><input type="number" id="cCost" oninput="calcClientSplit()"></div>
                         <div class="form-group"><label>Your Percentage Share (%)</label><input type="number" id="cPerc" value="50" oninput="calcClientSplit()"></div>
+                        
+                        <!-- PDF Download Button -->
+                        <button class="btn-premium btn-pdf" onclick="generatePDF()"><i class="fa-solid fa-file-pdf"></i> Download PDF Invoice</button>
                     </div>
-                    <div class="details-box" style="background: rgba(0,0,0,0.6);">
-                        <div style="font-size: 20px; color: #fff; margin-bottom: 20px; display: block; text-align: center;">Monthly Statement</div>
-                        <div><span>Total Net Profit:</span> <span id="rTotal" style="color:#10b981;">0.00</span></div>
-                        <div><span>Client's Share:</span> <span id="rClient">0.00</span></div>
-                        <div style="border-top: 1px solid var(--gold-primary); margin-top: 10px; padding-top: 15px;">
-                            <span>Your Share (Ecom with Asad):</span> <span id="rYou" style="color:var(--gold-primary);">0.00</span>
+                    <div class="details-box">
+                        <div style="font-size: 20px; color: #0f172a; margin-bottom: 20px; display: block; text-align: center; font-weight: 900;">Live Statement</div>
+                        <div><span>Total Net Profit:</span> <span id="rTotal" style="color:#059669; font-size:18px;">0.00</span></div>
+                        <div><span>Client's Share:</span> <span id="rClient" style="font-size:16px;">0.00</span></div>
+                        <div style="border-top: 2px solid var(--gold-primary); margin-top: 10px; padding-top: 15px;">
+                            <span>Your Share (Agency):</span> <span id="rYou" style="color:var(--gold-primary); font-size:18px;">0.00</span>
                         </div>
                     </div>
                 </div>
@@ -223,43 +270,41 @@
                         <div class="msg-title">⚠️ Item Damaged / Apology & Refund</div>
                         <div class="msg-body" id="msg2">Dear Customer, we sincerely apologize that your item arrived damaged. This is not our usual standard. We have fully refunded you as a gesture of goodwill. You do not need to return the broken item.</div>
                     </div>
-                    <div class="msg-card">
-                        <button class="copy-btn" onclick="copyText('msg3', this)"><i class="fa-regular fa-copy"></i> Copy</button>
-                        <div class="msg-title">⭐ Positive Feedback Request</div>
-                        <div class="msg-body" id="msg3">Hi there! We see your order has been delivered. If you are satisfied with your purchase, we would be incredibly grateful if you could leave us a positive feedback. It helps our small business immensely!</div>
-                    </div>
                 </div>
             </div>
 
-            <!-- 5. VIP EXTENSIONS -->
+            <!-- 5. VIP EXTENSIONS (HIGHLIGHTED) -->
             <div id="extTool" class="tool-section">
                 <div class="section-header">
-                    <h2>ECOM WITH ASAD - Extensions</h2>
-                    <p>Install our private Chrome extensions for Amazon to eBay automation.</p>
+                    <h2>Premium Automation Tools</h2>
+                    <p>Install our private Chrome extensions to supercharge your dropshipping.</p>
                 </div>
                 
-                <div class="card grid-2">
-                    <!-- Ecom Jaadugar VIP -->
-                    <div style="text-align: center; padding: 20px; background: rgba(0,0,0,0.4); border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Google_Chrome_icon_%28February_2022%29.svg" width="60" style="margin-bottom: 15px;">
-                        <h3 style="color: #fff; margin: 0 0 10px 0;">Ecom Jaadugar VIP</h3>
-                        <p style="font-size: 12px; color: #9ca3af; margin-bottom: 20px;">1-Click address autofill, price checking, and automation script for dropshippers.</p>
+                <div class="card grid-2" style="background: transparent; border: none; box-shadow: none; padding: 0;">
+                    
+                    <!-- 🔥 HIGHLIGHTED: Ecom Jaadugar VIP -->
+                    <div class="magic-card" style="text-align: center; padding: 35px 20px; border-radius: 24px; position: relative; overflow: hidden;">
+                        <div style="position: absolute; top: 15px; left: -30px; background: #ef4444; color: #fff; padding: 5px 40px; transform: rotate(-45deg); font-weight: 900; font-size: 12px; box-shadow: 0 5px 10px rgba(0,0,0,0.2);">MUST HAVE</div>
                         
-                        <div style="display: flex; flex-direction: column; gap: 10px;">
-                            <a href="https://chromewebstore.google.com/detail/gkiloblbdnadnikmjbojnadgmfdlolgn?utm_source=item-share-cb" target="_blank" class="btn-chrome" style="justify-content: center;"><i class="fa-brands fa-chrome"></i> Add to Chrome</a>
-                            <a href="https://wa.me/923028997180?text=Hi Asad, I have installed Ecom Jaadugar VIP from the Chrome Store. I need login access." target="_blank" class="btn-whatsapp" style="justify-content: center;"><i class="fa-brands fa-whatsapp"></i> Get Login Access</a>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Google_Chrome_icon_%28February_2022%29.svg" width="70" style="margin-bottom: 15px; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1));">
+                        <h3 style="color: #0f172a; margin: 0 0 10px 0; font-size: 24px; font-weight: 900;">Ecom Jaadugar VIP <i class="fa-solid fa-sparkles" style="color: var(--gold-primary);"></i></h3>
+                        <p style="font-size: 14px; color: #475569; margin-bottom: 25px; font-weight: 600;">1-Click address autofill, price checking, and automation script for dropshippers.</p>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                            <a href="https://chromewebstore.google.com/detail/gkiloblbdnadnikmjbojnadgmfdlolgn?utm_source=item-share-cb" target="_blank" class="btn-chrome" style="justify-content: center; padding: 15px; font-size: 16px;"><i class="fa-brands fa-chrome"></i> Install from Chrome Store</a>
+                            <a href="https://wa.me/923028997180?text=Hi Asad, I have installed Ecom Jaadugar VIP from the Chrome Store. I need login access." target="_blank" class="btn-whatsapp" style="justify-content: center; padding: 15px; font-size: 16px;"><i class="fa-brands fa-whatsapp"></i> Get VIP Login Access</a>
                         </div>
                     </div>
                     
                     <!-- Stealth Account Guard -->
-                    <div style="text-align: center; padding: 20px; background: rgba(0,0,0,0.4); border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);">
-                        <i class="fa-solid fa-shield-halved" style="font-size: 55px; color: var(--gold-primary); margin-bottom: 15px;"></i>
-                        <h3 style="color: #fff; margin: 0 0 10px 0;">Stealth Account Guard</h3>
-                        <p style="font-size: 12px; color: #9ca3af; margin-bottom: 20px;">Advanced WebRTC leak shield and IP masking integration for stealth accounts.</p>
+                    <div style="text-align: center; padding: 35px 20px; background: #fff; border-radius: 24px; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.03);">
+                        <i class="fa-solid fa-shield-halved" style="font-size: 65px; color: #64748b; margin-bottom: 15px;"></i>
+                        <h3 style="color: #0f172a; margin: 0 0 10px 0; font-size: 22px; font-weight: 900;">Stealth Account Guard</h3>
+                        <p style="font-size: 14px; color: #475569; margin-bottom: 25px; font-weight: 600;">Advanced WebRTC leak shield and IP masking integration for stealth accounts.</p>
                         
-                        <div style="display: flex; flex-direction: column; gap: 10px;">
-                            <a href="#" target="_blank" class="btn-chrome" style="justify-content: center;"><i class="fa-brands fa-chrome"></i> Add to Chrome</a>
-                            <a href="https://wa.me/923028997180?text=Hi Asad, I have installed Stealth Guard. I need login access." target="_blank" class="btn-whatsapp" style="justify-content: center;"><i class="fa-brands fa-whatsapp"></i> Get Login Access</a>
+                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                            <a href="#" target="_blank" class="btn-chrome" style="justify-content: center; background: #64748b; border-color: #64748b; padding: 15px;"><i class="fa-brands fa-chrome"></i> Add to Chrome</a>
+                            <a href="https://wa.me/923028997180?text=Hi Asad, I have installed Stealth Guard. I need login access." target="_blank" class="btn-whatsapp" style="justify-content: center; padding: 15px;"><i class="fa-brands fa-whatsapp"></i> Get Login Access</a>
                         </div>
                     </div>
                 </div>
@@ -268,7 +313,63 @@
         </main>
     </div>
 
+    <!-- INVOICE HTML TEMPLATE (HIDDEN) -->
+    <div id="invoiceTemplate">
+        <div class="inv-header">
+            <div>
+                <h1 style="color: #d97706; margin: 0; font-size: 28px;">ECOM WITH ASAD</h1>
+                <p style="color: #64748b; margin: 5px 0 0 0; font-size: 14px;">Premium Dropshipping Management</p>
+            </div>
+            <div style="text-align: right;">
+                <h2 style="margin: 0; color: #1e293b;">PROFIT SHARE STATEMENT</h2>
+                <p style="margin: 5px 0 0 0; color: #64748b;" id="pdfDate">Date: --</p>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 30px;">
+            <p><strong>Prepared For:</strong> <span id="pdfClient">--</span></p>
+            <p><strong>Statement Month:</strong> <span id="pdfMonth">--</span></p>
+        </div>
+
+        <table class="inv-table">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th style="text-align: right;">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Total Gross Revenue</td>
+                    <td style="text-align: right;" id="pdfRev">0.00</td>
+                </tr>
+                <tr>
+                    <td>Total Goods & Operational Costs</td>
+                    <td style="text-align: right; color: #dc2626;" id="pdfCost">- 0.00</td>
+                </tr>
+                <tr style="background: #f8fafc;">
+                    <td><strong>Net Store Profit</strong></td>
+                    <td style="text-align: right; font-weight: bold;" id="pdfNet">0.00</td>
+                </tr>
+                <tr>
+                    <td>Agency Service Fee (<span id="pdfPercVal">50</span>%)</td>
+                    <td style="text-align: right; color: #d97706;" id="pdfAgency">- 0.00</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="text-align: right; margin-top: 30px; border-top: 2px solid #e5e7eb; padding-top: 20px;">
+            <p style="font-size: 16px; color: #64748b; margin: 0;">Total Client Payout:</p>
+            <p class="inv-total" id="pdfPayout">0.00</p>
+        </div>
+        
+        <div style="margin-top: 50px; text-align: center; color: #94a3b8; font-size: 12px; border-top: 1px solid #e5e7eb; padding-top: 20px;">
+            Thank you for doing business with Ecom With Asad. If you have any questions concerning this statement, please contact us on WhatsApp: +923028997180.
+        </div>
+    </div>
+
     <script>
+        // --- NAVIGATION LOGIC ---
         function switchTool(toolId, btnElement) {
             document.querySelectorAll('.tool-section').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
@@ -276,7 +377,7 @@
             btnElement.classList.add('active');
         }
 
-        // --- MARKET LOGIC (100% Accurate Tiered Formula) ---
+        // --- MARKET LOGIC (Accurate Tiered Formula) ---
         let currentMarket = 'UK';
         let currencySym = '£';
 
@@ -300,25 +401,18 @@
             if(price <= 0) {
                 document.getElementById('globalFeeRes').innerText = currencySym + "0.00";
                 document.getElementById('globalProfitRes').innerText = currencySym + "0.00";
-                document.getElementById('globalProfitRes').style.color = '#fff';
+                document.getElementById('globalProfitRes').style.color = '#0f172a';
                 return;
             }
 
             let fee = 0;
             
-            // 1. UK Tiered System (Buyer Protection Fee)
             if(currentMarket === 'UK') {
-                fee = 0.10; // Flat fee
-                fee += Math.min(price, 20) * 0.07; // 7% on up to £20
-                if(price > 20) {
-                    fee += Math.min(price - 20, 280) * 0.04; // 4% on portion from £20 to £300
-                }
-                if(price > 300) {
-                    fee += Math.min(price - 300, 3700) * 0.02; // 2% on portion from £300 to £4000
-                }
+                fee = 0.10; 
+                fee += Math.min(price, 20) * 0.07; 
+                if(price > 20) { fee += Math.min(price - 20, 280) * 0.04; }
+                if(price > 300) { fee += Math.min(price - 300, 3700) * 0.02; }
             }
-            
-            // 2. US & AU Standard Rules
             if(currentMarket === 'US') fee = (price * 0.1325) + 0.30;
             if(currentMarket === 'AU') fee = (price * 0.134) + 0.30;
 
@@ -327,7 +421,7 @@
             document.getElementById('globalFeeRes').innerText = currencySym + fee.toFixed(2);
             let pEl = document.getElementById('globalProfitRes');
             pEl.innerText = currencySym + profit.toFixed(2);
-            pEl.style.color = profit >= 0 ? '#10b981' : '#ef4444';
+            pEl.style.color = profit >= 0 ? '#059669' : '#dc2626';
         }
 
         // --- CLIENT SPLIT LOGIC ---
@@ -345,18 +439,61 @@
             document.getElementById('rClient').innerText = client.toFixed(2);
         }
 
+        // --- PDF INVOICE GENERATOR ---
+        function generatePDF() {
+            // Get inputs
+            let clientName = document.getElementById('iName').value || 'Valued Client';
+            let month = document.getElementById('iMonth').value || 'Current Month';
+            let rev = parseFloat(document.getElementById('cRev').value) || 0;
+            let cost = parseFloat(document.getElementById('cCost').value) || 0;
+            let perc = parseFloat(document.getElementById('cPerc').value) || 50;
+            
+            let profit = rev - cost;
+            let you = profit * (perc / 100);
+            let client = profit - you;
+            
+            // Populate HTML template
+            document.getElementById('pdfDate').innerText = "Date: " + new Date().toLocaleDateString();
+            document.getElementById('pdfClient').innerText = clientName;
+            document.getElementById('pdfMonth').innerText = month;
+            document.getElementById('pdfRev').innerText = rev.toFixed(2);
+            document.getElementById('pdfCost').innerText = "- " + cost.toFixed(2);
+            document.getElementById('pdfNet').innerText = profit.toFixed(2);
+            document.getElementById('pdfPercVal').innerText = perc;
+            document.getElementById('pdfAgency').innerText = "- " + you.toFixed(2);
+            document.getElementById('pdfPayout').innerText = client.toFixed(2);
+            
+            // Create PDF
+            let element = document.getElementById('invoiceTemplate');
+            element.style.display = 'block'; // Temporarily show it
+            
+            let opt = {
+              margin:       0.5,
+              filename:     `Invoice_${clientName.replace(/\s+/g, '_')}_${month}.pdf`,
+              image:        { type: 'jpeg', quality: 0.98 },
+              html2canvas:  { scale: 2 },
+              jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            
+            // Use html2pdf
+            html2pdf().set(opt).from(element).save().then(() => {
+                element.style.display = 'none'; // Hide it again
+            });
+        }
+
         // --- COPY VIP ---
         function copyText(elementId, btn) {
             let text = document.getElementById(elementId).innerText;
             navigator.clipboard.writeText(text);
             let originalHTML = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-check"></i> Success!';
-            btn.style.backgroundColor = '#10b981'; 
-            btn.style.color = '#fff'; btn.style.borderColor = '#10b981';
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+            btn.style.backgroundColor = '#059669'; 
+            btn.style.color = '#fff'; btn.style.borderColor = '#059669';
             setTimeout(() => {
                 btn.innerHTML = originalHTML;
-                btn.style.backgroundColor = 'rgba(255,255,255,0.1)';
-                btn.style.borderColor = 'rgba(255,255,255,0.2)';
+                btn.style.backgroundColor = '#fff';
+                btn.style.borderColor = '#e2e8f0';
+                btn.style.color = '#0f172a';
             }, 2000);
         }
 
