@@ -62,7 +62,7 @@
         .btn-premium { width: 100%; background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary)); border: none; color: #000; font-size: 15px; font-weight: 900; padding: 18px; border-radius: 12px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.4s ease; box-shadow: 0 10px 20px rgba(217, 119, 6, 0.3); display: flex; justify-content: center; align-items: center; gap: 10px;}
         .btn-premium:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(251, 191, 36, 0.5); color: #fff; }
         .btn-whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); color: #fff; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;}
-        .btn-chrome { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;}
+        .btn-chrome { background: #1a73e8; border: 1px solid #1a73e8; color: #fff; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;}
 
         /* UTILITIES */
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
@@ -126,20 +126,19 @@
                     <div class="grid-2">
                         <div>
                             <div class="form-group">
-                                <label><i class="fa-solid fa-box"></i> Supplier Cost (<span class="curr-sym">£</span>)</label>
-                                <input type="number" id="globalCost" placeholder="0.00" step="0.01">
+                                <label><i class="fa-solid fa-box"></i> Amazon Price / Cost (<span class="curr-sym">£</span>)</label>
+                                <input type="number" id="globalCost" placeholder="0.00" step="0.01" oninput="calcGlobalProfit()">
                             </div>
                             <div class="form-group">
                                 <label><i class="fa-brands fa-ebay"></i> eBay Sale Price (<span class="curr-sym">£</span>)</label>
-                                <input type="number" id="globalPrice" placeholder="0.00" step="0.01">
+                                <input type="number" id="globalPrice" placeholder="0.00" step="0.01" oninput="calcGlobalProfit()">
                             </div>
-                            <button class="btn-premium" onclick="calcGlobalProfit()">Calculate Profit</button>
                         </div>
                         <div class="details-box" style="margin-top: 0; background: rgba(0,0,0,0.6);">
                             <label style="text-align: center; color: var(--gold-primary);">Net Profit</label>
                             <div class="profit-val" id="globalProfitRes"><span class="curr-sym">£</span>0.00</div>
                             <div><span>eBay Fee Deducted:</span> <span id="globalFeeRes"><span class="curr-sym">£</span>0.00</span></div>
-                            <div style="font-size: 11px; color: #6b7280; text-align: center; display: block; border: none; margin-top: 10px;" id="feeNote">UK Private: 12.8% + 0.30p</div>
+                            <div style="font-size: 11px; color: #6b7280; text-align: center; display: block; border: none; margin-top: 10px;" id="feeNote">UK Buyer Protection: 7%-4%-2% + £0.10</div>
                         </div>
                     </div>
                 </div>
@@ -192,10 +191,9 @@
                 </div>
                 <div class="card grid-2">
                     <div>
-                        <div class="form-group"><label>Total Monthly Revenue (£/$)</label><input type="number" id="cRev"></div>
-                        <div class="form-group"><label>Total Monthly Costs (£/$)</label><input type="number" id="cCost"></div>
-                        <div class="form-group"><label>Your Percentage Share (%)</label><input type="number" id="cPerc" value="50"></div>
-                        <button class="btn-premium" onclick="calcClientSplit()">Calculate Split</button>
+                        <div class="form-group"><label>Total Monthly Revenue (£/$)</label><input type="number" id="cRev" oninput="calcClientSplit()"></div>
+                        <div class="form-group"><label>Total Monthly Costs (£/$)</label><input type="number" id="cCost" oninput="calcClientSplit()"></div>
+                        <div class="form-group"><label>Your Percentage Share (%)</label><input type="number" id="cPerc" value="50" oninput="calcClientSplit()"></div>
                     </div>
                     <div class="details-box" style="background: rgba(0,0,0,0.6);">
                         <div style="font-size: 20px; color: #fff; margin-bottom: 20px; display: block; text-align: center;">Monthly Statement</div>
@@ -241,25 +239,27 @@
                 </div>
                 
                 <div class="card grid-2">
+                    <!-- Ecom Jaadugar VIP -->
                     <div style="text-align: center; padding: 20px; background: rgba(0,0,0,0.4); border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Google_Chrome_icon_%28February_2022%29.svg" width="60" style="margin-bottom: 15px;">
                         <h3 style="color: #fff; margin: 0 0 10px 0;">Ecom Jaadugar VIP</h3>
                         <p style="font-size: 12px; color: #9ca3af; margin-bottom: 20px;">1-Click address autofill, price checking, and automation script for dropshippers.</p>
                         
                         <div style="display: flex; flex-direction: column; gap: 10px;">
-                            <a href="#" class="btn-chrome" onclick="alert('Redirecting to Chrome Web Store...')"><i class="fa-brands fa-chrome"></i> View on Web Store</a>
-                            <a href="https://wa.me/03028997180?text=Hi Asad, I need login access for Ecom Jaadugar VIP Extension." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Get Login Access</a>
+                            <a href="https://chromewebstore.google.com/detail/gkiloblbdnadnikmjbojnadgmfdlolgn?utm_source=item-share-cb" target="_blank" class="btn-chrome" style="justify-content: center;"><i class="fa-brands fa-chrome"></i> Add to Chrome</a>
+                            <a href="https://wa.me/923028997180?text=Hi Asad, I have installed Ecom Jaadugar VIP from the Chrome Store. I need login access." target="_blank" class="btn-whatsapp" style="justify-content: center;"><i class="fa-brands fa-whatsapp"></i> Get Login Access</a>
                         </div>
                     </div>
                     
+                    <!-- Stealth Account Guard -->
                     <div style="text-align: center; padding: 20px; background: rgba(0,0,0,0.4); border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);">
                         <i class="fa-solid fa-shield-halved" style="font-size: 55px; color: var(--gold-primary); margin-bottom: 15px;"></i>
                         <h3 style="color: #fff; margin: 0 0 10px 0;">Stealth Account Guard</h3>
                         <p style="font-size: 12px; color: #9ca3af; margin-bottom: 20px;">Advanced WebRTC leak shield and IP masking integration for stealth accounts.</p>
                         
                         <div style="display: flex; flex-direction: column; gap: 10px;">
-                            <a href="#" class="btn-chrome"><i class="fa-brands fa-chrome"></i> View on Web Store</a>
-                            <a href="https://wa.me/03028997180?text=Hi Asad, I need access to the Stealth Guard Extension." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Get Login Access</a>
+                            <a href="#" target="_blank" class="btn-chrome" style="justify-content: center;"><i class="fa-brands fa-chrome"></i> Add to Chrome</a>
+                            <a href="https://wa.me/923028997180?text=Hi Asad, I have installed Stealth Guard. I need login access." target="_blank" class="btn-whatsapp" style="justify-content: center;"><i class="fa-brands fa-whatsapp"></i> Get Login Access</a>
                         </div>
                     </div>
                 </div>
@@ -276,7 +276,7 @@
             btnElement.classList.add('active');
         }
 
-        // --- MARKET LOGIC ---
+        // --- MARKET LOGIC (100% Accurate Tiered Formula) ---
         let currentMarket = 'UK';
         let currencySym = '£';
 
@@ -285,7 +285,7 @@
             document.querySelectorAll('.market-tab').forEach(el => el.classList.remove('active'));
             btn.classList.add('active');
             
-            if(market === 'UK') { currencySym = '£'; document.getElementById('feeNote').innerText = "UK Private: 12.8% + £0.30"; }
+            if(market === 'UK') { currencySym = '£'; document.getElementById('feeNote').innerText = "UK Buyer Protection: 7%-4%-2% + £0.10"; }
             if(market === 'US') { currencySym = '$'; document.getElementById('feeNote').innerText = "US Private: 13.25% + $0.30"; }
             if(market === 'AU') { currencySym = 'A$'; document.getElementById('feeNote').innerText = "AU Private: 13.4% + A$0.30"; }
             
@@ -296,10 +296,29 @@
         function calcGlobalProfit() {
             let cost = parseFloat(document.getElementById('globalCost').value) || 0;
             let price = parseFloat(document.getElementById('globalPrice').value) || 0;
-            if(price <= 0) return;
+            
+            if(price <= 0) {
+                document.getElementById('globalFeeRes').innerText = currencySym + "0.00";
+                document.getElementById('globalProfitRes').innerText = currencySym + "0.00";
+                document.getElementById('globalProfitRes').style.color = '#fff';
+                return;
+            }
 
             let fee = 0;
-            if(currentMarket === 'UK') fee = (price * 0.128) + 0.30;
+            
+            // 1. UK Tiered System (Buyer Protection Fee)
+            if(currentMarket === 'UK') {
+                fee = 0.10; // Flat fee
+                fee += Math.min(price, 20) * 0.07; // 7% on up to £20
+                if(price > 20) {
+                    fee += Math.min(price - 20, 280) * 0.04; // 4% on portion from £20 to £300
+                }
+                if(price > 300) {
+                    fee += Math.min(price - 300, 3700) * 0.02; // 2% on portion from £300 to £4000
+                }
+            }
+            
+            // 2. US & AU Standard Rules
             if(currentMarket === 'US') fee = (price * 0.1325) + 0.30;
             if(currentMarket === 'AU') fee = (price * 0.134) + 0.30;
 
