@@ -28,7 +28,6 @@
             overflow: hidden; 
         }
         
-        /* 💎 GLASSMORPHISM SIDEBAR */
         .sidebar { 
             width: 280px; 
             background: rgba(10, 10, 12, 0.8); 
@@ -72,10 +71,8 @@
         }
         .nav-item.active i { color: var(--gold-primary); filter: drop-shadow(0 0 5px var(--gold-primary));}
 
-        /* 🚀 MAIN CONTENT AREA */
         .main-wrapper { flex: 1; display: flex; flex-direction: column; position: relative; }
         
-        /* TOP HEADER */
         .top-header {
             height: 70px; background: rgba(10,10,12,0.5); backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: space-between;
@@ -95,7 +92,6 @@
         .section-header h2 { font-size: 28px; margin: 0; color: #fff; font-weight: 800; }
         .section-header p { color: var(--text-muted); margin-top: 5px; font-size: 14px; }
 
-        /* 🃏 PREMIUM GLASS CARDS */
         .card { 
             background: var(--panel-bg); backdrop-filter: blur(15px);
             border: 1px solid rgba(255,255,255,0.05); border-top: 1px solid var(--glass-border);
@@ -103,10 +99,7 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.6);
             position: relative; overflow: hidden;
         }
-        .card::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.03), transparent); transform: skewX(-25deg); animation: shine 6s infinite; }
-        @keyframes shine { 0% { left: -100%; } 20%, 100% { left: 200%; } }
 
-        /* 🎛️ INPUTS & BUTTONS */
         .form-group { margin-bottom: 20px; }
         label { display: block; font-size: 12px; font-weight: 800; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
         input[type="text"], input[type="number"] { 
@@ -125,15 +118,16 @@
         }
         .btn-premium:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(251, 191, 36, 0.5); color: #fff; }
 
-        /* SPECIFIC ELEMENTS */
         .profit-val { font-size: 50px; font-weight: 900; text-align: center; color: #10b981; text-shadow: 0 0 30px rgba(16,185,129,0.3); margin: 20px 0;}
         .details-box { background: rgba(0,0,0,0.4); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
         .details-box div { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); font-size: 14px; font-weight: 600; color: #d1d5db;}
         .details-box div:last-child { border: none; padding-bottom: 0; color: var(--gold-primary); font-size: 16px; font-weight: 800;}
 
         .ai-result-box { background: rgba(0,0,0,0.6); padding: 20px; border-radius: 12px; border: 1px solid #333; margin-bottom: 20px; position: relative;}
-        .copy-btn { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 11px; font-weight: bold; padding: 6px 12px; border-radius: 6px; cursor: pointer; transition: 0.3s;}
-        .copy-btn:hover { background: var(--gold-primary); color: #000;}
+        
+        /* 💎 VIP COPY BUTTON STYLES */
+        .copy-btn { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 12px; font-weight: bold; padding: 8px 15px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 6px;}
+        .copy-btn:hover { background: var(--gold-primary); color: #000; border-color: var(--gold-primary);}
         
         .ai-text { font-size: 15px; color: #e4e4e7; line-height: 1.6; white-space: pre-wrap; margin-top: 10px;}
         .loader { display: none; text-align: center; padding: 30px; }
@@ -143,7 +137,6 @@
 </head>
 <body>
 
-    <!-- 💎 SIDEBAR -->
     <nav class="sidebar">
         <div class="brand">
             <h1>ECOM WITH ASAD</h1>
@@ -157,7 +150,6 @@
         </div>
     </nav>
 
-    <!-- 🚀 MAIN CONTENT -->
     <div class="main-wrapper">
         <header class="top-header">
             <div style="font-size: 14px; color: var(--text-muted);"><i class="fa-brands fa-amazon"></i> Amazon to eBay Automation</div>
@@ -170,7 +162,6 @@
 
         <main class="content-area">
             
-            <!-- TOOL 1: PROFIT CALCULATOR -->
             <div id="calcTool" class="tool-section active">
                 <div class="section-header">
                     <h2>Advanced Profit Calculator</h2>
@@ -202,23 +193,22 @@
                 </div>
             </div>
 
-            <!-- TOOL 2: 100% REAL AI LISTING GENERATOR -->
             <div id="aiTool" class="tool-section">
                 <div class="section-header">
                     <h2>Real AI SEO Generator</h2>
-                    <p>Paste any Amazon/Supplier link. AI will write a 100% authentic, eBay-compliant SEO Title & Description.</p>
+                    <p>Paste any Amazon/Supplier link. AI will write a 100% authentic, eBay-compliant SEO Title & HTML Description.</p>
                 </div>
 
                 <div class="card">
                     <div class="form-group">
                         <label><i class="fa-solid fa-link"></i> Paste Product URL</label>
-                        <input type="text" id="productLink" placeholder="https://www.amazon.co.uk/dp/B08N5WRWNW...">
+                        <input type="text" id="productLink" placeholder="https://www.amazon.co.uk/dp/B003TJWVZ6...">
                     </div>
                     <button class="btn-premium" onclick="generateRealListing()"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate SEO Listing</button>
                     
                     <div id="loading" class="loader">
                         <div class="spinner"></div>
-                        <div>Fetching product data and generating via AI...</div>
+                        <div>Fetching product data and generating HTML via AI...</div>
                     </div>
                 </div>
 
@@ -227,14 +217,16 @@
                     
                     <label style="color: var(--gold-primary); margin-top: 20px;">eBay SEO Title (Max 80 Chars)</label>
                     <div class="ai-result-box">
-                        <button class="copy-btn" onclick="copyText('titleOutput')"><i class="fa-regular fa-copy"></i> Copy</button>
+                        <!-- نیا کاپی بٹن جس میں 'this' پاس کیا گیا ہے -->
+                        <button class="copy-btn" onclick="copyText('titleOutput', this)"><i class="fa-regular fa-copy"></i> Copy</button>
                         <div id="titleOutput" class="ai-text" style="font-size: 18px; font-weight: bold; color: #fff;"></div>
                     </div>
 
-                    <label style="color: var(--gold-primary);">eBay Compliant Description (No HTML)</label>
+                    <label style="color: var(--gold-primary);">eBay HTML Description Code</label>
                     <div class="ai-result-box">
-                        <button class="copy-btn" onclick="copyText('descOutput')"><i class="fa-regular fa-copy"></i> Copy</button>
-                        <div id="descOutput" class="ai-text"></div>
+                        <!-- نیا کاپی بٹن جس میں 'this' پاس کیا گیا ہے -->
+                        <button class="copy-btn" onclick="copyText('descOutput', this)"><i class="fa-regular fa-copy"></i> Copy HTML</button>
+                        <div id="descOutput" class="ai-text" style="font-family: monospace; font-size: 13px; color: #a1a1aa;"></div>
                     </div>
                 </div>
             </div>
@@ -243,7 +235,6 @@
     </div>
 
     <script>
-        // --- 1. UI NAVIGATION ---
         function switchTool(toolId, btnElement) {
             document.querySelectorAll('.tool-section').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
@@ -251,7 +242,6 @@
             btnElement.classList.add('active');
         }
 
-        // --- 2. EXACT EBAY FEE LOGIC ---
         function calculateEbayFee(ebayPrice) {
             if (!ebayPrice || ebayPrice <= 0) return 0;
             let fee = 0.10; 
@@ -281,7 +271,6 @@
             document.getElementById('totalDeduction').innerText = '£' + totalDeduction.toFixed(2);
         }
 
-        // --- 3. 100% REAL AI LOGIC (SECURE SERVERLESS API) ---
         async function generateRealListing() {
             let link = document.getElementById('productLink').value.trim();
             if(!link) { alert("Please enter a product link!"); return; }
@@ -290,7 +279,6 @@
             document.getElementById('loading').style.display = 'block';
 
             try {
-                // ہماری ویب سائٹ اب ڈائریکٹ API Key استعمال نہیں کرے گی، بلکہ ہمارے Vercel سرور سے بات کرے گی
                 let response = await fetch('/api/generate', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -305,9 +293,8 @@
                     return;
                 }
 
-                // سکرین پر رزلٹ شو کرنا
                 document.getElementById('titleOutput').innerText = aiData.title;
-                document.getElementById('descOutput').innerText = aiData.description;
+                document.getElementById('descOutput').innerText = aiData.description; // HTML کوڈ ٹیکسٹ فارمیٹ میں آئے گا تاکہ کاپی کرنا آسان ہو
                 
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('results').style.display = 'block';
@@ -319,11 +306,27 @@
             }
         }
 
-        // --- 4. COPY TEXT HELPER ---
-        function copyText(elementId) {
+        // --- نیا VIP کاپی بٹن فنکشن (الرٹ ختم کر دیا گیا ہے) ---
+        function copyText(elementId, btn) {
+            // ٹیکسٹ کاپی کریں
             let text = document.getElementById(elementId).innerText;
             navigator.clipboard.writeText(text);
-            alert("Copied to clipboard!");
+            
+            // پرانا HTML محفوظ کریں
+            let originalHTML = btn.innerHTML;
+            
+            // بٹن کو Success موڈ میں بدلیں
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> Success!';
+            btn.style.backgroundColor = '#10b981'; 
+            btn.style.color = '#fff';
+            btn.style.borderColor = '#10b981';
+            
+            // 2 سیکنڈ کے بعد بٹن کو اصلی حالت میں واپس لے آئیں
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.style.backgroundColor = 'rgba(255,255,255,0.1)';
+                btn.style.borderColor = 'rgba(255,255,255,0.2)';
+            }, 2000);
         }
     </script>
 </body>
