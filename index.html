@@ -43,7 +43,7 @@
         @keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(239,68,68, 0.7); } 70% { box-shadow: 0 0 0 6px rgba(239,68,68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239,68,68, 0); } }
 
         /* MAIN CONTENT */
-        .main-wrapper { flex: 1; display: flex; flex-direction: column; }
+        .main-wrapper { flex: 1; display: flex; flex-direction: column; position: relative; z-index: 1;}
         .top-header { height: 70px; background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; padding: 0 40px;}
         .user-profile { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; color: var(--text-main);}
         .user-profile img { width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--gold-primary); }
@@ -92,7 +92,7 @@
         .msg-title { color: var(--gold-primary); font-weight: 900; margin-bottom: 10px; font-size: 14px;}
         .msg-body { color: #334155; font-size: 14px; line-height: 1.6; padding-right: 80px; font-weight: 500;}
 
-        /* ✨ VIP EXTENSION HIGHLIGHT (Magic Glow) */
+        /* ✨ VIP EXTENSION HIGHLIGHT */
         .magic-card {
             border: 2px solid var(--gold-secondary) !important;
             box-shadow: 0 0 25px rgba(245, 158, 11, 0.3) !important;
@@ -104,8 +104,15 @@
             to { box-shadow: 0 0 30px rgba(245, 158, 11, 0.6); }
         }
 
-        /* 📜 VIP INVOICE TEMPLATE (HIDDEN FOR PDF) */
-        #invoiceTemplate { display: none; background: #ffffff; color: #0f172a; width: 800px; font-family: 'Inter', sans-serif; position: absolute; left: 0; top: 0; z-index: -9999;}
+        /* 📜 VIP INVOICE TEMPLATE (PERFECT A4 SIZE) */
+        #invoiceTemplate { 
+            display: none; 
+            background: #ffffff; 
+            color: #0f172a; 
+            width: 800px; 
+            font-family: 'Inter', sans-serif; 
+        }
+        
         .inv-header { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 40px; border-bottom: 6px solid #fbbf24; display: flex; justify-content: space-between; align-items: center;}
         .inv-header h1 { color: #fbbf24; margin: 0; font-size: 32px; font-weight: 900; letter-spacing: 2px;}
         .inv-header p { color: #94a3b8; margin: 5px 0 0 0; font-size: 14px; font-weight: 600;}
@@ -139,7 +146,6 @@
             <button class="nav-item" onclick="switchTool('aiTool', this)"><i class="fa-solid fa-robot"></i> Multi-Platform AI</button>
             <button class="nav-item" onclick="switchTool('clientTool', this)"><i class="fa-solid fa-file-invoice"></i> Profit Share Invoice</button>
             <button class="nav-item" onclick="switchTool('msgTool', this)"><i class="fa-solid fa-comment-dots"></i> 1-Click Messages</button>
-            <!-- Highlighted VIP Extension Menu Item -->
             <button class="nav-item" onclick="switchTool('extTool', this)" style="border: 1px solid var(--gold-secondary); background: #fffbeb;">
                 <i class="fa-solid fa-bolt" style="color:var(--gold-primary)"></i> Ecom Jaadugar VIP 
                 <span class="hot-badge">HOT</span>
@@ -247,7 +253,6 @@
                         <div class="form-group"><label>Total Revenue Generated (£/$)</label><input type="number" id="cRev" oninput="calcClientSplit()"></div>
                         <div class="form-group"><label>Your Agency Share (%)</label><input type="number" id="cPerc" value="50" oninput="calcClientSplit()"></div>
                         
-                        <!-- Premium PDF Download Button -->
                         <button class="btn-premium btn-pdf" onclick="generatePDF()"><i class="fa-solid fa-file-pdf"></i> Download VIP Invoice PDF</button>
                     </div>
                     <div class="details-box">
@@ -281,7 +286,7 @@
                 </div>
             </div>
 
-            <!-- 5. VIP EXTENSIONS (HIGHLIGHTED) -->
+            <!-- 5. VIP EXTENSIONS -->
             <div id="extTool" class="tool-section">
                 <div class="section-header">
                     <h2>Premium Automation Tools</h2>
@@ -290,7 +295,6 @@
                 
                 <div class="card grid-2" style="background: transparent; border: none; box-shadow: none; padding: 0;">
                     
-                    <!-- 🔥 HIGHLIGHTED: Ecom Jaadugar VIP -->
                     <div class="magic-card" style="text-align: center; padding: 35px 20px; border-radius: 24px; position: relative; overflow: hidden;">
                         <div style="position: absolute; top: 15px; left: -30px; background: #ef4444; color: #fff; padding: 5px 40px; transform: rotate(-45deg); font-weight: 900; font-size: 12px; box-shadow: 0 5px 10px rgba(0,0,0,0.2);">MUST HAVE</div>
                         
@@ -304,7 +308,6 @@
                         </div>
                     </div>
                     
-                    <!-- Stealth Account Guard -->
                     <div style="text-align: center; padding: 35px 20px; background: #fff; border-radius: 24px; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.03);">
                         <i class="fa-solid fa-shield-halved" style="font-size: 65px; color: #64748b; margin-bottom: 15px;"></i>
                         <h3 style="color: #0f172a; margin: 0 0 10px 0; font-size: 22px; font-weight: 900;">Stealth Account Guard</h3>
@@ -346,7 +349,6 @@
                 </div>
             </div>
 
-            <!-- 3D Stat Cards for Invoice -->
             <div class="inv-stats">
                 <div class="inv-stat-card cost">
                     <h4>Total Capital Invested</h4>
@@ -455,7 +457,7 @@
             document.getElementById('rClient').innerText = client.toFixed(2);
         }
 
-        // --- GLOWING VIP PDF INVOICE GENERATOR ---
+        // --- 100% FIXED GLOWING VIP PDF INVOICE GENERATOR ---
         function generatePDF() {
             let clientName = document.getElementById('iName').value || 'Valued Client';
             let month = document.getElementById('iMonth').value || 'Current Month';
@@ -483,20 +485,29 @@
             document.getElementById('pdfAgencyPercVal').innerText = agencyPerc;
             document.getElementById('pdfAgencyProfit').innerText = agencyShare.toFixed(2);
             
-            // Fix Cut-off Issue + Generate PDF
+            // FOOLPROOF PDF RENDER METHOD
             let element = document.getElementById('invoiceTemplate');
+            
+            // سکرین کے پیچھے ہی اوپن کریں تاکہ بلینک والا مسئلہ نہ آئے
             element.style.display = 'block'; 
+            element.style.position = 'absolute'; 
+            element.style.top = '0';
+            element.style.left = '0';
+            element.style.zIndex = '-100'; // ڈیش بورڈ کے پیچھے رہے گا
             
             let opt = {
-              margin:       0,
+              margin:       0.5,
               filename:     `VIP_Invoice_${clientName.replace(/\s+/g, '_')}_${month}.pdf`,
               image:        { type: 'jpeg', quality: 1 },
-              html2canvas:  { scale: 2, windowWidth: 800 },
+              html2canvas:  { scale: 2, windowWidth: 1000 }, // ونڈو کی وڈتھ لاک کر دی تاکہ سائیڈ سے نہ کٹے
               jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
             
             html2pdf().set(opt).from(element).save().then(() => {
+                // پرنٹ ہونے کے بعد واپس چھپا دیں
                 element.style.display = 'none'; 
+                element.style.position = 'static';
+                element.style.zIndex = 'auto';
             });
         }
 
