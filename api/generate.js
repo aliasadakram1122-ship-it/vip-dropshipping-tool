@@ -17,6 +17,7 @@ export default async function handler(req, res) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
+                model: "models/gemini-1.5-flash", // 👈 یہاں ہم نے ماڈل کا نام ایڈ کر دیا ہے
                 input: prompt
             })
         });
