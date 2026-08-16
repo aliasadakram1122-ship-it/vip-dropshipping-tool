@@ -20,71 +20,30 @@
 
         body { 
             background: radial-gradient(circle at top right, #1a1a24 0%, var(--bg-color) 40%);
-            color: var(--text-main); 
-            font-family: 'Inter', sans-serif; 
-            margin: 0; 
-            height: 100vh; 
-            display: flex; 
-            overflow: hidden; 
+            color: var(--text-main); font-family: 'Inter', sans-serif; margin: 0; height: 100vh; display: flex; overflow: hidden; 
         }
         
-        .sidebar { 
-            width: 280px; 
-            background: rgba(10, 10, 12, 0.8); 
-            backdrop-filter: blur(20px);
-            border-right: 1px solid var(--glass-border); 
-            display: flex; 
-            flex-direction: column; 
-            box-shadow: 5px 0 30px rgba(0,0,0,0.5);
-            z-index: 10;
-        }
-        
-        .brand { 
-            padding: 30px 20px; 
-            text-align: center; 
-            border-bottom: 1px solid rgba(255,255,255,0.05); 
-            position: relative;
-        }
-        .brand h1 { 
-            margin: 0; font-size: 22px; font-weight: 900; 
-            background: linear-gradient(to right, #fff, var(--gold-primary)); 
-            -webkit-background-clip: text; color: transparent; 
-            letter-spacing: 2px;
-        }
+        /* SIDEBAR */
+        .sidebar { width: 280px; background: rgba(10, 10, 12, 0.8); backdrop-filter: blur(20px); border-right: 1px solid var(--glass-border); display: flex; flex-direction: column; box-shadow: 5px 0 30px rgba(0,0,0,0.5); z-index: 10;}
+        .brand { padding: 30px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .brand h1 { margin: 0; font-size: 22px; font-weight: 900; background: linear-gradient(to right, #fff, var(--gold-primary)); -webkit-background-clip: text; color: transparent; letter-spacing: 2px;}
         .brand span { font-size: 11px; color: var(--gold-primary); letter-spacing: 3px; font-weight: 600; text-transform: uppercase;}
         
-        .nav-menu { padding: 20px 15px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
-        .nav-item { 
-            background: transparent; border: 1px solid transparent; color: var(--text-muted); 
-            padding: 16px 20px; border-radius: 12px; cursor: pointer; text-align: left; 
-            font-size: 14px; font-weight: 600; transition: all 0.4s ease; 
-            display: flex; align-items: center; gap: 15px;
-        }
-        .nav-item i { font-size: 18px; transition: 0.3s; }
-        
+        .nav-menu { padding: 20px 15px; flex: 1; display: flex; flex-direction: column; gap: 10px; overflow-y: auto;}
+        .nav-item { background: transparent; border: 1px solid transparent; color: var(--text-muted); padding: 16px 20px; border-radius: 12px; cursor: pointer; text-align: left; font-size: 14px; font-weight: 600; transition: all 0.4s ease; display: flex; align-items: center; gap: 15px;}
+        .nav-item i { font-size: 18px; width: 20px; text-align: center;}
         .nav-item:hover { background: rgba(255,255,255,0.03); color: #fff; transform: translateX(5px);}
-        .nav-item.active { 
-            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(217, 119, 6, 0.1)); 
-            color: var(--gold-primary); 
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3), inset 0 0 15px rgba(251, 191, 36, 0.05);
-        }
-        .nav-item.active i { color: var(--gold-primary); filter: drop-shadow(0 0 5px var(--gold-primary));}
-
-        .main-wrapper { flex: 1; display: flex; flex-direction: column; position: relative; }
+        .nav-item.active { background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(217, 119, 6, 0.1)); color: var(--gold-primary); border: 1px solid var(--glass-border); box-shadow: 0 10px 20px rgba(0,0,0,0.3), inset 0 0 15px rgba(251, 191, 36, 0.05);}
         
-        .top-header {
-            height: 70px; background: rgba(10,10,12,0.5); backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: space-between;
-            padding: 0 40px;
-        }
+        /* MAIN CONTENT */
+        .main-wrapper { flex: 1; display: flex; flex-direction: column; }
+        .top-header { height: 70px; background: rgba(10,10,12,0.5); backdrop-filter: blur(10px); border-bottom: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: space-between; padding: 0 40px;}
         .user-profile { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; color: #fff;}
         .user-profile img { width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--gold-primary); }
         .status-badge { background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 5px 10px; border-radius: 20px; font-size: 11px; border: 1px solid #10b981;}
 
         .content-area { padding: 40px; overflow-y: auto; height: calc(100vh - 70px); box-sizing: border-box; }
-        
-        .tool-section { display: none; animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1); max-width: 900px; margin: 0 auto; }
+        .tool-section { display: none; animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1); max-width: 1000px; margin: 0 auto; }
         .tool-section.active { display: block; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
@@ -92,47 +51,34 @@
         .section-header h2 { font-size: 28px; margin: 0; color: #fff; font-weight: 800; }
         .section-header p { color: var(--text-muted); margin-top: 5px; font-size: 14px; }
 
-        .card { 
-            background: var(--panel-bg); backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.05); border-top: 1px solid var(--glass-border);
-            border-radius: 20px; padding: 30px; margin-bottom: 25px; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-            position: relative; overflow: hidden;
-        }
-
+        /* CARDS & FORMS */
+        .card { background: var(--panel-bg); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.05); border-top: 1px solid var(--glass-border); border-radius: 20px; padding: 30px; margin-bottom: 25px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); position: relative; }
         .form-group { margin-bottom: 20px; }
         label { display: block; font-size: 12px; font-weight: 800; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
-        input[type="text"], input[type="number"] { 
-            width: 100%; box-sizing: border-box; background: rgba(0,0,0,0.5); 
-            border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 16px; 
-            border-radius: 12px; font-size: 15px; font-family: 'Inter', sans-serif; outline: none; transition: 0.3s; 
-        }
-        input:focus { border-color: var(--gold-primary); box-shadow: 0 0 20px rgba(251, 191, 36, 0.15); background: rgba(0,0,0,0.8); }
+        input[type="text"], input[type="number"], select { width: 100%; box-sizing: border-box; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 16px; border-radius: 12px; font-size: 15px; font-family: 'Inter', sans-serif; outline: none; transition: 0.3s; }
+        input:focus, select:focus { border-color: var(--gold-primary); box-shadow: 0 0 20px rgba(251, 191, 36, 0.15); background: rgba(0,0,0,0.8); }
         
-        .btn-premium { 
-            width: 100%; background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary)); 
-            border: none; color: #000; font-size: 15px; font-weight: 900; padding: 18px; 
-            border-radius: 12px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
-            transition: all 0.4s ease; box-shadow: 0 10px 20px rgba(217, 119, 6, 0.3);
-            display: flex; justify-content: center; align-items: center; gap: 10px;
-        }
+        /* BUTTONS */
+        .btn-premium { width: 100%; background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary)); border: none; color: #000; font-size: 15px; font-weight: 900; padding: 18px; border-radius: 12px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.4s ease; box-shadow: 0 10px 20px rgba(217, 119, 6, 0.3); display: flex; justify-content: center; align-items: center; gap: 10px;}
         .btn-premium:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(251, 191, 36, 0.5); color: #fff; }
+        .btn-whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); color: #fff; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;}
+        .btn-chrome { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;}
 
+        /* UTILITIES */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
         .profit-val { font-size: 50px; font-weight: 900; text-align: center; color: #10b981; text-shadow: 0 0 30px rgba(16,185,129,0.3); margin: 20px 0;}
         .details-box { background: rgba(0,0,0,0.4); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
         .details-box div { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); font-size: 14px; font-weight: 600; color: #d1d5db;}
-        .details-box div:last-child { border: none; padding-bottom: 0; color: var(--gold-primary); font-size: 16px; font-weight: 800;}
+        
+        .market-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .market-tab { flex: 1; padding: 15px; text-align: center; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: #fff; font-weight: bold; cursor: pointer; transition: 0.3s;}
+        .market-tab.active { background: rgba(251, 191, 36, 0.2); border-color: var(--gold-primary); color: var(--gold-primary); }
 
-        .ai-result-box { background: rgba(0,0,0,0.6); padding: 20px; border-radius: 12px; border: 1px solid #333; margin-bottom: 20px; position: relative;}
-        
-        /* 💎 VIP COPY BUTTON STYLES */
         .copy-btn { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 12px; font-weight: bold; padding: 8px 15px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 6px;}
-        .copy-btn:hover { background: var(--gold-primary); color: #000; border-color: var(--gold-primary);}
-        
-        .ai-text { font-size: 15px; color: #e4e4e7; line-height: 1.6; white-space: pre-wrap; margin-top: 10px;}
-        .loader { display: none; text-align: center; padding: 30px; }
-        .spinner { width: 40px; height: 40px; border: 4px solid rgba(251,191,36,0.2); border-top: 4px solid var(--gold-primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px auto; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .msg-card { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; margin-bottom: 15px; position: relative;}
+        .msg-title { color: var(--gold-primary); font-weight: bold; margin-bottom: 10px; font-size: 14px;}
+        .msg-body { color: #d1d5db; font-size: 13px; line-height: 1.6; padding-right: 80px;}
+
     </style>
 </head>
 <body>
@@ -143,16 +89,17 @@
             <span>VIP Seller Suite</span>
         </div>
         <div class="nav-menu">
-            <button class="nav-item active" onclick="switchTool('calcTool', this)"><i class="fa-solid fa-calculator"></i> Profit Calculator</button>
-            <button class="nav-item" onclick="switchTool('aiTool', this)"><i class="fa-solid fa-robot"></i> AI Listing Generator</button>
-            <button class="nav-item" onclick="alert('Module locked for updates.')"><i class="fa-solid fa-truck-fast"></i> Order Autofill</button>
-            <button class="nav-item" onclick="alert('Module locked for updates.')"><i class="fa-solid fa-chart-line"></i> Sales Analytics</button>
+            <button class="nav-item active" onclick="switchTool('calcTool', this)"><i class="fa-solid fa-calculator"></i> Global Calculator</button>
+            <button class="nav-item" onclick="switchTool('aiTool', this)"><i class="fa-solid fa-robot"></i> Multi-Platform AI</button>
+            <button class="nav-item" onclick="switchTool('clientTool', this)"><i class="fa-solid fa-handshake"></i> Client Profit Share</button>
+            <button class="nav-item" onclick="switchTool('msgTool', this)"><i class="fa-solid fa-comment-dots"></i> 1-Click Messages</button>
+            <button class="nav-item" onclick="switchTool('extTool', this)"><i class="fa-solid fa-puzzle-piece"></i> VIP Extensions</button>
         </div>
     </nav>
 
     <div class="main-wrapper">
         <header class="top-header">
-            <div style="font-size: 14px; color: var(--text-muted);"><i class="fa-brands fa-amazon"></i> Amazon to eBay Automation</div>
+            <div style="font-size: 14px; color: var(--text-muted);"><i class="fa-solid fa-crown" style="color:var(--gold-primary)"></i> Premium SaaS Edition</div>
             <div class="user-profile">
                 <span class="status-badge"><i class="fa-solid fa-circle-check"></i> System Online</span>
                 <img src="https://ui-avatars.com/api/?name=Asad+VIP&background=fbbf24&color=000&bold=true" alt="Admin">
@@ -162,71 +109,158 @@
 
         <main class="content-area">
             
+            <!-- 1. MULTI-MARKET CALCULATOR -->
             <div id="calcTool" class="tool-section active">
                 <div class="section-header">
-                    <h2>Advanced Profit Calculator</h2>
-                    <p>Calculate exact dropshipping margins with eBay's latest UK tiered fee structure.</p>
+                    <h2>Global Profit Calculator</h2>
+                    <p>Accurate Private Account eBay fee structures for UK, USA, and Australia.</p>
                 </div>
                 
-                <div style="display: grid; gap: 25px; grid-template-columns: 1fr 1fr;">
-                    <div class="card">
-                        <div class="form-group">
-                            <label><i class="fa-brands fa-amazon" style="color:#ff9900;"></i> Supplier Cost Price (£)</label>
-                            <input type="number" id="amazonCost" placeholder="0.00" step="0.01">
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fa-brands fa-ebay" style="color:#86b817;"></i> eBay Sale Price (£)</label>
-                            <input type="number" id="ebayPrice" placeholder="0.00" step="0.01">
-                        </div>
-                        <button class="btn-premium" onclick="calculateVIPProfit()">Calculate Net Profit <i class="fa-solid fa-arrow-right"></i></button>
+                <div class="card">
+                    <div class="market-tabs">
+                        <div class="market-tab active" onclick="setMarket('UK', this)">🇬🇧 eBay UK (£)</div>
+                        <div class="market-tab" onclick="setMarket('US', this)">🇺🇸 eBay USA ($)</div>
+                        <div class="market-tab" onclick="setMarket('AU', this)">🇦🇺 eBay AU (A$)</div>
                     </div>
-
-                    <div class="card">
-                        <label style="text-align: center; color: var(--gold-primary);">Final Net Profit</label>
-                        <div class="profit-val" id="netProfit">£0.00</div>
-                        <div class="details-box">
-                            <div><span>Supplier Cost:</span> <span id="displayAmzCost">£0.00</span></div>
-                            <div><span>eBay Protection Fee:</span> <span id="displayEbayFee">£0.00</span></div>
-                            <div><span>Total Deduction:</span> <span id="totalDeduction">£0.00</span></div>
+                    
+                    <div class="grid-2">
+                        <div>
+                            <div class="form-group">
+                                <label><i class="fa-solid fa-box"></i> Supplier Cost (<span class="curr-sym">£</span>)</label>
+                                <input type="number" id="globalCost" placeholder="0.00" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fa-brands fa-ebay"></i> eBay Sale Price (<span class="curr-sym">£</span>)</label>
+                                <input type="number" id="globalPrice" placeholder="0.00" step="0.01">
+                            </div>
+                            <button class="btn-premium" onclick="calcGlobalProfit()">Calculate Profit</button>
+                        </div>
+                        <div class="details-box" style="margin-top: 0; background: rgba(0,0,0,0.6);">
+                            <label style="text-align: center; color: var(--gold-primary);">Net Profit</label>
+                            <div class="profit-val" id="globalProfitRes"><span class="curr-sym">£</span>0.00</div>
+                            <div><span>eBay Fee Deducted:</span> <span id="globalFeeRes"><span class="curr-sym">£</span>0.00</span></div>
+                            <div style="font-size: 11px; color: #6b7280; text-align: center; display: block; border: none; margin-top: 10px;" id="feeNote">UK Private: 12.8% + 0.30p</div>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- 2. MULTI-PLATFORM AI -->
             <div id="aiTool" class="tool-section">
                 <div class="section-header">
-                    <h2>Real AI SEO Generator</h2>
-                    <p>Paste any Amazon/Supplier link. AI will write a 100% authentic, eBay-compliant SEO Title & HTML Description.</p>
+                    <h2>Multi-Platform AI Generator</h2>
+                    <p>Generate SEO optimized listings for eBay, TikTok Shop, Etsy, and Walmart.</p>
                 </div>
 
                 <div class="card">
-                    <div class="form-group">
-                        <label><i class="fa-solid fa-link"></i> Paste Product URL</label>
-                        <input type="text" id="productLink" placeholder="https://www.amazon.co.uk/dp/B003TJWVZ6...">
+                    <div class="grid-2" style="margin-bottom: 20px;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label>Select Platform</label>
+                            <select id="platformSelect">
+                                <option value="eBay UK">eBay (UK/USA/AU)</option>
+                                <option value="TikTok Shop">TikTok Shop</option>
+                                <option value="Etsy">Etsy</option>
+                                <option value="Walmart">Walmart</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label>Product Link / Keyword</label>
+                            <input type="text" id="productLink" placeholder="Paste link or keywords...">
+                        </div>
                     </div>
                     <button class="btn-premium" onclick="generateRealListing()"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate SEO Listing</button>
                     
-                    <div id="loading" class="loader">
-                        <div class="spinner"></div>
-                        <div>Fetching product data and generating HTML via AI...</div>
-                    </div>
+                    <div id="loading" style="display:none; text-align:center; padding: 20px;"><i class="fa-solid fa-spinner fa-spin" style="color:var(--gold-primary); font-size:24px;"></i> Generating VIP Content...</div>
                 </div>
 
                 <div id="results" class="card" style="display: none; border-color: #10b981;">
-                    <h3 style="color: #10b981; margin-top: 0;"><i class="fa-solid fa-check-circle"></i> AI Generation Complete</h3>
-                    
-                    <label style="color: var(--gold-primary); margin-top: 20px;">eBay SEO Title (Max 80 Chars)</label>
-                    <div class="ai-result-box">
-                        <!-- نیا کاپی بٹن جس میں 'this' پاس کیا گیا ہے -->
-                        <button class="copy-btn" onclick="copyText('titleOutput', this)"><i class="fa-regular fa-copy"></i> Copy</button>
-                        <div id="titleOutput" class="ai-text" style="font-size: 18px; font-weight: bold; color: #fff;"></div>
-                    </div>
+                    <button class="copy-btn" onclick="copyText('titleOutput', this)"><i class="fa-regular fa-copy"></i> Copy Title</button>
+                    <label style="color: var(--gold-primary);">Optimized Title</label>
+                    <div id="titleOutput" style="font-size: 18px; font-weight: bold; padding: 15px 0 25px 0;"></div>
 
-                    <label style="color: var(--gold-primary);">eBay HTML Description Code</label>
-                    <div class="ai-result-box">
-                        <!-- نیا کاپی بٹن جس میں 'this' پاس کیا گیا ہے -->
-                        <button class="copy-btn" onclick="copyText('descOutput', this)"><i class="fa-regular fa-copy"></i> Copy HTML</button>
-                        <div id="descOutput" class="ai-text" style="font-family: monospace; font-size: 13px; color: #a1a1aa;"></div>
+                    <button class="copy-btn" style="top: 120px;" onclick="copyText('descOutput', this)"><i class="fa-regular fa-copy"></i> Copy HTML / Desc</button>
+                    <label style="color: var(--gold-primary);">Premium Description Code</label>
+                    <div id="descOutput" style="font-family: monospace; font-size: 13px; color: #a1a1aa; background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; margin-top: 10px; white-space: pre-wrap;"></div>
+                </div>
+            </div>
+
+            <!-- 3. CLIENT PROFIT SHARE -->
+            <div id="clientTool" class="tool-section">
+                <div class="section-header">
+                    <h2>Client Profit-Share Tracker</h2>
+                    <p>Calculate end-of-month profit splits for your dropshipping clients.</p>
+                </div>
+                <div class="card grid-2">
+                    <div>
+                        <div class="form-group"><label>Total Monthly Revenue (£/$)</label><input type="number" id="cRev"></div>
+                        <div class="form-group"><label>Total Monthly Costs (£/$)</label><input type="number" id="cCost"></div>
+                        <div class="form-group"><label>Your Percentage Share (%)</label><input type="number" id="cPerc" value="50"></div>
+                        <button class="btn-premium" onclick="calcClientSplit()">Calculate Split</button>
+                    </div>
+                    <div class="details-box" style="background: rgba(0,0,0,0.6);">
+                        <div style="font-size: 20px; color: #fff; margin-bottom: 20px; display: block; text-align: center;">Monthly Statement</div>
+                        <div><span>Total Net Profit:</span> <span id="rTotal" style="color:#10b981;">0.00</span></div>
+                        <div><span>Client's Share:</span> <span id="rClient">0.00</span></div>
+                        <div style="border-top: 1px solid var(--gold-primary); margin-top: 10px; padding-top: 15px;">
+                            <span>Your Share (Ecom with Asad):</span> <span id="rYou" style="color:var(--gold-primary);">0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. 1-CLICK MESSAGES -->
+            <div id="msgTool" class="tool-section">
+                <div class="section-header">
+                    <h2>Customer Service Templates</h2>
+                    <p>Professional, 1-click messages to keep international buyers happy.</p>
+                </div>
+                <div class="card">
+                    <div class="msg-card">
+                        <button class="copy-btn" onclick="copyText('msg1', this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                        <div class="msg-title">📦 Order Delayed / Tracking Update</div>
+                        <div class="msg-body" id="msg1">Hello! Thank you for your purchase. We wanted to gently inform you that your order is in transit but experiencing a slight delay from the courier. Rest assured, it is on its way. We appreciate your patience!</div>
+                    </div>
+                    <div class="msg-card">
+                        <button class="copy-btn" onclick="copyText('msg2', this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                        <div class="msg-title">⚠️ Item Damaged / Apology & Refund</div>
+                        <div class="msg-body" id="msg2">Dear Customer, we sincerely apologize that your item arrived damaged. This is not our usual standard. We have fully refunded you as a gesture of goodwill. You do not need to return the broken item.</div>
+                    </div>
+                    <div class="msg-card">
+                        <button class="copy-btn" onclick="copyText('msg3', this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                        <div class="msg-title">⭐ Positive Feedback Request</div>
+                        <div class="msg-body" id="msg3">Hi there! We see your order has been delivered. If you are satisfied with your purchase, we would be incredibly grateful if you could leave us a positive feedback. It helps our small business immensely!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. VIP EXTENSIONS -->
+            <div id="extTool" class="tool-section">
+                <div class="section-header">
+                    <h2>ECOM WITH ASAD - Extensions</h2>
+                    <p>Install our private Chrome extensions for Amazon to eBay automation.</p>
+                </div>
+                
+                <div class="card grid-2">
+                    <div style="text-align: center; padding: 20px; background: rgba(0,0,0,0.4); border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Google_Chrome_icon_%28February_2022%29.svg" width="60" style="margin-bottom: 15px;">
+                        <h3 style="color: #fff; margin: 0 0 10px 0;">Ecom Jaadugar VIP</h3>
+                        <p style="font-size: 12px; color: #9ca3af; margin-bottom: 20px;">1-Click address autofill, price checking, and automation script for dropshippers.</p>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <a href="#" class="btn-chrome" onclick="alert('Redirecting to Chrome Web Store...')"><i class="fa-brands fa-chrome"></i> View on Web Store</a>
+                            <a href="https://wa.me/447000000000?text=Hi Asad, I need login access for Ecom Jaadugar VIP Extension." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Get Login Access</a>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 20px; background: rgba(0,0,0,0.4); border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);">
+                        <i class="fa-solid fa-shield-halved" style="font-size: 55px; color: var(--gold-primary); margin-bottom: 15px;"></i>
+                        <h3 style="color: #fff; margin: 0 0 10px 0;">Stealth Account Guard</h3>
+                        <p style="font-size: 12px; color: #9ca3af; margin-bottom: 20px;">Advanced WebRTC leak shield and IP masking integration for stealth accounts.</p>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <a href="#" class="btn-chrome"><i class="fa-brands fa-chrome"></i> View on Web Store</a>
+                            <a href="https://wa.me/447000000000?text=Hi Asad, I need access to the Stealth Guard Extension." target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Get Login Access</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -242,38 +276,76 @@
             btnElement.classList.add('active');
         }
 
-        function calculateEbayFee(ebayPrice) {
-            if (!ebayPrice || ebayPrice <= 0) return 0;
-            let fee = 0.10; 
-            let tier1 = Math.min(ebayPrice, 20); fee += tier1 * 0.07; 
-            if (ebayPrice > 20) { let tier2 = Math.min(ebayPrice - 20, 280); fee += tier2 * 0.04; } 
-            if (ebayPrice > 300) { let tier3 = Math.min(ebayPrice - 300, 3700); fee += tier3 * 0.02; } 
-            return fee;
+        // --- MARKET LOGIC ---
+        let currentMarket = 'UK';
+        let currencySym = '£';
+
+        function setMarket(market, btn) {
+            currentMarket = market;
+            document.querySelectorAll('.market-tab').forEach(el => el.classList.remove('active'));
+            btn.classList.add('active');
+            
+            if(market === 'UK') { currencySym = '£'; document.getElementById('feeNote').innerText = "UK Private: 12.8% + £0.30"; }
+            if(market === 'US') { currencySym = '$'; document.getElementById('feeNote').innerText = "US Private: 13.25% + $0.30"; }
+            if(market === 'AU') { currencySym = 'A$'; document.getElementById('feeNote').innerText = "AU Private: 13.4% + A$0.30"; }
+            
+            document.querySelectorAll('.curr-sym').forEach(el => el.innerText = currencySym);
+            calcGlobalProfit();
         }
 
-        function calculateVIPProfit() {
-            let amazonCost = parseFloat(document.getElementById('amazonCost').value) || 0;
-            let ebayPrice = parseFloat(document.getElementById('ebayPrice').value) || 0;
+        function calcGlobalProfit() {
+            let cost = parseFloat(document.getElementById('globalCost').value) || 0;
+            let price = parseFloat(document.getElementById('globalPrice').value) || 0;
+            if(price <= 0) return;
+
+            let fee = 0;
+            if(currentMarket === 'UK') fee = (price * 0.128) + 0.30;
+            if(currentMarket === 'US') fee = (price * 0.1325) + 0.30;
+            if(currentMarket === 'AU') fee = (price * 0.134) + 0.30;
+
+            let profit = price - cost - fee;
             
-            let ebayFee = calculateEbayFee(ebayPrice);
-            let totalDeduction = amazonCost + ebayFee;
-            let profit = ebayPrice > 0 ? (ebayPrice - totalDeduction) : 0;
-            
-            let profitEl = document.getElementById('netProfit');
-            profitEl.innerText = '£' + profit.toFixed(2);
-            
-            if(profit > 0) { profitEl.style.color = '#10b981'; profitEl.style.textShadow = '0 0 30px rgba(16,185,129,0.3)'; }
-            else if(profit < 0) { profitEl.style.color = '#ef4444'; profitEl.style.textShadow = '0 0 30px rgba(239,68,68,0.3)'; profitEl.innerText = '-' + profitEl.innerText.replace('-', ''); }
-            else { profitEl.style.color = '#fff'; profitEl.style.textShadow = 'none'; }
-            
-            document.getElementById('displayAmzCost').innerText = '£' + amazonCost.toFixed(2);
-            document.getElementById('displayEbayFee').innerText = '£' + ebayFee.toFixed(2);
-            document.getElementById('totalDeduction').innerText = '£' + totalDeduction.toFixed(2);
+            document.getElementById('globalFeeRes').innerText = currencySym + fee.toFixed(2);
+            let pEl = document.getElementById('globalProfitRes');
+            pEl.innerText = currencySym + profit.toFixed(2);
+            pEl.style.color = profit >= 0 ? '#10b981' : '#ef4444';
         }
 
+        // --- CLIENT SPLIT LOGIC ---
+        function calcClientSplit() {
+            let rev = parseFloat(document.getElementById('cRev').value) || 0;
+            let cost = parseFloat(document.getElementById('cCost').value) || 0;
+            let perc = parseFloat(document.getElementById('cPerc').value) || 50;
+            
+            let profit = rev - cost;
+            let you = profit * (perc / 100);
+            let client = profit - you;
+            
+            document.getElementById('rTotal').innerText = profit.toFixed(2);
+            document.getElementById('rYou').innerText = you.toFixed(2);
+            document.getElementById('rClient').innerText = client.toFixed(2);
+        }
+
+        // --- COPY VIP ---
+        function copyText(elementId, btn) {
+            let text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text);
+            let originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> Success!';
+            btn.style.backgroundColor = '#10b981'; 
+            btn.style.color = '#fff'; btn.style.borderColor = '#10b981';
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.style.backgroundColor = 'rgba(255,255,255,0.1)';
+                btn.style.borderColor = 'rgba(255,255,255,0.2)';
+            }, 2000);
+        }
+
+        // --- AI GENERATOR ---
         async function generateRealListing() {
             let link = document.getElementById('productLink').value.trim();
-            if(!link) { alert("Please enter a product link!"); return; }
+            let platform = document.getElementById('platformSelect').value;
+            if(!link) { alert("Please enter a link!"); return; }
 
             document.getElementById('results').style.display = 'none';
             document.getElementById('loading').style.display = 'block';
@@ -282,51 +354,26 @@
                 let response = await fetch('/api/generate', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ link: link })
+                    body: JSON.stringify({ link: link, platform: platform })
                 });
 
                 let aiData = await response.json();
                 
                 if(aiData.error) {
-                    alert("System Error: " + aiData.error);
+                    alert("API Error: " + aiData.error);
                     document.getElementById('loading').style.display = 'none';
                     return;
                 }
 
                 document.getElementById('titleOutput').innerText = aiData.title;
-                document.getElementById('descOutput').innerText = aiData.description; // HTML کوڈ ٹیکسٹ فارمیٹ میں آئے گا تاکہ کاپی کرنا آسان ہو
+                document.getElementById('descOutput').innerText = aiData.description; 
                 
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('results').style.display = 'block';
-
             } catch (error) {
-                console.error(error);
-                alert("Network error! Make sure the server is running.");
+                alert("Server error!");
                 document.getElementById('loading').style.display = 'none';
             }
-        }
-
-        // --- نیا VIP کاپی بٹن فنکشن (الرٹ ختم کر دیا گیا ہے) ---
-        function copyText(elementId, btn) {
-            // ٹیکسٹ کاپی کریں
-            let text = document.getElementById(elementId).innerText;
-            navigator.clipboard.writeText(text);
-            
-            // پرانا HTML محفوظ کریں
-            let originalHTML = btn.innerHTML;
-            
-            // بٹن کو Success موڈ میں بدلیں
-            btn.innerHTML = '<i class="fa-solid fa-check"></i> Success!';
-            btn.style.backgroundColor = '#10b981'; 
-            btn.style.color = '#fff';
-            btn.style.borderColor = '#10b981';
-            
-            // 2 سیکنڈ کے بعد بٹن کو اصلی حالت میں واپس لے آئیں
-            setTimeout(() => {
-                btn.innerHTML = originalHTML;
-                btn.style.backgroundColor = 'rgba(255,255,255,0.1)';
-                btn.style.borderColor = 'rgba(255,255,255,0.2)';
-            }, 2000);
         }
     </script>
 </body>
