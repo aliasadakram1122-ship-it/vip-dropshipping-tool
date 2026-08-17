@@ -99,7 +99,7 @@
         #invoiceTemplate { display: none; }
 
         /* =========================================
-           🚀 NATIVE PRINT SYSTEM (100% GARANTEED FIX FOR CUT-OFF)
+           🚀 NATIVE PRINT SYSTEM
            ========================================= */
         @media print {
             body * {
@@ -115,18 +115,13 @@
                 position: absolute !important;
                 left: 0 !important;
                 top: 0 !important;
-                
-                /* 🔥 یہ وہ جادوئی تبدیلیاں ہیں جو انوائس کو کٹنے نہیں دیں گی 🔥 */
                 width: 100% !important;
                 max-width: 100% !important;
-                padding: 20px !important; /* پیڈنگ کم کر دی ہے */
+                padding: 20px !important;
                 margin: 0 !important;
-                box-sizing: border-box !important; /* اس نے انوائس کو صفحے کے اندر لاک کر دیا ہے */
-                
+                box-sizing: border-box !important;
                 font-family: Arial, sans-serif !important;
                 background: #ffffff !important;
-                
-                /* کلرز اور بارڈر کی گارنٹی */
                 -webkit-print-color-adjust: exact !important; 
                 print-color-adjust: exact !important; 
                 color-adjust: exact !important;
@@ -134,7 +129,7 @@
 
             @page {
                 size: A4 portrait;
-                margin: 10mm !important; /* صفحے کا مارجن سیٹ کر دیا ہے تاکہ کچھ نہ کٹے */
+                margin: 10mm !important;
             }
         }
     </style>
@@ -304,7 +299,8 @@
                         
                         <div style="display: flex; flex-direction: column; gap: 12px;">
                             <a href="https://chromewebstore.google.com/detail/gkiloblbdnadnikmjbojnadgmfdlolgn?utm_source=item-share-cb" target="_blank" class="btn-chrome" style="justify-content: center; padding: 15px; font-size: 16px;"><i class="fa-brands fa-chrome"></i> Install from Chrome Store</a>
-                            <a href="https://wa.me/923028997180?text=Hi Asad, I have installed Ecom Jaadugar VIP from the Chrome Store. I need login access." target="_blank" class="btn-whatsapp" style="justify-content: center; padding: 15px; font-size: 16px;"><i class="fa-brands fa-whatsapp"></i> Get VIP Login Access</a>
+                            <!-- 🔥 نیا واٹس ایپ نمبر یہاں اپڈیٹ کر دیا گیا ہے -->
+                            <a href="https://wa.me/923007718411?text=Hi Asad, I have installed Ecom Jaadugar VIP from the Chrome Store. I need login access." target="_blank" class="btn-whatsapp" style="justify-content: center; padding: 15px; font-size: 16px;"><i class="fa-brands fa-whatsapp"></i> Get VIP Login Access</a>
                         </div>
                     </div>
                     
@@ -315,7 +311,8 @@
                         
                         <div style="display: flex; flex-direction: column; gap: 12px;">
                             <a href="#" target="_blank" class="btn-chrome" style="justify-content: center; background: #64748b; border-color: #64748b; padding: 15px;"><i class="fa-brands fa-chrome"></i> Add to Chrome</a>
-                            <a href="https://wa.me/923028997180?text=Hi Asad, I have installed Stealth Guard. I need login access." target="_blank" class="btn-whatsapp" style="justify-content: center; padding: 15px;"><i class="fa-brands fa-whatsapp"></i> Get Login Access</a>
+                            <!-- 🔥 نیا واٹس ایپ نمبر یہاں بھی اپڈیٹ کر دیا گیا ہے -->
+                            <a href="https://wa.me/923007718411?text=Hi Asad, I have installed Stealth Guard. I need login access." target="_blank" class="btn-whatsapp" style="justify-content: center; padding: 15px;"><i class="fa-brands fa-whatsapp"></i> Get Login Access</a>
                         </div>
                     </div>
                 </div>
@@ -454,7 +451,6 @@
             document.getElementById('rClient').innerText = client.toFixed(2);
         }
 
-        // --- 🚀 NEW NATIVE BROWSER PRINT ENGINE ---
         function generateNativePDF() {
             let clientName = document.getElementById('iName').value || 'Client';
             let month = document.getElementById('iMonth').value || 'Month';
@@ -467,7 +463,6 @@
             let agencyShare = profit * (agencyPerc / 100);
             let clientShare = profit - agencyShare;
             
-            // Populate values
             document.getElementById('pdfDate').innerText = new Date().toLocaleDateString();
             document.getElementById('pdfClient').innerText = clientName.toUpperCase();
             document.getElementById('pdfMonth').innerText = month.toUpperCase();
