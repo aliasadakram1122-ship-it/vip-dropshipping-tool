@@ -84,7 +84,7 @@
         
         .form-group { margin-bottom: 22px; }
         label { display: block; font-size: 12px; font-weight: 800; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
-        input[type="text"], input[type="number"], select { width: 100%; box-sizing: border-box; background: rgba(255,255,255,0.8); border: 2px solid rgba(226, 232, 240, 0.8); color: #0f172a; padding: 16px; border-radius: 14px; font-size: 15px; font-family: 'Inter', sans-serif; outline: none; transition: 0.3s; font-weight: 600; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);}
+        input[type="text"], input[type="number"], input[type="date"], select { width: 100%; box-sizing: border-box; background: rgba(255,255,255,0.8); border: 2px solid rgba(226, 232, 240, 0.8); color: #0f172a; padding: 16px; border-radius: 14px; font-size: 15px; font-family: 'Inter', sans-serif; outline: none; transition: 0.3s; font-weight: 600; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);}
         input:focus, select:focus { border-color: var(--gold-secondary); background: #ffffff; box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1), inset 0 2px 4px rgba(0,0,0,0.01); transform: translateY(-1px);}
         
         /* PREMIUM BUTTONS */
@@ -92,8 +92,8 @@
         .btn-premium:hover { background-position: right center; transform: translateY(-3px); box-shadow: 0 15px 30px rgba(217, 119, 6, 0.4); }
         .btn-pdf { background: linear-gradient(135deg, #1e293b, #0f172a, #334155); margin-top: 15px; }
         .btn-pdf:hover { box-shadow: 0 15px 30px rgba(15, 23, 42, 0.3); }
-        .btn-action { background: #fff; border: 2px solid #e2e8f0; color: #0f172a; padding: 12px 20px; border-radius: 10px; font-weight: 800; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.02);}
-        .btn-action:hover { border-color: var(--gold-primary); color: var(--gold-primary); transform: translateY(-2px);}
+        .btn-whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); color: #fff; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;}
+        .btn-chrome { background: #1a73e8; border: 1px solid #1a73e8; color: #fff; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;}
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         
@@ -114,6 +114,17 @@
         .status-alert { padding: 20px; border-radius: 14px; font-weight: 800; font-size: 16px; text-align: center; margin-top: 20px; display: none; border: 2px solid transparent;}
         .status-safe { background: #f0fdf4; color: #059669; border-color: #bbf7d0; display: block;}
         .status-danger { background: #fef2f2; color: #dc2626; border-color: #fecaca; display: block;}
+
+        .magic-card {
+            border: 2px solid var(--gold-secondary) !important;
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.3) !important;
+            animation: super-glow 2s infinite alternate;
+            background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%) !important;
+        }
+        @keyframes super-glow {
+            from { box-shadow: 0 0 10px rgba(245, 158, 11, 0.2); }
+            to { box-shadow: 0 0 30px rgba(245, 158, 11, 0.6); }
+        }
 
         /* INVOICE TEMPLATE (HIDDEN ON SCREEN) */
         #invoiceTemplate { display: none; }
@@ -139,11 +150,14 @@
             <span>VIP Seller Suite</span>
         </div>
         <div class="nav-menu">
-            <!-- 🔥 AI GENERATOR IS NOW AT THE TOP AND ACTIVE -->
             <button class="nav-item active" onclick="switchTool('aiTool', this)"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Listing Generator</button>
+            
+            <!-- 🔥 نیا بٹن: ایجنسی بزنس ہب -->
+            <button class="nav-item" onclick="switchTool('bizTool', this)"><i class="fa-solid fa-chart-pie"></i> Business Hub <span class="new-badge">NEW</span></button>
+            
             <button class="nav-item" onclick="switchTool('calcTool', this)"><i class="fa-solid fa-calculator"></i> Global Calculator</button>
-            <button class="nav-item" onclick="switchTool('veroTool', this)"><i class="fa-solid fa-shield-halved"></i> eBay VERO Scanner <span class="new-badge">NEW</span></button>
-            <button class="nav-item" onclick="switchTool('tagTool', this)"><i class="fa-brands fa-tiktok"></i> TikTok Viral Tags <span class="new-badge">NEW</span></button>
+            <button class="nav-item" onclick="switchTool('veroTool', this)"><i class="fa-solid fa-shield-halved"></i> eBay VERO Scanner</button>
+            <button class="nav-item" onclick="switchTool('tagTool', this)"><i class="fa-brands fa-tiktok"></i> TikTok Viral Tags</button>
             <button class="nav-item" onclick="switchTool('clientTool', this)"><i class="fa-solid fa-file-invoice"></i> Profit Share Invoice</button>
             <button class="nav-item" onclick="switchTool('msgTool', this)"><i class="fa-solid fa-comment-dots"></i> 1-Click Messages</button>
             <button class="nav-item" onclick="switchTool('extTool', this)" style="border: 1px solid var(--gold-secondary); background: #fffbeb;">
@@ -164,7 +178,7 @@
 
         <main class="content-area">
             
-            <!-- 1. MULTI-PLATFORM AI (NOW DEFAULT ACTIVE) -->
+            <!-- 1. MULTI-PLATFORM AI (DEFAULT ACTIVE) -->
             <div id="aiTool" class="tool-section active">
                 <div class="section-header">
                     <h2>Multi-Platform AI Generator</h2>
@@ -203,7 +217,73 @@
                 </div>
             </div>
 
-            <!-- 2. GLOBAL CALCULATOR -->
+            <!-- 🔥 NEW: 2. AGENCY BUSINESS HUB (KPIs & PAYOUTS) -->
+            <div id="bizTool" class="tool-section">
+                <div class="section-header">
+                    <h2>Agency Business Hub</h2>
+                    <p>Track your daily targets and accurately predict payout dates across all your clients' accounts.</p>
+                </div>
+
+                <div class="grid-2">
+                    <!-- Dynamic Payout Predictor -->
+                    <div class="card">
+                        <h3 style="margin-top:0; margin-bottom: 20px; font-size: 20px; color: #1e293b;"><i class="fa-solid fa-vault" style="color: var(--gold-primary);"></i> Dynamic Payout Predictor</h3>
+                        
+                        <div class="form-group">
+                            <label>Sale / Dispatch Date</label>
+                            <input type="date" id="saleDate">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Account Hold Policy</label>
+                            <select id="holdPolicy">
+                                <option value="1">Daily Release (24 Hours)</option>
+                                <option value="7">Weekly Release (7 Days)</option>
+                                <option value="14">Bi-Weekly Release (14 Days)</option>
+                                <option value="30">Monthly Hold (30 Days)</option>
+                                <option value="10">Tracking Delivered + 3 Days (Approx. 10 Days)</option>
+                            </select>
+                        </div>
+                        
+                        <button class="btn-premium" onclick="predictPayout()"><i class="fa-solid fa-calendar-check"></i> Predict Payout Date</button>
+                        
+                        <div id="payoutResult" style="display: none; margin-top: 20px; background: #f0fdf4; border: 2px solid #10b981; padding: 20px; border-radius: 12px; text-align: center;">
+                            <span style="display: block; font-size: 13px; font-weight: 800; color: #059669; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Funds will clear on:</span>
+                            <span id="outDate" style="font-size: 24px; font-weight: 900; color: #0f172a;">--</span>
+                        </div>
+                    </div>
+
+                    <!-- Daily KPI Tracker (Auto-Saving) -->
+                    <div class="card">
+                        <h3 style="margin-top:0; margin-bottom: 20px; font-size: 20px; color: #1e293b;"><i class="fa-solid fa-bullseye" style="color: var(--gold-primary);"></i> Daily KPI Tracker</h3>
+                        
+                        <div class="grid-2" style="gap: 15px; margin-bottom: 25px;">
+                            <div class="form-group" style="margin: 0;">
+                                <label>Today's Target</label>
+                                <input type="number" id="kpiTarget" placeholder="e.g. 20" oninput="updateKPI()">
+                            </div>
+                            <div class="form-group" style="margin: 0;">
+                                <label>Completed</label>
+                                <input type="number" id="kpiDone" placeholder="e.g. 5" oninput="updateKPI()">
+                            </div>
+                        </div>
+                        
+                        <div style="background: rgba(0,0,0,0.05); border-radius: 20px; height: 35px; width: 100%; overflow: hidden; border: 1px solid rgba(0,0,0,0.1); margin-bottom: 15px; position: relative; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);">
+                            <!-- The Animated Fill Bar -->
+                            <div id="kpiBar" style="height: 100%; width: 0%; background: linear-gradient(90deg, #10b981, #34d399); transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: inset 0 0 10px rgba(255,255,255,0.4);"></div>
+                            
+                            <!-- The Text -->
+                            <span id="kpiText" style="position: absolute; width: 100%; text-align: center; top: 9px; font-size: 14px; font-weight: 900; color: #0f172a; text-shadow: 0 0 10px #ffffff;">0% Completed</span>
+                        </div>
+                        
+                        <p style="font-size: 13px; color: var(--text-muted); text-align: center; font-weight: 600; margin: 0;"><i class="fa-solid fa-cloud-arrow-up" style="color: #3b82f6;"></i> Progress is auto-saved to your browser.</p>
+                        
+                        <button class="btn-action" style="width: 100%; margin-top: 15px;" onclick="resetKPI()"><i class="fa-solid fa-rotate-right"></i> Reset for New Day</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. GLOBAL CALCULATOR -->
             <div id="calcTool" class="tool-section">
                 <div class="section-header">
                     <h2>Global Profit Calculator</h2>
@@ -238,7 +318,7 @@
                 </div>
             </div>
 
-            <!-- 3. NEW: eBay VERO SCANNER -->
+            <!-- 4. eBay VERO SCANNER -->
             <div id="veroTool" class="tool-section">
                 <div class="section-header">
                     <h2>eBay VERO Brand Scanner</h2>
@@ -256,7 +336,7 @@
                 </div>
             </div>
 
-            <!-- 4. NEW: TIKTOK HASHTAGS -->
+            <!-- 5. TIKTOK HASHTAGS -->
             <div id="tagTool" class="tool-section">
                 <div class="section-header">
                     <h2>TikTok Viral Hashtag Generator</h2>
@@ -276,7 +356,7 @@
                 </div>
             </div>
 
-            <!-- 5. CLIENT PROFIT SHARE + PDF INVOICE -->
+            <!-- 6. CLIENT PROFIT SHARE + PDF INVOICE -->
             <div id="clientTool" class="tool-section">
                 <div class="section-header">
                     <h2>Client Profit-Share & Invoice</h2>
@@ -303,7 +383,7 @@
                 </div>
             </div>
 
-            <!-- 6. 1-CLICK MESSAGES -->
+            <!-- 7. 1-CLICK MESSAGES -->
             <div id="msgTool" class="tool-section">
                 <div class="section-header">
                     <h2>Customer Service Templates</h2>
@@ -323,7 +403,7 @@
                 </div>
             </div>
 
-            <!-- 7. VIP EXTENSIONS -->
+            <!-- 8. VIP EXTENSIONS -->
             <div id="extTool" class="tool-section">
                 <div class="section-header">
                     <h2>Premium Automation Tools</h2>
@@ -424,6 +504,17 @@
     </div>
 
     <script>
+        // --- AUTO-LOAD KPI TRACKER DATA ON PAGE LOAD ---
+        window.onload = function() {
+            let savedTarget = localStorage.getItem('asad_kpi_target');
+            let savedDone = localStorage.getItem('asad_kpi_done');
+            
+            if(savedTarget) document.getElementById('kpiTarget').value = savedTarget;
+            if(savedDone) document.getElementById('kpiDone').value = savedDone;
+            
+            if(savedTarget || savedDone) updateKPI();
+        };
+
         // --- NAVIGATION LOGIC ---
         function switchTool(toolId, btnElement) {
             document.querySelectorAll('.tool-section').forEach(el => el.classList.remove('active'));
@@ -432,17 +523,72 @@
             btnElement.classList.add('active');
         }
 
-        // --- NEW: VERO SCANNER LOGIC ---
+        // --- 🚀 NEW: BUSINESS HUB LOGIC ---
+        function predictPayout() {
+            let dateVal = document.getElementById('saleDate').value;
+            let days = parseInt(document.getElementById('holdPolicy').value);
+            
+            if(!dateVal) { 
+                alert("Please select a Sale/Dispatch date first."); 
+                return; 
+            }
+            
+            let date = new Date(dateVal);
+            date.setDate(date.getDate() + days); // Add the selected days
+            
+            // Format nicely e.g. "Mon Aug 24 2026"
+            let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('outDate').innerText = date.toLocaleDateString('en-US', options);
+            document.getElementById('payoutResult').style.display = 'block';
+        }
+
+        function updateKPI() {
+            let target = parseInt(document.getElementById('kpiTarget').value) || 0;
+            let done = parseInt(document.getElementById('kpiDone').value) || 0;
+            
+            // Save to LocalStorage so it persists across refreshes
+            localStorage.setItem('asad_kpi_target', target);
+            localStorage.setItem('asad_kpi_done', done);
+            
+            if(target <= 0) {
+                document.getElementById('kpiBar').style.width = '0%';
+                document.getElementById('kpiText').innerText = '0% Completed';
+                return;
+            }
+            
+            let perc = Math.round((done / target) * 100);
+            if(perc > 100) perc = 100; // Cap at 100%
+            
+            document.getElementById('kpiBar').style.width = perc + '%';
+            document.getElementById('kpiText').innerText = perc + '% Completed';
+            
+            // Change color if completed
+            if(perc >= 100) {
+                document.getElementById('kpiBar').style.background = 'linear-gradient(90deg, #fbbf24, #f59e0b)';
+                document.getElementById('kpiText').innerText = '🔥 TARGET ACHIEVED!';
+            } else {
+                document.getElementById('kpiBar').style.background = 'linear-gradient(90deg, #10b981, #34d399)';
+            }
+        }
+
+        function resetKPI() {
+            document.getElementById('kpiTarget').value = '';
+            document.getElementById('kpiDone').value = '';
+            localStorage.removeItem('asad_kpi_target');
+            localStorage.removeItem('asad_kpi_done');
+            updateKPI();
+        }
+
+        // --- VERO SCANNER LOGIC ---
         function checkVero() {
             let input = document.getElementById('brandInput').value.trim().toLowerCase();
             let resBox = document.getElementById('veroResult');
             
             if(!input) { alert("Please enter a brand name."); return; }
             
-            // Dummy list of high-risk VERO brands for demonstration
             let veroBrands = ['apple', 'nike', 'sony', 'samsung', 'gucci', 'rolex', 'dyson', 'velcro', 'velvet', 'chapstick', 'puma', 'adidas', 'lego', 'nintendo'];
             
-            resBox.className = 'status-alert'; // Reset classes
+            resBox.className = 'status-alert';
             
             if(veroBrands.includes(input)) {
                 resBox.classList.add('status-danger');
@@ -453,7 +599,7 @@
             }
         }
 
-        // --- NEW: TIKTOK HASHTAG LOGIC ---
+        // --- TIKTOK HASHTAG LOGIC ---
         function generateTags() {
             let input = document.getElementById('tagInput').value.trim().toLowerCase();
             let resBox = document.getElementById('tagResultBox');
