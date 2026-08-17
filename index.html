@@ -6,8 +6,6 @@
     <title>VIP Dropshipping Suite | ECOM WITH ASAD</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
-    <!-- ہم نے اس بار html2pdf کی بکواس لائبریری کو مکمل ڈیلیٹ کر دیا ہے -->
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap');
         
@@ -101,15 +99,13 @@
         #invoiceTemplate { display: none; }
 
         /* =========================================
-           🚀 NATIVE PRINT SYSTEM (100% GARANTEED)
+           🚀 NATIVE PRINT SYSTEM (100% GARANTEED FIXES)
            ========================================= */
         @media print {
-            /* جب پرنٹ/پی ڈی ایف بنے گی تو ڈیش بورڈ کی ہر چیز غائب ہو جائے گی */
             body * {
                 visibility: hidden !important;
             }
             
-            /* صرف اور صرف انوائس نظر آئے گی */
             #invoiceTemplate, #invoiceTemplate * {
                 visibility: visible !important;
             }
@@ -120,15 +116,20 @@
                 left: 0 !important;
                 top: 0 !important;
                 width: 100% !important;
-                padding: 20px !important;
+                padding: 1in !important; /* اندر سے فاصلہ دے دیا تاکہ خوبصورت لگے */
                 margin: 0 !important;
                 font-family: Arial, sans-serif !important;
                 background: #ffffff !important;
+                
+                /* 🔥 یہ وہ جادوئی کمانڈز ہیں جو براؤزر کو رنگ اور بارڈر چھاپنے پر مجبور کریں گی */
+                -webkit-print-color-adjust: exact !important; 
+                print-color-adjust: exact !important; 
+                color-adjust: exact !important;
             }
 
             @page {
                 size: A4 portrait;
-                margin: 0.5in;
+                margin: 0mm !important; /* 🔥 یہ کمانڈ اوپر اور نیچے والے ویب سائٹ کے لنکس اور تاریخ کو ختم کرے گی */
             }
         }
     </style>
@@ -319,7 +320,7 @@
     </div>
 
     <!-- 🛑 HTML NATIVE PRINT INVOICE -->
-    <div id="invoiceTemplate">
+    <div id="invoiceTemplate" style="border-left: 15px solid #1e293b;">
         <table width="100%" cellpadding="0" cellspacing="0" style="border-bottom:2px solid #e2e8f0; padding-bottom:20px; margin-bottom:30px;">
             <tr>
                 <td align="left" valign="middle">
@@ -376,8 +377,9 @@
             </tr>
         </table>
         
+        <!-- 🔥 واٹس ایپ نمبر ختم کر دیا گیا ہے -->
         <div style="text-align:center; color:#64748b; font-size:13px; font-weight:bold; margin-top:50px;">
-            Thank you for doing business with us!<br>For any questions, please contact WhatsApp: +923028997180
+            Thank you for doing business with us!
         </div>
     </div>
 
