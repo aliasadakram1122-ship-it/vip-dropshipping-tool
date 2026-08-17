@@ -96,6 +96,18 @@
             from { box-shadow: 0 0 10px rgba(245, 158, 11, 0.2); }
             to { box-shadow: 0 0 30px rgba(245, 158, 11, 0.6); }
         }
+        
+        /* THE ULTIMATE BULLETPROOF INVOICE CSS */
+        #invoiceTemplate {
+            display: none;
+            width: 800px; /* Fixed width */
+            background: #ffffff;
+            color: #1e293b;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+            padding: 40px;
+            border-left: 15px solid #1e293b;
+        }
     </style>
 </head>
 <body>
@@ -217,7 +229,7 @@
                         <div class="form-group"><label>Total Revenue Generated (£/$)</label><input type="number" id="cRev" oninput="calcClientSplit()"></div>
                         <div class="form-group"><label>Your Agency Share (%)</label><input type="number" id="cPerc" value="50" oninput="calcClientSplit()"></div>
                         
-                        <button class="btn-premium btn-pdf" onclick="generatePDF()"><i class="fa-solid fa-file-pdf"></i> Download VIP Invoice PDF</button>
+                        <button class="btn-premium btn-pdf" onclick="generatePDF()"><i class="fa-solid fa-file-pdf"></i> Download PDF Invoice</button>
                     </div>
                     <div class="details-box">
                         <div style="font-size: 20px; color: #0f172a; margin-bottom: 20px; display: block; text-align: center; font-weight: 900;">Live Statement</div>
@@ -288,10 +300,8 @@
         </main>
     </div>
 
-    <!-- 🛑 FOOLPROOF HTML TABLE PDF TEMPLATE (CANNOT SQUASH ON MOBILE) -->
-    <div id="invoiceTemplate" style="display:none; width:800px; background:#ffffff; font-family:Arial, sans-serif; padding:40px; box-sizing:border-box; border-left:15px solid #1e293b;">
-        
-        <!-- Header -->
+    <!-- 🛑 100% BULLETPROOF INVOICE TEMPLATE -->
+    <div id="invoiceTemplate">
         <table width="100%" cellpadding="0" cellspacing="0" style="border-bottom:2px solid #e2e8f0; padding-bottom:20px; margin-bottom:30px;">
             <tr>
                 <td align="left" valign="middle">
@@ -305,7 +315,6 @@
             </tr>
         </table>
 
-        <!-- Client Info Box -->
         <table width="100%" cellpadding="15" cellspacing="0" style="background:#f8fafc; margin-bottom:30px; border-radius:8px;">
             <tr>
                 <td align="left" width="50%">
@@ -319,7 +328,6 @@
             </tr>
         </table>
 
-        <!-- Financial Breakdown -->
         <table width="100%" cellpadding="15" cellspacing="0" style="margin-bottom:30px; border-collapse:collapse;">
             <tr>
                 <th align="left" style="background:#f1f5f9; color:#475569; font-size:13px; border-bottom:2px solid #cbd5e1; text-transform:uppercase;">Financial Breakdown Description</th>
@@ -339,7 +347,6 @@
             </tr>
         </table>
 
-        <!-- Split Breakdown -->
         <table width="100%" cellpadding="15" cellspacing="0" style="margin-bottom:40px; border-collapse:collapse;">
             <tr>
                 <td align="left" style="font-size:16px; font-weight:bold; color:#334155;">Agency Service Fee (<span id="pdfAgencyPercVal">50</span>%)</td>
@@ -351,11 +358,9 @@
             </tr>
         </table>
         
-        <!-- Footer -->
         <div style="text-align:center; color:#64748b; font-size:13px; font-weight:bold; margin-top:50px;">
             Thank you for doing business with us!<br>For any questions, please contact WhatsApp: +923028997180
         </div>
-
     </div>
 
     <script>
@@ -425,64 +430,59 @@
             document.getElementById('rClient').innerText = client.toFixed(2);
         }
 
-        // --- THE UNBREAKABLE PDF GENERATOR ---
+        // --- THE ULTIMATE ZERO-BUG PDF GENERATOR ---
         function generatePDF() {
-            let clientName = document.getElementById('iName').value || 'Valued Client';
-            let month = document.getElementById('iMonth').value || 'Current Month';
+            let clientName = document.getElementById('iName').value || 'Client';
+            let month = document.getElementById('iMonth').value || 'Month';
             let rev = parseFloat(document.getElementById('cRev').value) || 0;
             let cost = parseFloat(document.getElementById('cCost').value) || 0;
             let agencyPerc = parseFloat(document.getElementById('cPerc').value) || 50;
-            let clientPerc = 100 - agencyPerc;
             
             let profit = rev - cost;
             let agencyShare = profit * (agencyPerc / 100);
             let clientShare = profit - agencyShare;
             
-            // Populate values
             document.getElementById('pdfDate').innerText = "Date: " + new Date().toLocaleDateString();
             document.getElementById('pdfClient').innerText = clientName.toUpperCase();
             document.getElementById('pdfMonth').innerText = month.toUpperCase();
-            document.getElementById('pdfCost').innerText = "- " + cost.toFixed(2);
-            document.getElementById('pdfRev').innerText = rev.toFixed(2);
-            document.getElementById('pdfNet').innerText = profit.toFixed(2);
-            document.getElementById('pdfClientPercVal').innerText = clientPerc;
-            document.getElementById('pdfClientProfit').innerText = clientShare.toFixed(2);
+            document.getElementById('pdfCost').innerText = "- " + currencySym + cost.toFixed(2);
+            document.getElementById('pdfRev').innerText = currencySym + rev.toFixed(2);
+            document.getElementById('pdfNet').innerText = currencySym + profit.toFixed(2);
+            document.getElementById('pdfClientPercVal').innerText = (100 - agencyPerc);
+            document.getElementById('pdfClientProfit').innerText = currencySym + clientShare.toFixed(2);
             document.getElementById('pdfAgencyPercVal').innerText = agencyPerc;
-            document.getElementById('pdfAgencyProfit').innerText = agencyShare.toFixed(2);
+            document.getElementById('pdfAgencyProfit').innerText = currencySym + agencyShare.toFixed(2);
             
-            // Clone the rigidly structured table HTML
             let element = document.getElementById('invoiceTemplate');
-            let clone = element.cloneNode(true);
-            
-            clone.style.display = 'block'; 
-            clone.style.position = 'absolute'; 
-            clone.style.top = '0'; 
-            clone.style.left = '-9999px'; // Safely out of view
-            clone.style.width = '800px';  // Force 800px width
-            
-            document.body.appendChild(clone);
-            
             let btn = document.querySelector('.btn-pdf');
             let oldText = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Generating PDF...';
             
-            // html2canvas settings specifically built to prevent mobile squash
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing VIP PDF...';
+            
+            // 🛑 THE FINAL FIX: Bring it to the absolute top of the screen where the browser can see it perfectly
+            window.scrollTo(0, 0); 
+            element.style.display = 'block';
+            element.style.position = 'absolute';
+            element.style.top = '0';
+            element.style.left = '0';
+            element.style.zIndex = '999999';
+            
             let opt = {
-              margin:       0.3,
-              filename:     `Statement_${clientName.replace(/\s+/g, '_')}_${month}.pdf`,
+              margin:       0.5,
+              filename:     `Invoice_${clientName.replace(/\s+/g, '_')}_${month}.pdf`,
               image:        { type: 'jpeg', quality: 1 },
-              html2canvas:  { 
-                  scale: 2, 
-                  windowWidth: 800, // Tell the library the screen is 800px wide
-                  width: 800,       // Force the render box to 800px wide
-                  useCORS: true 
-              },
+              html2canvas:  { scale: 2, useCORS: true, scrollY: 0 },
               jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
             };
             
-            html2pdf().set(opt).from(clone).save().then(() => {
-                document.body.removeChild(clone); // Destroy the clone
+            html2pdf().set(opt).from(element).save().then(() => {
+                element.style.display = 'none'; // Hide it back after downloading
                 btn.innerHTML = oldText;
+            }).catch(err => {
+                console.error("PDF Error: ", err);
+                element.style.display = 'none';
+                btn.innerHTML = oldText;
+                alert("Error generating PDF. Please try again.");
             });
         }
 
