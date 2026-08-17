@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VIP Dropshipping Suite | ECOM WITH ASAD</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- PDF Generation Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <!-- ہم نے اس بار html2pdf کی بکواس لائبریری کو مکمل ڈیلیٹ کر دیا ہے -->
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap');
@@ -96,17 +96,40 @@
             from { box-shadow: 0 0 10px rgba(245, 158, 11, 0.2); }
             to { box-shadow: 0 0 30px rgba(245, 158, 11, 0.6); }
         }
-        
-        /* THE ULTIMATE BULLETPROOF INVOICE CSS */
-        #invoiceTemplate {
-            display: none;
-            width: 800px; /* Fixed width */
-            background: #ffffff;
-            color: #1e293b;
-            font-family: Arial, sans-serif;
-            box-sizing: border-box;
-            padding: 40px;
-            border-left: 15px solid #1e293b;
+
+        /* INVOICE TEMPLATE (HIDDEN ON SCREEN) */
+        #invoiceTemplate { display: none; }
+
+        /* =========================================
+           🚀 NATIVE PRINT SYSTEM (100% GARANTEED)
+           ========================================= */
+        @media print {
+            /* جب پرنٹ/پی ڈی ایف بنے گی تو ڈیش بورڈ کی ہر چیز غائب ہو جائے گی */
+            body * {
+                visibility: hidden !important;
+            }
+            
+            /* صرف اور صرف انوائس نظر آئے گی */
+            #invoiceTemplate, #invoiceTemplate * {
+                visibility: visible !important;
+            }
+            
+            #invoiceTemplate {
+                display: block !important;
+                position: absolute !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 100% !important;
+                padding: 20px !important;
+                margin: 0 !important;
+                font-family: Arial, sans-serif !important;
+                background: #ffffff !important;
+            }
+
+            @page {
+                size: A4 portrait;
+                margin: 0.5in;
+            }
         }
     </style>
 </head>
@@ -141,7 +164,6 @@
 
         <main class="content-area">
             
-            <!-- 1. MULTI-MARKET CALCULATOR -->
             <div id="calcTool" class="tool-section active">
                 <div class="section-header">
                     <h2>Global Profit Calculator</h2>
@@ -176,7 +198,6 @@
                 </div>
             </div>
 
-            <!-- 2. MULTI-PLATFORM AI -->
             <div id="aiTool" class="tool-section">
                 <div class="section-header">
                     <h2>Multi-Platform AI Generator</h2>
@@ -215,7 +236,6 @@
                 </div>
             </div>
 
-            <!-- 3. CLIENT PROFIT SHARE + PDF INVOICE -->
             <div id="clientTool" class="tool-section">
                 <div class="section-header">
                     <h2>Client Profit-Share & Invoice</h2>
@@ -229,7 +249,7 @@
                         <div class="form-group"><label>Total Revenue Generated (£/$)</label><input type="number" id="cRev" oninput="calcClientSplit()"></div>
                         <div class="form-group"><label>Your Agency Share (%)</label><input type="number" id="cPerc" value="50" oninput="calcClientSplit()"></div>
                         
-                        <button class="btn-premium btn-pdf" onclick="generatePDF()"><i class="fa-solid fa-file-pdf"></i> Download PDF Invoice</button>
+                        <button class="btn-premium btn-pdf" onclick="generateNativePDF()"><i class="fa-solid fa-print"></i> Print / Save as PDF</button>
                     </div>
                     <div class="details-box">
                         <div style="font-size: 20px; color: #0f172a; margin-bottom: 20px; display: block; text-align: center; font-weight: 900;">Live Statement</div>
@@ -242,7 +262,6 @@
                 </div>
             </div>
 
-            <!-- 4. 1-CLICK MESSAGES -->
             <div id="msgTool" class="tool-section">
                 <div class="section-header">
                     <h2>Customer Service Templates</h2>
@@ -262,7 +281,6 @@
                 </div>
             </div>
 
-            <!-- 5. VIP EXTENSIONS -->
             <div id="extTool" class="tool-section">
                 <div class="section-header">
                     <h2>Premium Automation Tools</h2>
@@ -300,7 +318,7 @@
         </main>
     </div>
 
-    <!-- 🛑 100% BULLETPROOF INVOICE TEMPLATE -->
+    <!-- 🛑 HTML NATIVE PRINT INVOICE -->
     <div id="invoiceTemplate">
         <table width="100%" cellpadding="0" cellspacing="0" style="border-bottom:2px solid #e2e8f0; padding-bottom:20px; margin-bottom:30px;">
             <tr>
@@ -315,7 +333,7 @@
             </tr>
         </table>
 
-        <table width="100%" cellpadding="15" cellspacing="0" style="background:#f8fafc; margin-bottom:30px; border-radius:8px;">
+        <table width="100%" cellpadding="15" cellspacing="0" style="background:#f8fafc; margin-bottom:30px; border-radius:8px; border:1px solid #e2e8f0;">
             <tr>
                 <td align="left" width="50%">
                     <strong style="color:#94a3b8; font-size:12px; letter-spacing:1px;">BILLED TO / CLIENT:</strong><br>
@@ -430,60 +448,41 @@
             document.getElementById('rClient').innerText = client.toFixed(2);
         }
 
-        // --- THE ULTIMATE ZERO-BUG PDF GENERATOR ---
-        function generatePDF() {
+        // --- 🚀 NEW NATIVE BROWSER PRINT ENGINE (100% BUG FREE) ---
+        function generateNativePDF() {
             let clientName = document.getElementById('iName').value || 'Client';
             let month = document.getElementById('iMonth').value || 'Month';
             let rev = parseFloat(document.getElementById('cRev').value) || 0;
             let cost = parseFloat(document.getElementById('cCost').value) || 0;
             let agencyPerc = parseFloat(document.getElementById('cPerc').value) || 50;
+            let clientPerc = 100 - agencyPerc;
             
             let profit = rev - cost;
             let agencyShare = profit * (agencyPerc / 100);
             let clientShare = profit - agencyShare;
             
-            document.getElementById('pdfDate').innerText = "Date: " + new Date().toLocaleDateString();
+            // Populate values
+            document.getElementById('pdfDate').innerText = new Date().toLocaleDateString();
             document.getElementById('pdfClient').innerText = clientName.toUpperCase();
             document.getElementById('pdfMonth').innerText = month.toUpperCase();
             document.getElementById('pdfCost').innerText = "- " + currencySym + cost.toFixed(2);
             document.getElementById('pdfRev').innerText = currencySym + rev.toFixed(2);
             document.getElementById('pdfNet').innerText = currencySym + profit.toFixed(2);
-            document.getElementById('pdfClientPercVal').innerText = (100 - agencyPerc);
+            document.getElementById('pdfClientPercVal').innerText = clientPerc;
             document.getElementById('pdfClientProfit').innerText = currencySym + clientShare.toFixed(2);
             document.getElementById('pdfAgencyPercVal').innerText = agencyPerc;
             document.getElementById('pdfAgencyProfit').innerText = currencySym + agencyShare.toFixed(2);
             
-            let element = document.getElementById('invoiceTemplate');
-            let btn = document.querySelector('.btn-pdf');
-            let oldText = btn.innerHTML;
+            // انوائس کو ظاہر کریں
+            let inv = document.getElementById('invoiceTemplate');
+            inv.style.display = 'block';
             
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing VIP PDF...';
-            
-            // 🛑 THE FINAL FIX: Bring it to the absolute top of the screen where the browser can see it perfectly
-            window.scrollTo(0, 0); 
-            element.style.display = 'block';
-            element.style.position = 'absolute';
-            element.style.top = '0';
-            element.style.left = '0';
-            element.style.zIndex = '999999';
-            
-            let opt = {
-              margin:       0.5,
-              filename:     `Invoice_${clientName.replace(/\s+/g, '_')}_${month}.pdf`,
-              image:        { type: 'jpeg', quality: 1 },
-              html2canvas:  { scale: 2, useCORS: true, scrollY: 0 },
-              jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-            };
-            
-            html2pdf().set(opt).from(element).save().then(() => {
-                element.style.display = 'none'; // Hide it back after downloading
-                btn.innerHTML = oldText;
-            }).catch(err => {
-                console.error("PDF Error: ", err);
-                element.style.display = 'none';
-                btn.innerHTML = oldText;
-                alert("Error generating PDF. Please try again.");
-            });
+            // براؤزر کو حکم دیں کہ وہ اپنا اصلی پرنٹ/سیو ڈائیلاگ کھولے
+            setTimeout(() => {
+                window.print();
+                // پرنٹ ہونے یا کینسل ہونے کے بعد انوائس کو دوبارہ چھپا دیں
+                inv.style.display = 'none';
+            }, 500);
         }
 
         // --- COPY VIP ---
