@@ -58,6 +58,10 @@
         .new-badge { background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-size: 10px; padding: 3px 8px; border-radius: 20px; position: absolute; right: 10px; font-weight: 900;}
         @keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(239,68,68, 0.7); } 70% { box-shadow: 0 0 0 6px rgba(239,68,68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239,68,68, 0); } }
 
+        /* LEGAL FOOTER MENU */
+        .nav-footer { padding: 15px; border-top: 1px solid rgba(0,0,0,0.05); }
+        .nav-footer .nav-item { font-size: 12px; justify-content: center; background: rgba(255,255,255,0.5); border: 1px solid rgba(0,0,0,0.05);}
+
         /* MAIN CONTENT */
         .main-wrapper { flex: 1; display: flex; flex-direction: column; position: relative; z-index: 1;}
         .top-header { height: 70px; background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.6); display: flex; align-items: center; justify-content: space-between; padding: 0 40px;}
@@ -87,7 +91,6 @@
         .btn-premium { width: 100%; background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary), #fbbf24); background-size: 200% auto; border: none; color: #fff; font-size: 15px; font-weight: 900; padding: 18px; border-radius: 14px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.5s; box-shadow: 0 10px 20px rgba(217, 119, 6, 0.2); display: flex; justify-content: center; align-items: center; gap: 10px;}
         .btn-premium:hover { background-position: right center; transform: translateY(-3px); box-shadow: 0 15px 30px rgba(217, 119, 6, 0.4); }
         .btn-pdf { background: linear-gradient(135deg, #1e293b, #0f172a, #334155); margin-top: 15px; }
-        .btn-pdf:hover { box-shadow: 0 15px 30px rgba(15, 23, 42, 0.3); }
         .btn-action { background: #fff; border: 2px solid #e2e8f0; color: #0f172a; padding: 12px 20px; border-radius: 10px; font-weight: 800; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.02);}
         .btn-action:hover { border-color: var(--gold-primary); color: var(--gold-primary); transform: translateY(-2px);}
         .btn-whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); color: #fff; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;}
@@ -118,11 +121,15 @@
             animation: super-glow 2s infinite alternate;
             background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%) !important;
         }
-        @keyframes super-glow {
-            from { box-shadow: 0 0 10px rgba(245, 158, 11, 0.2); }
-            to { box-shadow: 0 0 30px rgba(245, 158, 11, 0.6); }
-        }
 
+        /* LEGAL DOCUMENT STYLING */
+        .legal-doc { line-height: 1.8; color: #334155; font-size: 15px;}
+        .legal-doc h3 { color: #0f172a; margin-top: 30px; font-size: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;}
+        .legal-doc p { margin-bottom: 15px;}
+        .legal-doc ul { padding-left: 20px;}
+        .legal-doc li { margin-bottom: 10px;}
+
+        /* INVOICE TEMPLATE (HIDDEN ON SCREEN) */
         #invoiceTemplate { display: none; }
 
         @media print {
@@ -156,6 +163,11 @@
             <button class="nav-item" onclick="switchTool('extTool', this)" style="border: 1px solid var(--gold-secondary); background: #fffbeb;">
                 <i class="fa-solid fa-bolt" style="color:var(--gold-primary)"></i> Auto Extensions <span class="hot-badge">HOT</span>
             </button>
+        </div>
+        
+        <!-- 🔥 NEW: Legal Footer Menu -->
+        <div class="nav-footer">
+            <button class="nav-item" onclick="switchTool('privacyTool', this)"><i class="fa-solid fa-scale-balanced"></i> Privacy & Legal</button>
         </div>
     </nav>
 
@@ -422,6 +434,39 @@
                             <a href="https://wa.me/923007718411?text=Hi Asad, I have installed Stealth Guard. I need login access." target="_blank" class="btn-premium" style="background: #25D366; color: #fff; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);"><i class="fa-brands fa-whatsapp"></i> Get Access Key</a>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- 🔥 NEW: 9. PRIVACY POLICY & TERMS -->
+            <div id="privacyTool" class="tool-section">
+                <div class="section-header">
+                    <h2>Privacy Policy & Terms of Service</h2>
+                    <p>Last Updated: August 2026</p>
+                </div>
+                
+                <div class="card legal-doc">
+                    <p>Welcome to <strong>ECOM WITH ASAD</strong>. By accessing or using our VIP Dropshipping Suite, you agree to comply with and be bound by the following privacy policy and terms of service. Please read them carefully.</p>
+
+                    <h3>1. Information We Collect</h3>
+                    <p>We prioritize your privacy. We do not require you to create an account, and we do not collect personal identifiable information directly on our servers. Certain features (such as the Daily Target Tracker) utilize your browser's <strong>Local Storage</strong> to save your settings directly on your device. We do not have access to this data.</p>
+
+                    <h3>2. Google AdSense & Third-Party Cookies</h3>
+                    <p>We use third-party advertising companies, including <strong>Google AdSense</strong>, to serve ads when you visit our website. These companies may use aggregated information (not including your name, address, email address, or telephone number) about your visits to this and other websites in order to provide advertisements about goods and services of interest to you.</p>
+                    <ul>
+                        <li>Google, as a third-party vendor, uses cookies to serve ads on our site.</li>
+                        <li>Google's use of the DART cookie enables it to serve ads to our users based on their visit to our sites and other sites on the Internet.</li>
+                        <li>Users may opt-out of the use of the DART cookie by visiting the Google Ad and Content Network Privacy Policy.</li>
+                    </ul>
+
+                    <h3>3. Use of Third-Party Extensions</h3>
+                    <p>Our website provides links to third-party Google Chrome Extensions (e.g., "Ecom Jaadugar VIP"). These extensions are managed independently. Downloading and installing them is at your own discretion. We do not take responsibility for any account limitations or issues arising from their misuse.</p>
+
+                    <h3>4. Financial Calculations</h3>
+                    <p>The "Global Profit Calculator" and "Payout Predictor" are provided for estimation purposes only. While we constantly update fee tiers to match current marketplace rules, we are not responsible for any financial discrepancies or losses incurred during your dropshipping operations.</p>
+
+                    <h3>5. Contact Information</h3>
+                    <p>If you have any questions or concerns regarding this Privacy Policy or require assistance with access keys for our extensions, please contact us directly:</p>
+                    <p><strong>WhatsApp Support:</strong> <a href="https://wa.me/923007718411" target="_blank" style="color: var(--gold-primary); font-weight: bold; text-decoration: none;">+92 300 7718411</a></p>
                 </div>
             </div>
 
