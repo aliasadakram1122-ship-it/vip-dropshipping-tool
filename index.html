@@ -7,130 +7,127 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800;900&display=swap');
         
         :root {
-            --bg-color: #f4f7f6;
             --gold-primary: #d97706; 
             --gold-secondary: #f59e0b;
-            --panel-bg: rgba(255, 255, 255, 0.85);
-            --glass-border: rgba(217, 119, 6, 0.2);
-            --text-main: #1e293b;
+            --text-main: #0f172a;
             --text-muted: #64748b;
+            --glass-bg: rgba(255, 255, 255, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
         }
 
+        /* 🌟 Animated Soft Premium Background */
         body { 
-            background: radial-gradient(circle at top right, #e0f2fe 0%, #f8fafc 50%, var(--bg-color) 100%);
-            color: var(--text-main); font-family: 'Inter', sans-serif; margin: 0; height: 100vh; display: flex; overflow: hidden; 
+            background: linear-gradient(120deg, #e0f2fe, #f8fafc, #fef3c7, #e0f2fe);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--text-main); 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            height: 100vh; 
+            display: flex; 
+            overflow: hidden; 
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
-        /* SIDEBAR */
-        .sidebar { width: 280px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border-right: 1px solid rgba(0,0,0,0.05); display: flex; flex-direction: column; box-shadow: 10px 0 30px rgba(0,0,0,0.03); z-index: 10;}
-        .brand { padding: 30px 20px; text-align: center; border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .brand h1 { margin: 0; font-size: 22px; font-weight: 900; background: linear-gradient(to right, #1e293b, var(--gold-primary)); -webkit-background-clip: text; color: transparent; letter-spacing: 2px;}
-        .brand span { font-size: 11px; color: var(--gold-secondary); letter-spacing: 3px; font-weight: 800; text-transform: uppercase;}
+        /* SIDEBAR (Ultra Glass) */
+        .sidebar { width: 280px; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border-right: 1px solid rgba(255,255,255,0.9); display: flex; flex-direction: column; box-shadow: 10px 0 30px rgba(0,0,0,0.02); z-index: 10;}
+        .brand { padding: 35px 20px 25px; text-align: center; border-bottom: 1px solid rgba(0,0,0,0.04); position: relative;}
+        .brand::after { content: ''; position: absolute; bottom: -1px; left: 20%; right: 20%; height: 2px; background: linear-gradient(to right, transparent, var(--gold-secondary), transparent);}
+        .brand h1 { margin: 0; font-size: 24px; font-weight: 900; background: linear-gradient(to right, #0f172a, var(--gold-primary)); -webkit-background-clip: text; color: transparent; letter-spacing: 1px;}
+        .brand span { font-size: 11px; color: var(--gold-secondary); letter-spacing: 4px; font-weight: 800; text-transform: uppercase;}
         
-        .nav-menu { padding: 20px 15px; flex: 1; display: flex; flex-direction: column; gap: 10px; overflow-y: auto;}
-        .nav-item { background: transparent; border: 1px solid transparent; color: var(--text-muted); padding: 16px 20px; border-radius: 12px; cursor: pointer; text-align: left; font-size: 14px; font-weight: 600; transition: all 0.4s ease; display: flex; align-items: center; gap: 15px; position: relative;}
-        .nav-item i { font-size: 18px; width: 20px; text-align: center;}
-        .nav-item:hover { background: #f1f5f9; color: var(--text-main); transform: translateX(5px);}
-        .nav-item.active { background: #fff; color: var(--gold-primary); border: 1px solid var(--glass-border); box-shadow: 0 10px 20px rgba(217, 119, 6, 0.1), inset 0 0 15px rgba(251, 191, 36, 0.05);}
-        .hot-badge { background: #ef4444; color: #fff; font-size: 10px; padding: 3px 8px; border-radius: 20px; position: absolute; right: 10px; animation: pulse-red 1.5s infinite; font-weight: 900;}
+        .nav-menu { padding: 20px 15px; flex: 1; display: flex; flex-direction: column; gap: 8px; overflow-y: auto;}
+        .nav-menu::-webkit-scrollbar { width: 4px; }
+        .nav-menu::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        
+        .nav-item { background: transparent; border: 1px solid transparent; color: var(--text-muted); padding: 15px 20px; border-radius: 14px; cursor: pointer; text-align: left; font-size: 14px; font-weight: 600; transition: all 0.3s ease; display: flex; align-items: center; gap: 15px; position: relative;}
+        .nav-item i { font-size: 18px; width: 20px; text-align: center; transition: 0.3s;}
+        .nav-item:hover { background: rgba(255,255,255,0.9); color: var(--text-main); transform: translateX(5px); box-shadow: 0 4px 15px rgba(0,0,0,0.02);}
+        
+        /* Active Nav Item */
+        .nav-item.active { background: #ffffff; color: var(--gold-primary); border: 1px solid rgba(245, 158, 11, 0.2); box-shadow: 0 10px 25px rgba(217, 119, 6, 0.1), inset 0 0 0 1px rgba(255,255,255,1);}
+        .nav-item.active i { transform: scale(1.2); color: var(--gold-secondary);}
+        
+        .hot-badge { background: linear-gradient(135deg, #ef4444, #f43f5e); color: #fff; font-size: 10px; padding: 3px 8px; border-radius: 20px; position: absolute; right: 10px; animation: pulse-red 1.5s infinite; font-weight: 900;}
+        .new-badge { background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-size: 10px; padding: 3px 8px; border-radius: 20px; position: absolute; right: 10px; font-weight: 900;}
         @keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(239,68,68, 0.7); } 70% { box-shadow: 0 0 0 6px rgba(239,68,68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239,68,68, 0); } }
 
         /* MAIN CONTENT */
         .main-wrapper { flex: 1; display: flex; flex-direction: column; position: relative; z-index: 1;}
-        .top-header { height: 70px; background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; padding: 0 40px;}
-        .user-profile { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; color: var(--text-main);}
-        .user-profile img { width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--gold-primary); }
-        .status-badge { background: rgba(16, 185, 129, 0.1); color: #059669; padding: 5px 10px; border-radius: 20px; font-size: 11px; border: 1px solid #10b981; font-weight: bold;}
+        .top-header { height: 70px; background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.6); display: flex; align-items: center; justify-content: space-between; padding: 0 40px;}
+        .user-profile { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; color: var(--text-main);}
+        .user-profile img { width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--gold-secondary); padding: 2px; background: #fff;}
+        .status-badge { background: rgba(16, 185, 129, 0.1); color: #059669; padding: 6px 12px; border-radius: 20px; font-size: 11px; border: 1px solid rgba(16, 185, 129, 0.3); font-weight: 800;}
 
         .content-area { padding: 40px; overflow-y: auto; height: calc(100vh - 70px); box-sizing: border-box; }
-        .tool-section { display: none; animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1); max-width: 1000px; margin: 0 auto; }
+        .content-area::-webkit-scrollbar { width: 6px; }
+        .content-area::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
+
+        .tool-section { display: none; animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1); max-width: 1000px; margin: 0 auto; }
         .tool-section.active { display: block; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         
-        .section-header { margin-bottom: 30px; text-align: center; }
-        .section-header h2 { font-size: 32px; margin: 0; color: #0f172a; font-weight: 900; letter-spacing: -0.5px;}
-        .section-header p { color: var(--text-muted); margin-top: 8px; font-size: 15px; }
+        .section-header { margin-bottom: 35px; text-align: center; }
+        .section-header h2 { font-size: 34px; margin: 0; color: #0f172a; font-weight: 900; letter-spacing: -1px;}
+        .section-header p { color: var(--text-muted); margin-top: 10px; font-size: 15px; font-weight: 500;}
 
-        .card { background: var(--panel-bg); backdrop-filter: blur(15px); border: 1px solid #ffffff; border-radius: 24px; padding: 35px; margin-bottom: 25px; box-shadow: 0 20px 40px rgba(0,0,0,0.04), inset 0 0 0 1px rgba(255,255,255,0.5); position: relative; }
-        .form-group { margin-bottom: 20px; }
+        /* GLASS CARDS */
+        .card { background: var(--glass-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 24px; padding: 35px; margin-bottom: 25px; box-shadow: var(--glass-shadow); position: relative; }
+        
+        .form-group { margin-bottom: 22px; }
         label { display: block; font-size: 12px; font-weight: 800; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
-        input[type="text"], input[type="number"], select { width: 100%; box-sizing: border-box; background: #f8fafc; border: 1px solid #e2e8f0; color: #0f172a; padding: 16px; border-radius: 12px; font-size: 15px; font-family: 'Inter', sans-serif; outline: none; transition: 0.3s; font-weight: 600; }
-        input:focus, select:focus { border-color: var(--gold-secondary); box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.15); background: #ffffff; }
+        input[type="text"], input[type="number"], select { width: 100%; box-sizing: border-box; background: rgba(255,255,255,0.8); border: 2px solid rgba(226, 232, 240, 0.8); color: #0f172a; padding: 16px; border-radius: 14px; font-size: 15px; font-family: 'Inter', sans-serif; outline: none; transition: 0.3s; font-weight: 600; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);}
+        input:focus, select:focus { border-color: var(--gold-secondary); background: #ffffff; box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1), inset 0 2px 4px rgba(0,0,0,0.01); transform: translateY(-1px);}
         
-        .btn-premium { width: 100%; background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary)); border: none; color: #fff; font-size: 15px; font-weight: 900; padding: 18px; border-radius: 12px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.4s ease; box-shadow: 0 10px 20px rgba(217, 119, 6, 0.2); display: flex; justify-content: center; align-items: center; gap: 10px;}
-        .btn-premium:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(217, 119, 6, 0.4); }
-        .btn-pdf { background: linear-gradient(135deg, #1e293b, #0f172a); margin-top: 15px; }
-        .btn-whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); color: #fff; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;}
-        .btn-chrome { background: #1a73e8; border: 1px solid #1a73e8; color: #fff; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;}
+        /* PREMIUM BUTTONS */
+        .btn-premium { width: 100%; background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary), #fbbf24); background-size: 200% auto; border: none; color: #fff; font-size: 15px; font-weight: 900; padding: 18px; border-radius: 14px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.5s; box-shadow: 0 10px 20px rgba(217, 119, 6, 0.2); display: flex; justify-content: center; align-items: center; gap: 10px;}
+        .btn-premium:hover { background-position: right center; transform: translateY(-3px); box-shadow: 0 15px 30px rgba(217, 119, 6, 0.4); }
+        .btn-pdf { background: linear-gradient(135deg, #1e293b, #0f172a, #334155); margin-top: 15px; }
+        .btn-pdf:hover { box-shadow: 0 15px 30px rgba(15, 23, 42, 0.3); }
+        .btn-action { background: #fff; border: 2px solid #e2e8f0; color: #0f172a; padding: 12px 20px; border-radius: 10px; font-weight: 800; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.02);}
+        .btn-action:hover { border-color: var(--gold-primary); color: var(--gold-primary); transform: translateY(-2px);}
 
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
-        .profit-val { font-size: 50px; font-weight: 900; text-align: center; color: #059669; text-shadow: 0 5px 15px rgba(16,185,129,0.2); margin: 20px 0;}
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         
-        .details-box { background: #f1f5f9; padding: 25px; border-radius: 16px; border: 1px solid #e2e8f0; }
-        .details-box div { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px dashed #cbd5e1; font-size: 14px; font-weight: 700; color: #475569;}
-        .details-box div:last-child { border: none; }
+        .details-box { background: rgba(255,255,255,0.7); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.9); box-shadow: inset 0 0 20px rgba(0,0,0,0.02);}
+        .details-box div { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px dashed #cbd5e1; font-size: 15px; font-weight: 700; color: #475569;}
+        .details-box div:last-child { border: none; padding-bottom: 0;}
         
-        .market-tabs { display: flex; gap: 10px; margin-bottom: 25px; }
-        .market-tab { flex: 1; padding: 15px; text-align: center; background: #fff; border: 2px solid #e2e8f0; border-radius: 12px; color: var(--text-muted); font-weight: 800; cursor: pointer; transition: 0.3s;}
-        .market-tab.active { background: rgba(217, 119, 6, 0.05); border-color: var(--gold-secondary); color: var(--gold-primary); box-shadow: 0 5px 15px rgba(217,119,6,0.1);}
+        .market-tabs { display: flex; gap: 15px; margin-bottom: 25px; }
+        .market-tab { flex: 1; padding: 16px; text-align: center; background: rgba(255,255,255,0.8); border: 2px solid #e2e8f0; border-radius: 14px; color: var(--text-muted); font-weight: 800; cursor: pointer; transition: 0.3s;}
+        .market-tab.active { background: #fff; border-color: var(--gold-secondary); color: var(--gold-primary); box-shadow: 0 8px 20px rgba(217,119,6,0.15); transform: translateY(-2px);}
 
-        .copy-btn { position: absolute; top: 15px; right: 15px; background: #fff; border: 1px solid #e2e8f0; color: #0f172a; font-size: 12px; font-weight: bold; padding: 8px 15px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);}
-        .copy-btn:hover { background: var(--gold-primary); color: #fff; border-color: var(--gold-primary);}
+        .copy-btn { position: absolute; top: 20px; right: 20px; background: #fff; border: 2px solid #e2e8f0; color: #0f172a; font-size: 12px; font-weight: 800; padding: 8px 16px; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);}
+        .copy-btn:hover { background: var(--gold-primary); color: #fff; border-color: var(--gold-primary); transform: translateY(-2px);}
         
-        .msg-card { background: #fff; border: 1px solid #e2e8f0; padding: 20px; border-radius: 12px; margin-bottom: 15px; position: relative; box-shadow: 0 4px 10px rgba(0,0,0,0.02);}
-        .msg-title { color: var(--gold-primary); font-weight: 900; margin-bottom: 10px; font-size: 14px;}
-        .msg-body { color: #334155; font-size: 14px; line-height: 1.6; padding-right: 80px; font-weight: 500;}
+        .result-box { background: #fff; border: 2px solid #e2e8f0; padding: 25px; border-radius: 16px; margin-top: 15px; font-family: monospace; font-size: 14px; color: #334155; line-height: 1.6; white-space: pre-wrap; position: relative;}
 
-        .magic-card {
-            border: 2px solid var(--gold-secondary) !important;
-            box-shadow: 0 0 25px rgba(245, 158, 11, 0.3) !important;
-            animation: super-glow 2s infinite alternate;
-            background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%) !important;
-        }
-        @keyframes super-glow {
-            from { box-shadow: 0 0 10px rgba(245, 158, 11, 0.2); }
-            to { box-shadow: 0 0 30px rgba(245, 158, 11, 0.6); }
-        }
+        /* VERO SCANNER STYLES */
+        .status-alert { padding: 20px; border-radius: 14px; font-weight: 800; font-size: 16px; text-align: center; margin-top: 20px; display: none; border: 2px solid transparent;}
+        .status-safe { background: #f0fdf4; color: #059669; border-color: #bbf7d0; display: block;}
+        .status-danger { background: #fef2f2; color: #dc2626; border-color: #fecaca; display: block;}
 
         /* INVOICE TEMPLATE (HIDDEN ON SCREEN) */
         #invoiceTemplate { display: none; }
 
-        /* =========================================
-           🚀 NATIVE PRINT SYSTEM
-           ========================================= */
         @media print {
-            body * {
-                visibility: hidden !important;
-            }
-            
-            #invoiceTemplate, #invoiceTemplate * {
-                visibility: visible !important;
-            }
-            
+            body * { visibility: hidden !important; }
+            #invoiceTemplate, #invoiceTemplate * { visibility: visible !important; }
             #invoiceTemplate {
-                display: block !important;
-                position: absolute !important;
-                left: 0 !important;
-                top: 0 !important;
-                width: 100% !important;
-                max-width: 100% !important;
-                padding: 20px !important;
-                margin: 0 !important;
-                box-sizing: border-box !important;
-                font-family: Arial, sans-serif !important;
-                background: #ffffff !important;
-                -webkit-print-color-adjust: exact !important; 
-                print-color-adjust: exact !important; 
-                color-adjust: exact !important;
+                display: block !important; position: absolute !important; left: 0 !important; top: 0 !important;
+                width: 100% !important; max-width: 100% !important; padding: 20px !important; margin: 0 !important; box-sizing: border-box !important;
+                font-family: Arial, sans-serif !important; background: #ffffff !important;
+                -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important;
             }
-
-            @page {
-                size: A4 portrait;
-                margin: 10mm !important;
-            }
+            @page { size: A4 portrait; margin: 10mm !important; }
         }
     </style>
 </head>
@@ -142,20 +139,22 @@
             <span>VIP Seller Suite</span>
         </div>
         <div class="nav-menu">
-            <button class="nav-item active" onclick="switchTool('calcTool', this)"><i class="fa-solid fa-calculator"></i> Global Calculator</button>
-            <button class="nav-item" onclick="switchTool('aiTool', this)"><i class="fa-solid fa-robot"></i> Multi-Platform AI</button>
+            <!-- 🔥 AI GENERATOR IS NOW AT THE TOP AND ACTIVE -->
+            <button class="nav-item active" onclick="switchTool('aiTool', this)"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Listing Generator</button>
+            <button class="nav-item" onclick="switchTool('calcTool', this)"><i class="fa-solid fa-calculator"></i> Global Calculator</button>
+            <button class="nav-item" onclick="switchTool('veroTool', this)"><i class="fa-solid fa-shield-halved"></i> eBay VERO Scanner <span class="new-badge">NEW</span></button>
+            <button class="nav-item" onclick="switchTool('tagTool', this)"><i class="fa-brands fa-tiktok"></i> TikTok Viral Tags <span class="new-badge">NEW</span></button>
             <button class="nav-item" onclick="switchTool('clientTool', this)"><i class="fa-solid fa-file-invoice"></i> Profit Share Invoice</button>
             <button class="nav-item" onclick="switchTool('msgTool', this)"><i class="fa-solid fa-comment-dots"></i> 1-Click Messages</button>
             <button class="nav-item" onclick="switchTool('extTool', this)" style="border: 1px solid var(--gold-secondary); background: #fffbeb;">
-                <i class="fa-solid fa-bolt" style="color:var(--gold-primary)"></i> Ecom Jaadugar VIP 
-                <span class="hot-badge">HOT</span>
+                <i class="fa-solid fa-bolt" style="color:var(--gold-primary)"></i> VIP Extensions <span class="hot-badge">HOT</span>
             </button>
         </div>
     </nav>
 
     <div class="main-wrapper">
         <header class="top-header">
-            <div style="font-size: 14px; font-weight: 700; color: var(--gold-primary);"><i class="fa-solid fa-crown"></i> Premium Light Edition</div>
+            <div style="font-size: 15px; font-weight: 800; color: var(--gold-primary);"><i class="fa-solid fa-gem"></i> Ultra Premium Edition</div>
             <div class="user-profile">
                 <span class="status-badge"><i class="fa-solid fa-circle-check"></i> System Online</span>
                 <img src="https://ui-avatars.com/api/?name=Asad+VIP&background=f59e0b&color=fff&bold=true" alt="Admin">
@@ -165,7 +164,47 @@
 
         <main class="content-area">
             
-            <div id="calcTool" class="tool-section active">
+            <!-- 1. MULTI-PLATFORM AI (NOW DEFAULT ACTIVE) -->
+            <div id="aiTool" class="tool-section active">
+                <div class="section-header">
+                    <h2>Multi-Platform AI Generator</h2>
+                    <p>Generate high-converting, SEO optimized listings for eBay, TikTok Shop, Etsy, and Walmart.</p>
+                </div>
+
+                <div class="card">
+                    <div class="grid-2" style="margin-bottom: 25px;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label>Select Marketplace</label>
+                            <select id="platformSelect">
+                                <option value="eBay UK">eBay (UK/USA/AU)</option>
+                                <option value="TikTok Shop">TikTok Shop</option>
+                                <option value="Etsy">Etsy</option>
+                                <option value="Walmart">Walmart</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label>Product Link / Keyword</label>
+                            <input type="text" id="productLink" placeholder="Paste supplier link or keywords...">
+                        </div>
+                    </div>
+                    <button class="btn-premium" onclick="generateRealListing()"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate VIP SEO Listing</button>
+                    
+                    <div id="loading" style="display:none; text-align:center; padding: 30px; font-weight: 800; color: var(--gold-primary); font-size: 18px;"><i class="fa-solid fa-spinner fa-spin"></i> Processing via Google AI...</div>
+                </div>
+
+                <div id="results" class="card" style="display: none; border: 2px solid #10b981; background: #ffffff;">
+                    <button class="copy-btn" onclick="copyText('titleOutput', this)"><i class="fa-regular fa-copy"></i> Copy Title</button>
+                    <label style="color: var(--gold-primary);">Optimized SEO Title</label>
+                    <div id="titleOutput" style="font-size: 20px; font-weight: 900; color: #0f172a; padding: 15px 0 30px 0; border-bottom: 1px solid #e2e8f0; margin-bottom: 20px;"></div>
+
+                    <button class="copy-btn" style="top: 150px;" onclick="copyText('descOutput', this)"><i class="fa-regular fa-copy"></i> Copy HTML Code</button>
+                    <label style="color: var(--gold-primary);">Premium HTML Description Code</label>
+                    <div id="descOutput" class="result-box"></div>
+                </div>
+            </div>
+
+            <!-- 2. GLOBAL CALCULATOR -->
+            <div id="calcTool" class="tool-section">
                 <div class="section-header">
                     <h2>Global Profit Calculator</h2>
                     <p>Accurate Tiered Account eBay fee structures for UK, USA, and Australia.</p>
@@ -181,62 +220,63 @@
                     <div class="grid-2">
                         <div>
                             <div class="form-group">
-                                <label><i class="fa-solid fa-box"></i> Amazon Price / Cost (<span class="curr-sym">£</span>)</label>
+                                <label><i class="fa-solid fa-box" style="color:#3b82f6;"></i> Supplier Cost (<span class="curr-sym">£</span>)</label>
                                 <input type="number" id="globalCost" placeholder="0.00" step="0.01" oninput="calcGlobalProfit()">
                             </div>
                             <div class="form-group">
-                                <label><i class="fa-brands fa-ebay"></i> eBay Sale Price (<span class="curr-sym">£</span>)</label>
+                                <label><i class="fa-brands fa-ebay" style="color:#84cc16;"></i> eBay Sale Price (<span class="curr-sym">£</span>)</label>
                                 <input type="number" id="globalPrice" placeholder="0.00" step="0.01" oninput="calcGlobalProfit()">
                             </div>
                         </div>
                         <div class="details-box">
-                            <label style="text-align: center; color: var(--gold-primary);">Net Profit</label>
-                            <div class="profit-val" id="globalProfitRes"><span class="curr-sym">£</span>0.00</div>
-                            <div><span>eBay Fee Deducted:</span> <span id="globalFeeRes"><span class="curr-sym">£</span>0.00</span></div>
-                            <div style="font-size: 12px; color: #94a3b8; text-align: center; display: block; border: none; margin-top: 10px;" id="feeNote">UK Buyer Protection: 7%-4%-2% + £0.10</div>
+                            <label style="text-align: center; color: var(--gold-primary);">Final Net Profit</label>
+                            <div style="font-size: 50px; font-weight: 900; text-align: center; color: #059669; margin: 15px 0; display: block;" id="globalProfitRes"><span class="curr-sym">£</span>0.00</div>
+                            <div><span>Total eBay Fee Deducted:</span> <span id="globalFeeRes" style="color: #ef4444;"><span class="curr-sym">£</span>0.00</span></div>
+                            <div style="font-size: 11px; color: #94a3b8; text-align: center; display: block; border: none; margin-top: 10px;" id="feeNote">UK Buyer Protection: 7%-4%-2% + £0.10</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="aiTool" class="tool-section">
+            <!-- 3. NEW: eBay VERO SCANNER -->
+            <div id="veroTool" class="tool-section">
                 <div class="section-header">
-                    <h2>Multi-Platform AI Generator</h2>
-                    <p>Generate SEO optimized listings for eBay, TikTok Shop, Etsy, and Walmart.</p>
+                    <h2>eBay VERO Brand Scanner</h2>
+                    <p>Protect your stealth accounts. Check if a brand is strictly protected by eBay VERO.</p>
                 </div>
-
-                <div class="card">
-                    <div class="grid-2" style="margin-bottom: 20px;">
-                        <div class="form-group" style="margin-bottom: 0;">
-                            <label>Select Platform</label>
-                            <select id="platformSelect">
-                                <option value="eBay UK">eBay (UK/USA/AU)</option>
-                                <option value="TikTok Shop">TikTok Shop</option>
-                                <option value="Etsy">Etsy</option>
-                                <option value="Walmart">Walmart</option>
-                            </select>
-                        </div>
-                        <div class="form-group" style="margin-bottom: 0;">
-                            <label>Product Link / Keyword</label>
-                            <input type="text" id="productLink" placeholder="Paste link or keywords...">
-                        </div>
+                <div class="card" style="max-width: 600px; margin: 0 auto; text-align: center;">
+                    <i class="fa-solid fa-shield-virus" style="font-size: 60px; color: var(--text-muted); margin-bottom: 20px;"></i>
+                    <div class="form-group">
+                        <label>Enter Brand Name</label>
+                        <input type="text" id="brandInput" placeholder="e.g. Nike, Apple, Sony, Dyson..." style="text-align: center; font-size: 18px;">
                     </div>
-                    <button class="btn-premium" onclick="generateRealListing()"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate VIP SEO Listing</button>
+                    <button class="btn-premium" onclick="checkVero()"><i class="fa-solid fa-magnifying-glass"></i> Scan Brand Database</button>
                     
-                    <div id="loading" style="display:none; text-align:center; padding: 20px; font-weight: bold;"><i class="fa-solid fa-spinner fa-spin" style="color:var(--gold-primary); font-size:24px;"></i> Generating VIP Content...</div>
-                </div>
-
-                <div id="results" class="card" style="display: none; border: 2px solid #10b981;">
-                    <button class="copy-btn" onclick="copyText('titleOutput', this)"><i class="fa-regular fa-copy"></i> Copy Title</button>
-                    <label style="color: var(--gold-primary);">Optimized Title</label>
-                    <div id="titleOutput" style="font-size: 18px; font-weight: 900; color: #0f172a; padding: 15px 0 25px 0;"></div>
-
-                    <button class="copy-btn" style="top: 120px;" onclick="copyText('descOutput', this)"><i class="fa-regular fa-copy"></i> Copy HTML Code</button>
-                    <label style="color: var(--gold-primary);">Premium Description Code</label>
-                    <div id="descOutput" style="font-family: monospace; font-size: 13px; color: #475569; background: #f8fafc; border: 1px solid #e2e8f0; padding: 15px; border-radius: 8px; margin-top: 10px; white-space: pre-wrap;"></div>
+                    <div id="veroResult" class="status-alert"></div>
                 </div>
             </div>
 
+            <!-- 4. NEW: TIKTOK HASHTAGS -->
+            <div id="tagTool" class="tool-section">
+                <div class="section-header">
+                    <h2>TikTok Viral Hashtag Generator</h2>
+                    <p>Boost your TikTok Shop algorithm with 1-click viral hashtags.</p>
+                </div>
+                <div class="card" style="max-width: 600px; margin: 0 auto;">
+                    <div class="form-group">
+                        <label>Product Niche / Keyword</label>
+                        <input type="text" id="tagInput" placeholder="e.g. Beauty, Gadgets, Home Decor...">
+                    </div>
+                    <button class="btn-premium" onclick="generateTags()" style="background: linear-gradient(135deg, #00f2fe, #4facfe); color: #0f172a;"><i class="fa-brands fa-tiktok"></i> Get Viral Tags</button>
+                    
+                    <div id="tagResultBox" style="display: none; position: relative;">
+                        <button class="copy-btn" onclick="copyText('tagOutput', this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                        <div id="tagOutput" class="result-box" style="font-size: 16px; font-weight: 700; color: #3b82f6;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. CLIENT PROFIT SHARE + PDF INVOICE -->
             <div id="clientTool" class="tool-section">
                 <div class="section-header">
                     <h2>Client Profit-Share & Invoice</h2>
@@ -253,66 +293,65 @@
                         <button class="btn-premium btn-pdf" onclick="generateNativePDF()"><i class="fa-solid fa-print"></i> Print / Save as PDF</button>
                     </div>
                     <div class="details-box">
-                        <div style="font-size: 20px; color: #0f172a; margin-bottom: 20px; display: block; text-align: center; font-weight: 900;">Live Statement</div>
+                        <div style="font-size: 20px; color: #0f172a; margin-bottom: 25px; display: block; text-align: center; font-weight: 900; letter-spacing: 1px;">Live Statement</div>
                         <div><span>Total Net Profit:</span> <span id="rTotal" style="color:#059669; font-size:18px;">0.00</span></div>
                         <div><span>Client's Share:</span> <span id="rClient" style="font-size:16px;">0.00</span></div>
-                        <div style="border-top: 2px solid var(--gold-primary); margin-top: 10px; padding-top: 15px;">
+                        <div style="border-top: 2px solid var(--gold-primary); margin-top: 15px; padding-top: 15px;">
                             <span>Your Agency Share:</span> <span id="rYou" style="color:var(--gold-primary); font-size:18px;">0.00</span>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- 6. 1-CLICK MESSAGES -->
             <div id="msgTool" class="tool-section">
                 <div class="section-header">
                     <h2>Customer Service Templates</h2>
                     <p>Professional, 1-click messages to keep international buyers happy.</p>
                 </div>
-                <div class="card">
-                    <div class="msg-card">
-                        <button class="copy-btn" onclick="copyText('msg1', this)"><i class="fa-regular fa-copy"></i> Copy</button>
-                        <div class="msg-title">📦 Order Delayed / Tracking Update</div>
-                        <div class="msg-body" id="msg1">Hello! Thank you for your purchase. We wanted to gently inform you that your order is in transit but experiencing a slight delay from the courier. Rest assured, it is on its way. We appreciate your patience!</div>
+                <div class="card" style="background: rgba(255,255,255,0.8);">
+                    <div class="msg-card" style="background: #ffffff; border: 2px solid #e2e8f0; padding: 25px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
+                        <button class="copy-btn" style="top: 25px; right: 25px;" onclick="copyText('msg1', this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                        <div style="color: var(--gold-primary); font-weight: 900; margin-bottom: 12px; font-size: 16px;"><i class="fa-solid fa-truck-fast"></i> Order Delayed / Tracking Update</div>
+                        <div id="msg1" style="color: #334155; font-size: 15px; line-height: 1.6; padding-right: 90px; font-weight: 500;">Hello! Thank you for your purchase. We wanted to gently inform you that your order is in transit but experiencing a slight delay from the courier. Rest assured, it is on its way. We appreciate your patience!</div>
                     </div>
-                    <div class="msg-card">
-                        <button class="copy-btn" onclick="copyText('msg2', this)"><i class="fa-regular fa-copy"></i> Copy</button>
-                        <div class="msg-title">⚠️ Item Damaged / Apology & Refund</div>
-                        <div class="msg-body" id="msg2">Dear Customer, we sincerely apologize that your item arrived damaged. This is not our usual standard. We have fully refunded you as a gesture of goodwill. You do not need to return the broken item.</div>
+                    <div class="msg-card" style="background: #ffffff; border: 2px solid #e2e8f0; padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
+                        <button class="copy-btn" style="top: 25px; right: 25px;" onclick="copyText('msg2', this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                        <div style="color: #ef4444; font-weight: 900; margin-bottom: 12px; font-size: 16px;"><i class="fa-solid fa-triangle-exclamation"></i> Item Damaged / Apology & Refund</div>
+                        <div id="msg2" style="color: #334155; font-size: 15px; line-height: 1.6; padding-right: 90px; font-weight: 500;">Dear Customer, we sincerely apologize that your item arrived damaged. This is not our usual standard. We have fully refunded you as a gesture of goodwill. You do not need to return the broken item.</div>
                     </div>
                 </div>
             </div>
 
+            <!-- 7. VIP EXTENSIONS -->
             <div id="extTool" class="tool-section">
                 <div class="section-header">
                     <h2>Premium Automation Tools</h2>
                     <p>Install our private Chrome extensions to supercharge your dropshipping.</p>
                 </div>
                 
-                <div class="card grid-2" style="background: transparent; border: none; box-shadow: none; padding: 0;">
-                    
-                    <div class="magic-card" style="text-align: center; padding: 35px 20px; border-radius: 24px; position: relative; overflow: hidden;">
-                        <div style="position: absolute; top: 15px; left: -30px; background: #ef4444; color: #fff; padding: 5px 40px; transform: rotate(-45deg); font-weight: 900; font-size: 12px; box-shadow: 0 5px 10px rgba(0,0,0,0.2);">MUST HAVE</div>
+                <div class="grid-2">
+                    <div class="card" style="text-align: center; border: 2px solid var(--gold-secondary); box-shadow: 0 10px 40px rgba(245, 158, 11, 0.15); background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%);">
+                        <div style="position: absolute; top: 20px; left: -35px; background: #ef4444; color: #fff; padding: 5px 45px; transform: rotate(-45deg); font-weight: 900; font-size: 12px; box-shadow: 0 5px 10px rgba(0,0,0,0.2);">MUST HAVE</div>
                         
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Google_Chrome_icon_%28February_2022%29.svg" width="70" style="margin-bottom: 15px; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1));">
-                        <h3 style="color: #0f172a; margin: 0 0 10px 0; font-size: 24px; font-weight: 900;">Ecom Jaadugar VIP <i class="fa-solid fa-sparkles" style="color: var(--gold-primary);"></i></h3>
-                        <p style="font-size: 14px; color: #475569; margin-bottom: 25px; font-weight: 600;">1-Click address autofill, price checking, and automation script for dropshippers.</p>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Google_Chrome_icon_%28February_2022%29.svg" width="80" style="margin-bottom: 20px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));">
+                        <h3 style="color: #0f172a; margin: 0 0 10px 0; font-size: 26px; font-weight: 900;">Ecom Jaadugar VIP</h3>
+                        <p style="font-size: 15px; color: #475569; margin-bottom: 30px; font-weight: 600;">1-Click address autofill, price checking, and automation script for dropshippers.</p>
                         
-                        <div style="display: flex; flex-direction: column; gap: 12px;">
-                            <a href="https://chromewebstore.google.com/detail/gkiloblbdnadnikmjbojnadgmfdlolgn?utm_source=item-share-cb" target="_blank" class="btn-chrome" style="justify-content: center; padding: 15px; font-size: 16px;"><i class="fa-brands fa-chrome"></i> Install from Chrome Store</a>
-                            <!-- 🔥 نیا واٹس ایپ نمبر یہاں اپڈیٹ کر دیا گیا ہے -->
-                            <a href="https://wa.me/923007718411?text=Hi Asad, I have installed Ecom Jaadugar VIP from the Chrome Store. I need login access." target="_blank" class="btn-whatsapp" style="justify-content: center; padding: 15px; font-size: 16px;"><i class="fa-brands fa-whatsapp"></i> Get VIP Login Access</a>
+                        <div style="display: flex; flex-direction: column; gap: 15px;">
+                            <a href="https://chromewebstore.google.com/detail/gkiloblbdnadnikmjbojnadgmfdlolgn?utm_source=item-share-cb" target="_blank" class="btn-premium" style="background: #1a73e8; box-shadow: 0 10px 20px rgba(26, 115, 232, 0.2);"><i class="fa-brands fa-chrome"></i> Install from Chrome Store</a>
+                            <a href="https://wa.me/923007718411?text=Hi Asad, I have installed Ecom Jaadugar VIP. I need login access." target="_blank" class="btn-premium" style="background: #25D366; color: #fff; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);"><i class="fa-brands fa-whatsapp"></i> Get VIP Login Access</a>
                         </div>
                     </div>
                     
-                    <div style="text-align: center; padding: 35px 20px; background: #fff; border-radius: 24px; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.03);">
-                        <i class="fa-solid fa-shield-halved" style="font-size: 65px; color: #64748b; margin-bottom: 15px;"></i>
-                        <h3 style="color: #0f172a; margin: 0 0 10px 0; font-size: 22px; font-weight: 900;">Stealth Account Guard</h3>
-                        <p style="font-size: 14px; color: #475569; margin-bottom: 25px; font-weight: 600;">Advanced WebRTC leak shield and IP masking integration for stealth accounts.</p>
+                    <div class="card" style="text-align: center; background: #ffffff;">
+                        <i class="fa-solid fa-shield-halved" style="font-size: 75px; color: #64748b; margin-bottom: 20px; display: block;"></i>
+                        <h3 style="color: #0f172a; margin: 0 0 10px 0; font-size: 24px; font-weight: 900;">Stealth Account Guard</h3>
+                        <p style="font-size: 15px; color: #475569; margin-bottom: 30px; font-weight: 600;">Advanced WebRTC leak shield and IP masking integration for stealth accounts.</p>
                         
-                        <div style="display: flex; flex-direction: column; gap: 12px;">
-                            <a href="#" target="_blank" class="btn-chrome" style="justify-content: center; background: #64748b; border-color: #64748b; padding: 15px;"><i class="fa-brands fa-chrome"></i> Add to Chrome</a>
-                            <!-- 🔥 نیا واٹس ایپ نمبر یہاں بھی اپڈیٹ کر دیا گیا ہے -->
-                            <a href="https://wa.me/923007718411?text=Hi Asad, I have installed Stealth Guard. I need login access." target="_blank" class="btn-whatsapp" style="justify-content: center; padding: 15px;"><i class="fa-brands fa-whatsapp"></i> Get Login Access</a>
+                        <div style="display: flex; flex-direction: column; gap: 15px;">
+                            <a href="#" target="_blank" class="btn-premium" style="background: #64748b; box-shadow: 0 10px 20px rgba(100, 116, 139, 0.2);"><i class="fa-brands fa-chrome"></i> Add to Chrome</a>
+                            <a href="https://wa.me/923007718411?text=Hi Asad, I have installed Stealth Guard. I need login access." target="_blank" class="btn-premium" style="background: #25D366; color: #fff; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);"><i class="fa-brands fa-whatsapp"></i> Get Login Access</a>
                         </div>
                     </div>
                 </div>
@@ -321,8 +360,8 @@
         </main>
     </div>
 
-    <!-- 🛑 HTML NATIVE PRINT INVOICE -->
-    <div id="invoiceTemplate" style="border-left: 15px solid #1e293b;">
+    <!-- 🛑 HTML NATIVE PRINT INVOICE TEMPLATE (Hidden by default) -->
+    <div id="invoiceTemplate">
         <table width="100%" cellpadding="0" cellspacing="0" style="border-bottom:2px solid #e2e8f0; padding-bottom:20px; margin-bottom:30px;">
             <tr>
                 <td align="left" valign="middle">
@@ -385,6 +424,7 @@
     </div>
 
     <script>
+        // --- NAVIGATION LOGIC ---
         function switchTool(toolId, btnElement) {
             document.querySelectorAll('.tool-section').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
@@ -392,6 +432,45 @@
             btnElement.classList.add('active');
         }
 
+        // --- NEW: VERO SCANNER LOGIC ---
+        function checkVero() {
+            let input = document.getElementById('brandInput').value.trim().toLowerCase();
+            let resBox = document.getElementById('veroResult');
+            
+            if(!input) { alert("Please enter a brand name."); return; }
+            
+            // Dummy list of high-risk VERO brands for demonstration
+            let veroBrands = ['apple', 'nike', 'sony', 'samsung', 'gucci', 'rolex', 'dyson', 'velcro', 'velvet', 'chapstick', 'puma', 'adidas', 'lego', 'nintendo'];
+            
+            resBox.className = 'status-alert'; // Reset classes
+            
+            if(veroBrands.includes(input)) {
+                resBox.classList.add('status-danger');
+                resBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="font-size: 24px; margin-bottom: 10px; display: block;"></i> <b>HIGH RISK!</b> "${input.toUpperCase()}" is known to issue eBay VERO strikes. Do NOT list this brand.`;
+            } else {
+                resBox.classList.add('status-safe');
+                resBox.innerHTML = `<i class="fa-solid fa-circle-check" style="font-size: 24px; margin-bottom: 10px; display: block;"></i> <b>SAFE!</b> "${input.toUpperCase()}" does not appear in the high-risk VERO database. Proceed with caution.`;
+            }
+        }
+
+        // --- NEW: TIKTOK HASHTAG LOGIC ---
+        function generateTags() {
+            let input = document.getElementById('tagInput').value.trim().toLowerCase();
+            let resBox = document.getElementById('tagResultBox');
+            let outBox = document.getElementById('tagOutput');
+            
+            if(!input) { alert("Please enter a keyword."); return; }
+            
+            let baseTags = ['#fyp', '#tiktokmademebuyit', '#musthaves', '#viral', '#trending', '#shopping'];
+            let customTags = [`#${input.replace(/\s+/g, '')}`, `#${input.replace(/\s+/g, '')}finds`, `#${input.replace(/\s+/g, '')}hacks`, `#best${input.replace(/\s+/g, '')}`];
+            
+            let finalTags = [...customTags, ...baseTags].join(' ');
+            
+            outBox.innerText = finalTags;
+            resBox.style.display = 'block';
+        }
+
+        // --- MARKET LOGIC ---
         let currentMarket = 'UK';
         let currencySym = '£';
 
