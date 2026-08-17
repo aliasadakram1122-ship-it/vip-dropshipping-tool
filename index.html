@@ -99,7 +99,7 @@
         #invoiceTemplate { display: none; }
 
         /* =========================================
-           🚀 NATIVE PRINT SYSTEM (100% GARANTEED FIXES)
+           🚀 NATIVE PRINT SYSTEM (100% GARANTEED FIX FOR CUT-OFF)
            ========================================= */
         @media print {
             body * {
@@ -115,13 +115,18 @@
                 position: absolute !important;
                 left: 0 !important;
                 top: 0 !important;
+                
+                /* 🔥 یہ وہ جادوئی تبدیلیاں ہیں جو انوائس کو کٹنے نہیں دیں گی 🔥 */
                 width: 100% !important;
-                padding: 1in !important; /* اندر سے فاصلہ دے دیا تاکہ خوبصورت لگے */
+                max-width: 100% !important;
+                padding: 20px !important; /* پیڈنگ کم کر دی ہے */
                 margin: 0 !important;
+                box-sizing: border-box !important; /* اس نے انوائس کو صفحے کے اندر لاک کر دیا ہے */
+                
                 font-family: Arial, sans-serif !important;
                 background: #ffffff !important;
                 
-                /* 🔥 یہ وہ جادوئی کمانڈز ہیں جو براؤزر کو رنگ اور بارڈر چھاپنے پر مجبور کریں گی */
+                /* کلرز اور بارڈر کی گارنٹی */
                 -webkit-print-color-adjust: exact !important; 
                 print-color-adjust: exact !important; 
                 color-adjust: exact !important;
@@ -129,7 +134,7 @@
 
             @page {
                 size: A4 portrait;
-                margin: 0mm !important; /* 🔥 یہ کمانڈ اوپر اور نیچے والے ویب سائٹ کے لنکس اور تاریخ کو ختم کرے گی */
+                margin: 10mm !important; /* صفحے کا مارجن سیٹ کر دیا ہے تاکہ کچھ نہ کٹے */
             }
         }
     </style>
@@ -377,7 +382,6 @@
             </tr>
         </table>
         
-        <!-- 🔥 واٹس ایپ نمبر ختم کر دیا گیا ہے -->
         <div style="text-align:center; color:#64748b; font-size:13px; font-weight:bold; margin-top:50px;">
             Thank you for doing business with us!
         </div>
@@ -450,7 +454,7 @@
             document.getElementById('rClient').innerText = client.toFixed(2);
         }
 
-        // --- 🚀 NEW NATIVE BROWSER PRINT ENGINE (100% BUG FREE) ---
+        // --- 🚀 NEW NATIVE BROWSER PRINT ENGINE ---
         function generateNativePDF() {
             let clientName = document.getElementById('iName').value || 'Client';
             let month = document.getElementById('iMonth').value || 'Month';
@@ -475,19 +479,15 @@
             document.getElementById('pdfAgencyPercVal').innerText = agencyPerc;
             document.getElementById('pdfAgencyProfit').innerText = currencySym + agencyShare.toFixed(2);
             
-            // انوائس کو ظاہر کریں
             let inv = document.getElementById('invoiceTemplate');
             inv.style.display = 'block';
             
-            // براؤزر کو حکم دیں کہ وہ اپنا اصلی پرنٹ/سیو ڈائیلاگ کھولے
             setTimeout(() => {
                 window.print();
-                // پرنٹ ہونے یا کینسل ہونے کے بعد انوائس کو دوبارہ چھپا دیں
                 inv.style.display = 'none';
             }, 500);
         }
 
-        // --- COPY VIP ---
         function copyText(elementId, btn) {
             let text = document.getElementById(elementId).innerText;
             navigator.clipboard.writeText(text);
@@ -503,7 +503,6 @@
             }, 2000);
         }
 
-        // --- AI GENERATOR ---
         async function generateRealListing() {
             let link = document.getElementById('productLink').value.trim();
             let platform = document.getElementById('platformSelect').value;
